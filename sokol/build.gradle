@@ -2,12 +2,18 @@ group 'io.khasang.sokol'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
+apply plugin: 'war'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
+}
+
+war {
+    baseName = 'gradleExample'
+    version = '1.0.0-BUILD-SNAPSHOT'
 }
 
 dependencies {
@@ -18,4 +24,8 @@ dependencies {
     compile 'org.springframework:spring-web:4.2.5.RELEASE'
     compile 'jstl:jstl:1.2'
     compile 'javax.servlet:javax.servlet-api:3.1.0'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.3'
 }
