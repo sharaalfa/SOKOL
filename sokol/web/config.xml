@@ -2,14 +2,15 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <bean id="consolePrinter" class="ConsolePrinter">
-        <property name="message" ref="messageService"/>
+    <bean id="consolePrinter" class="beans.impl.ConsolePrinter">
+        <constructor-arg ref="messageService"/>
+        <property name="name" value="Vasya"/>
     </bean>
 
-    <bean id="messageService" class="MessageService">
-        <property name="message" value="Hello"  />
+    <bean id="messageService" class="beans.impl.MessageService">
+        <constructor-arg value="Hello"/>
     </bean>
 
-    <bean id="stage" class="Stage"
+    <bean id="stage" class="beans.impl.Stage"
           factory-method="getInstance"/>
 </beans>

@@ -1,3 +1,5 @@
+package beans.impl;
+
 public class Stage {
     private Stage(){
 
