@@ -19,5 +19,6 @@ Hello! Our first message: ${hello}
 <s:url value="/" var="springUrl"/>
 <c:url value="/" var="jstlUrl"/>
 <a href="${springUrl}">URL</a>
+<jsp:include page="test.jsp"/>
 </body>
 </html>
