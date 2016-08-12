@@ -1,5 +1,6 @@
 package config;
 
+//import config.application.MVCConfig;
 import config.application.WebConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 

@@ -4,9 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
@@ -16,6 +14,11 @@ import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 @EnableWebMvc
 @ComponentScan({"config", "controller"})
 public class WebConfig extends WebMvcConfigurerAdapter {
+    @Override
+    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+        configurer.enable();
+    }
+
     @Bean
     InternalResourceViewResolver viewResolver(){
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
@@ -34,10 +37,20 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         return viewResolver;
     }
 
+    /**
+     * Configure ViewResolvers to deliver preferred views.
+     */
+//    @Override
+//    public void configureViewResolvers(ViewResolverRegistry registry) {
+//        TilesViewResolver viewResolver = new TilesViewResolver();
+//        registry.viewResolver(viewResolver);
+//    }
+
     @Bean
     TilesConfigurer tilesConfigurer(){
         TilesConfigurer tiles = new TilesConfigurer();
         tiles.setDefinitions("/WEB-INF/views/layout/tiles.xml");
+        //tiles.setDefinitions("file: web/WEB-INF/views/layout/tiles.xml"); // for junit
         tiles.setCheckRefresh(true);
         return tiles;
     }

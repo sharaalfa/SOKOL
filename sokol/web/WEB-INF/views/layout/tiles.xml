@@ -18,4 +18,14 @@
     <definition name="index2" extends="base.definition">
     </definition>
 
+    <definition name="first" extends="base.definition">
+        <put-attribute name="title" value="First Page"/>
+        <put-attribute name="body" value="/WEB-INF/views/first.jsp"/>
+    </definition>
+
+    <definition name="second" extends="base.definition">
+        <put-attribute name="title" value="Second Page"/>
+        <put-attribute name="body" value="/WEB-INF/views/second.jsp"/>
+    </definition>
+
 </tiles-definitions>

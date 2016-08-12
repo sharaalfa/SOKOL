@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title></title>
+    <title><tiles:getAsString name="title"/></title>
 </head>
 <body>
 <tiles:insertAttribute name="header"/>
