@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class AppContext {
-    @Bean
+    @Bean(name = "messageService")
     public IMessageService message(){
         return new HelloMessage();
     }
