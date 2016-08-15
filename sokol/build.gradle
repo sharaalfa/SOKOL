@@ -15,7 +15,7 @@ repositories {
 }
 
 war {
-    baseName = 'gradleExample'
+    baseName = 'sokol'
     version = '1.0.0-BUILD-SNAPSHOT'
 }
 
@@ -32,6 +32,12 @@ dependencies {
     compile 'org.springframework:spring-core:4.2.5.RELEASE'
     compile 'org.springframework:spring-webmvc:4.2.5.RELEASE'
     compile 'org.springframework:spring-web:4.2.5.RELEASE'
+    compile 'org.springframework:spring-orm:4.2.5.RELEASE'
+    // spring security
+    compile 'org.springframework.security:spring-security-core:4.0.4.RELEASE'
+    compile 'org.springframework.security:spring-security-web:4.0.4.RELEASE'
+    compile 'org.springframework.security:spring-security-config:4.0.4.RELEASE'
+    compile 'org.springframework.security:spring-security-taglibs:4.0.4.RELEASE'
     // jstl tag lib
     compile 'jstl:jstl:1.2'
     // javax
