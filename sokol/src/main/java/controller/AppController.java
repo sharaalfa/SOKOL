@@ -8,6 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class AppController {
@@ -24,11 +27,22 @@ public class AppController {
         return "index";
     }
 
-    @RequestMapping("/index2")
+    @RequestMapping("/admin/test")
     public String hello2(Model model){
-        model.addAttribute("hello", messageService.getInfo());
-        return "index2";
+        return "test";
     }
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public ModelAndView login(
+            @RequestParam(value = "error", required = false) String error,
+            @RequestParam(value = "logout", required = false) String logout){
+        ModelAndView model = new ModelAndView();
+        model.setViewName("login");
+
+        return model;
+    }
+
+
 
     @RequestMapping("/first")
     public String firstPage(Model model){

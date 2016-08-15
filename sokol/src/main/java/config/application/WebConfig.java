@@ -20,17 +20,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    InternalResourceViewResolver viewResolver(){
-        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-        viewResolver.setViewClass(JstlView.class);
-        viewResolver.setPrefix("/WEB-INF/views/");
-        viewResolver.setSuffix(".jsp");
-        viewResolver.setContentType("text/html; charset-utf-8");
-        viewResolver.setOrder(1);
-        return viewResolver;
-    }
-
-    @Bean
     ViewResolver tilesViewResolver(){
         TilesViewResolver viewResolver = new TilesViewResolver();
         viewResolver.setOrder(0);
@@ -59,5 +48,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     public void addResourceHandlers(ResourceHandlerRegistry registry){
         registry.addResourceHandler("/css/**").addResourceLocations("/WEB-INF/views/css/");
         registry.addResourceHandler("/bootstrap/**").addResourceLocations("/WEB-INF/views/css/");
+        registry.addResourceHandler("/js/**").addResourceLocations("/WEB-INF/views/js/");
+        registry.addResourceHandler("/fonts/**").addResourceLocations("/WEB-INF/views/fonts/");
     }
 }

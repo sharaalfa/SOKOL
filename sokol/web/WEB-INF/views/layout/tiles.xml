@@ -15,7 +15,12 @@
         <put-attribute name="body" value="/WEB-INF/views/main.jsp"/>
     </definition>
 
-    <definition name="index2" extends="base.definition">
+    <definition name="login" extends="base.definition">
+        <put-attribute name="body" value="/WEB-INF/views/login.jsp"/>
+    </definition>
+
+    <definition name="test" extends="base.definition">
+        <put-attribute name="body" value="/WEB-INF/views/test.jsp"/>
     </definition>
 
     <definition name="first" extends="base.definition">
