@@ -1,6 +1,7 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <div class="container">
     <s:url var="authUrl" value="/j_spring_security_check"/>
     <form class="form-signin" action="${authUrl}" method="post">

@@ -18,13 +18,19 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter{
     }
 
     public void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_SUPERADMIN')")
-                .and().formLogin().defaultSuccessUrl("/index", false).loginPage("/login").permitAll()
-        .loginProcessingUrl("/j_spring_security_check")
-        .usernameParameter("j_username")
-        .passwordParameter("j_password")
-        .failureUrl("/login?error=true");
-        http.csrf().disable();
+        http
+                .authorizeRequests()
+                    .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_SUPERADMIN')")
+                .and()
+                    .formLogin().defaultSuccessUrl("/index", false).loginPage("/login").permitAll()
+                    .loginProcessingUrl("/j_spring_security_check")
+                    .usernameParameter("j_username")
+                    .passwordParameter("j_password")
+                    .failureUrl("/login?error=true")
+//                .and()
+//                    .requiresChannel()
+//                        .antMatchers("/login").requiresSecure()
+                .and()
+                    .csrf().disable();
     }
 }
