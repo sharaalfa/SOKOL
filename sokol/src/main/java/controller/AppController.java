@@ -41,7 +41,15 @@ public class AppController {
 
         return model;
     }
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    public ModelAndView register(
+            @RequestParam(value = "error", required = false) String error,
+            @RequestParam(value = "logout", required = false) String logout){
+        ModelAndView model = new ModelAndView();
+        model.setViewName("register");
 
+        return model;
+    }
 
 
     @RequestMapping("/first")
