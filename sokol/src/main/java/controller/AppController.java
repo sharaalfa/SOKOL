@@ -3,6 +3,7 @@ package controller;
 import beans.IMessageService;
 import beans.impl.HelloMessage;
 import beans.impl.User;
+import model.CreateTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,9 @@ public class AppController {
 
     @Autowired
     private User user;
+
+    @Autowired
+    CreateTable createTable;
 
 
     @RequestMapping("/index")
@@ -62,5 +66,11 @@ public class AppController {
     public String secondPage(Model model, @ModelAttribute User modelUser){
         model.addAttribute("user", modelUser);
         return "second";
+    }
+
+    @RequestMapping("/createtable")
+    public String createTable(Model model){
+        model.addAttribute("createTable", createTable.createTable());
+        return "createtable";
     }
 }

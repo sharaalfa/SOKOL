@@ -19,6 +19,10 @@
         <put-attribute name="body" value="/WEB-INF/views/login.jsp"/>
     </definition>
 
+    <definition name="createtable" extends="base.definition">
+        <put-attribute name="body" value="/WEB-INF/views/createtable.jsp"/>
+    </definition>
+
     <definition name="register" extends="base.definition">
         <put-attribute name="body" value="/WEB-INF/views/register.jsp"/>
     </definition>
