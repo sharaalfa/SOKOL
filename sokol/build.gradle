@@ -3,6 +3,8 @@ version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
 apply plugin: 'war'
+apply plugin: 'application'
+apply plugin: 'idea'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -13,7 +15,13 @@ repositories {
 
 war {
     baseName = 'sokol'
-    version = '1.0.0-BUILD-SNAPSHOT'
+    version = '1'
+}
+
+sourceSets {
+    main {
+        output.resourcesDir = 'out/res'
+    }
 }
 
 dependencies {

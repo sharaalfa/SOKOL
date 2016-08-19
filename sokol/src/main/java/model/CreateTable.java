@@ -5,7 +5,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import java.util.logging.Logger;
 
 public class CreateTable {
-    //private static final Logger log = Logger.getLogger("CreateTable");
+    private static final Logger log = Logger.getLogger("CreateTable");
     final String QUERY_CREATE_ROLE =
             "CREATE TABLE Role(\n" +
             "id integer,\n" +
@@ -34,10 +34,10 @@ public class CreateTable {
         try{
             jdbcTemplate.execute("DROP TABLE IF EXISTS Role");
             jdbcTemplate.execute(QUERY_CREATE_ROLE);
-            //log.info("table successfully created");
+            log.info("table successfully created");
             return "table successfully created";
         } catch (Exception e){
-            //log.warning(e.getMessage());
+            log.warning(e.getMessage());
             return e.toString();
         }
     }

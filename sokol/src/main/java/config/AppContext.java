@@ -16,7 +16,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import javax.activation.DataSource;
 
 @Configuration
-@PropertySource("classpath:util.properties")
+@PropertySource(value = {"classpath:util.properties"})
 public class AppContext {
     @Autowired
     Environment environment;
