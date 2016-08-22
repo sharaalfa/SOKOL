@@ -39,7 +39,6 @@ dependencies {
     compile 'org.springframework:spring-core:4.2.5.RELEASE'
     compile 'org.springframework:spring-webmvc:4.2.5.RELEASE'
     compile 'org.springframework:spring-web:4.2.5.RELEASE'
-    compile 'org.springframework:spring-orm:4.2.5.RELEASE'
     // spring security
     compile 'org.springframework.security:spring-security-core:4.0.4.RELEASE'
     compile 'org.springframework.security:spring-security-web:4.0.4.RELEASE'
@@ -62,6 +61,20 @@ dependencies {
     compile group: 'org.seleniumhq.selenium', name: 'selenium-ie-driver', version: '2.53.0'
     // postgre
     compile 'org.postgresql:postgresql:9.4.1208'
+    // support orm classes
+    compile 'org.springframework:spring-orm:4.2.5.RELEASE'
+    // Hibernate -->
+    // to start need only this -->
+    compile 'org.hibernate:hibernate-core:5.0.1.Final'
+    // for JPA, use hibernate-entitymanager instead of hibernate-core
+    compile 'org.hibernate:hibernate-entitymanager:5.0.1.Final'
+    // optional
+    compile 'org.hibernate:hibernate-osgi:5.0.1.Final'
+    compile 'org.hibernate:hibernate-envers:5.0.1.Final'
+    compile 'org.hibernate:hibernate-c3p0:5.0.1.Final'
+    compile 'org.hibernate:hibernate-proxool:5.0.1.Final'
+    compile 'org.hibernate:hibernate-infinispan:5.0.1.Final'
+    compile 'org.hibernate:hibernate-ehcache:5.0.1.Final'
 }
 
 task wrapper(type: Wrapper) {

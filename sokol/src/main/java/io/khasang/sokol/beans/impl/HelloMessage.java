@@ -1,6 +1,6 @@
-package beans.impl;
+package io.khasang.sokol.beans.impl;
 
-import beans.IMessageService;
+import io.khasang.sokol.beans.IMessageService;
 import org.springframework.stereotype.Component;
 
 @Component

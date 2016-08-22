@@ -1,10 +1,9 @@
-package config;
+package io.khasang.sokol.config;
 
-import beans.IMessageService;
-import beans.impl.HelloMessage;
-import beans.impl.User;
-import model.CreateTable;
-import org.openqa.grid.web.servlet.DriverServlet;
+import io.khasang.sokol.beans.IMessageService;
+import io.khasang.sokol.beans.impl.HelloMessage;
+import io.khasang.sokol.beans.impl.User;
+import io.khasang.sokol.model.CreateTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,8 +11,6 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-
-import javax.activation.DataSource;
 
 @Configuration
 @PropertySource(value = {"classpath:util.properties"})

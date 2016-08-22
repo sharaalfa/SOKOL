@@ -1,7 +1,7 @@
-package config;
+package io.khasang.sokol.config;
 
-//import config.application.MVCConfig;
-import config.application.WebConfig;
+//import io.khasang.sokol.config.application.MVCConfig;
+import io.khasang.sokol.config.application.WebConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {

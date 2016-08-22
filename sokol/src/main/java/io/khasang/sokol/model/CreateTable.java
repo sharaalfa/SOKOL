@@ -1,4 +1,4 @@
-package model;
+package io.khasang.sokol.model;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 

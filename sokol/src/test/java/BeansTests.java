@@ -1,4 +1,5 @@
 import io.khasang.sokol.beans.IMessageService;
+import io.khasang.sokol.beans.impl.HelloMessage;
 import io.khasang.sokol.config.AppContext;
 import org.junit.Assert;
 import org.junit.Test;
@@ -10,14 +11,16 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {AppContext.class})
-public class TestMessageServiceBean {
+public class BeansTests {
     @Autowired
-    ApplicationContext context;
+    private ApplicationContext applicationContext;
 
     @Test
-    public void testGetInfo(){
-        IMessageService messageService = context.getBean("messageService", IMessageService.class);
-        Assert.assertNotNull(messageService);
-        Assert.assertEquals("Hello", messageService.getInfo());
+    public void contentProviderTest() {
+        IMessageService helloProviderBean = applicationContext.getBean("helloWorldProvider", HelloMessage.class);
+        Assert.assertNotNull(helloProviderBean);
+        helloProviderBean = (HelloMessage) applicationContext.getBean("helloWorldProvider");
+        Assert.assertNotNull(helloProviderBean);
+        Assert.assertEquals(helloProviderBean.getInfo(), "Hello");
     }
 }

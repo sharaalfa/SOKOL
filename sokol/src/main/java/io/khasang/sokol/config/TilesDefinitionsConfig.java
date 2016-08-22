@@ -1,12 +1,4 @@
-package config;
-
-import org.apache.tiles.Attribute;
-import org.apache.tiles.Definition;
-import org.apache.tiles.definition.DefinitionsFactory;
-import org.apache.tiles.request.Request;
-
-import java.util.HashMap;
-import java.util.Map;
+package io.khasang.sokol.config;
 
 //public class TilesDefinitionsConfig implements DefinitionsFactory {
 //    private static final Map<String, Definition> tilesDefinitions = new HashMap<String,Definition>();

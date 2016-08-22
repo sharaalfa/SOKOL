@@ -1,4 +1,4 @@
-package beans.impl;
+package io.khasang.sokol.beans.impl;
 
 import org.springframework.stereotype.Component;
 

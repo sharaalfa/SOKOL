@@ -1,9 +1,8 @@
-package controller;
+package io.khasang.sokol.controller;
 
-import beans.IMessageService;
-import beans.impl.HelloMessage;
-import beans.impl.User;
-import model.CreateTable;
+import io.khasang.sokol.beans.IMessageService;
+import io.khasang.sokol.beans.impl.User;
+import io.khasang.sokol.model.CreateTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
