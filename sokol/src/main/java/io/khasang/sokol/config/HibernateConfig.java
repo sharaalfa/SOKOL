@@ -16,7 +16,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@ComponentScan("io.khasang.sokol.*")
+@ComponentScan("io.khasang.sokol")
 @PropertySource("classpath:hibernate.properties")
 @EnableTransactionManagement
 public class HibernateConfig {

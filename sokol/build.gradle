@@ -4,7 +4,7 @@ version '1.0-SNAPSHOT'
 apply plugin: 'java'
 apply plugin: 'war'
 //apply plugin: 'application'
-apply plugin: 'idea'
+//apply plugin: 'idea'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -16,11 +16,27 @@ repositories {
 war {
     baseName = 'sokol'
     version = '1'
+    webInf{
+        from('src/main/resources') {
+            include 'util.properties'
+            include 'hibernate.properties'
+            include 'log4j.properties'
+            into('WEB-INF/classes/')
+        }
+    }
 }
 
 sourceSets {
     main {
-        output.resourcesDir = 'out/res'
+        java {
+            srcDir 'src/main/java'
+            output.classesDir   = 'build/classes/main'
+        }
+        resources {
+            srcDir 'src/main/resources'
+            include '*.properties'
+            output.resourcesDir = 'build/classes/main'
+        }
     }
 }
 

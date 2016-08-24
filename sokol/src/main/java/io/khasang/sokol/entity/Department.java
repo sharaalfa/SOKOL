@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@IdClass(DepartmentKey.class)
+//@IdClass(DepartmentKey.class)
 public class Department {
     @Id
     private int id;

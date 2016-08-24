@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@NamedQuery(name = "Role.findById", query = "select distinct from Role r where r.id = :id")
+@NamedQuery(name = "Role.findById", query = "select distinct r from Role r where r.id = :id")
 public class Role {
     @Id
     private int id;
