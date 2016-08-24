@@ -3,6 +3,7 @@ package io.khasang.sokol.config;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -15,6 +16,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
+@ComponentScan("io.khasang.sokol.*")
 @PropertySource("classpath:hibernate.properties")
 @EnableTransactionManagement
 public class HibernateConfig {
@@ -25,7 +27,7 @@ public class HibernateConfig {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan("io.khasang.orgmanager.io.khasang.sokol.model");
+        sessionFactory.setPackagesToScan("io.khasang.sokol.*");
         sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
     }
@@ -47,8 +49,8 @@ public class HibernateConfig {
         properties.put("hibernate.format_sql", environment.getRequiredProperty("hibernate.format_sql"));
         properties.put("hibernate.hbm2ddl.auto", environment.getRequiredProperty("hibernate.hbm2ddl.auto"));
         properties.put("hibernate.max_fetch_depth", environment.getRequiredProperty("hibernate.max_fetch_depth"));
-        properties.put("hibernate.jdЬc.fetch_size", environment.getRequiredProperty("hibernate.jdЬc.fetch_size"));
-        properties.put("hibernate.jdЬc.batch_size", environment.getRequiredProperty("hibernate.jdЬc.batch_size"));
+        properties.put("hibernate.jdbc.fetch_size", environment.getRequiredProperty("hibernate.jdbc.fetch_size"));
+        properties.put("hibernate.jdbc.batch_size", environment.getRequiredProperty("hibernate.jdbc.batch_size"));
         return properties;
     }
 
