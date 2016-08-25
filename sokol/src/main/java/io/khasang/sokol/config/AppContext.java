@@ -5,18 +5,22 @@ import io.khasang.sokol.beans.impl.HelloMessage;
 import io.khasang.sokol.beans.impl.User;
 import io.khasang.sokol.model.CreateTable;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.beans.factory.config.PlaceholderConfigurerSupport;
+import org.springframework.context.annotation.*;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.apache.log4j.Logger;
+import org.apache.log4j.BasicConfigurator;
 
 @Configuration
-@PropertySource(value = {"classpath:util.properties"})
+@ComponentScan()
+@PropertySource(value = {"classpath:util.properties", "file:/Users/denspbru/Servers/util.properties"}, ignoreResourceNotFound = true)
 public class AppContext {
     @Autowired
     Environment environment;
+
 
     @Bean(name = "messageService")
     public IMessageService message(){
@@ -32,7 +36,10 @@ public class AppContext {
     public CreateTable createTable(){
         return new CreateTable(jdbcTemplate());
     }
-
+//    @Bean
+//    public static PlaceholderConfigurerSupport propertyPlaceholderConfigurer() {
+//        return new PropertySourcesPlaceholderConfigurer();
+//    }
     @Bean
     public DriverManagerDataSource dataSource(){
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
