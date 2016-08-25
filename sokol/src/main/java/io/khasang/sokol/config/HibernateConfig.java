@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@PropertySource("classpath:hibernate.properties")
+@PropertySource(value = {"classpath:hibernate.properties","file:/Users/denspbru/Servers/hibernate.properties"}, ignoreResourceNotFound = true )
 @EnableTransactionManagement
 public class HibernateConfig {
     @Autowired
@@ -46,9 +46,9 @@ public class HibernateConfig {
         properties.put("hibernate.show_sql", environment.getRequiredProperty("hibernate.show_sql"));
         properties.put("hibernate.format_sql", environment.getRequiredProperty("hibernate.format_sql"));
         properties.put("hibernate.hbm2ddl.auto", environment.getRequiredProperty("hibernate.hbm2ddl.auto"));
-        properties.put("hibernate.max_fetch_depth", environment.getRequiredProperty("hibernate.max_fetch_depth"));
-        properties.put("hibernate.jdЬc.fetch_size", environment.getRequiredProperty("hibernate.jdЬc.fetch_size"));
-        properties.put("hibernate.jdЬc.batch_size", environment.getRequiredProperty("hibernate.jdЬc.batch_size"));
+        //properties.put("hibernate.max_fetch_depth", environment.getRequiredProperty("hibernate.max_fetch_depth"));
+        //properties.put("hibernate.jdЬc.fetch_size", environment.getRequiredProperty("hibernate.jdЬc.fetch_size"));
+        //properties.put("hibernate.jdЬc.batch_size", environment.getRequiredProperty("hibernate.jdЬc.batch_size"));
         return properties;
     }
 
