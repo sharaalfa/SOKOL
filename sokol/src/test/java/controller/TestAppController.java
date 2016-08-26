@@ -1,6 +1,8 @@
 package controller;
 
 import io.khasang.sokol.config.AppContext;
+import io.khasang.sokol.config.AppSecurityConfig;
+import io.khasang.sokol.config.HibernateConfig;
 import io.khasang.sokol.config.application.WebConfig;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,26 +19,26 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-//@RunWith(SpringJUnit4ClassRunner.class)
-//@WebAppConfiguration
-//@ContextConfiguration(classes = {AppContext.class, WebConfig.class})
+@RunWith(SpringJUnit4ClassRunner.class)
+@WebAppConfiguration
+@ContextConfiguration(classes = {AppContext.class, WebConfig.class, AppSecurityConfig.class, HibernateConfig.class})
 public class TestAppController {
-//    @Autowired
-//    WebApplicationContext webApplicationContext;
-//
-//    private MockMvc mockMvc;
-//
-//    @Before
-//    public void setup(){
-//        mockMvc = MockMvcBuilders
-//                .webAppContextSetup(webApplicationContext)
-//                .build();
-//    }
+    @Autowired
+    WebApplicationContext webApplicationContext;
 
-//    @Test
-//    public void testFirstRequestMapping() throws Exception{
-//        mockMvc.perform(get("/first"))
+    private MockMvc mockMvc;
+
+    @Before
+    public void setup(){
+        mockMvc = MockMvcBuilders
+                .webAppContextSetup(webApplicationContext)
+                .build();
+    }
+
+    @Test
+    public void testFirstRequestMapping() throws Exception{
+//        mockMvc.perform(get("/login"))
 //                .andExpect(status().isOk())
 //                .andExpect(forwardedUrl("/WEB-INF/views/first.jsp"));
-//    }
+    }
 }

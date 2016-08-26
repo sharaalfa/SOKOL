@@ -16,14 +16,14 @@ repositories {
 war {
     baseName = 'sokol'
     version = '1'
-    webInf{
-        from('src/main/resources') {
-            include 'util.properties'
-            include 'hibernate.properties'
-            include 'log4j.properties'
-            into('WEB-INF/classes/')
-        }
-    }
+//    webInf{
+//        from('src/main/resources') {
+//            include 'util.properties'
+//            include 'hibernate.properties'
+//            include 'log4j.properties'
+//            into('WEB-INF/classes/')
+//        }
+//    }
 }
 
 sourceSets {
@@ -43,7 +43,10 @@ sourceSets {
 dependencies {
     // loggers
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.21'
+    compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.21'
+    compile group: 'log4j', name: 'log4j', version: '1.2.17'
     compile group: 'commons-logging', name: 'commons-logging', version: '1.2'
+    compile 'ch.qos.logback:logback-classic:1.0.13'
     // junit tests
     testCompile group: 'junit', name: 'junit', version: '4.11'
     testCompile 'org.springframework:spring-test:4.2.3.RELEASE'
@@ -90,7 +93,11 @@ dependencies {
     compile 'org.hibernate:hibernate-c3p0:5.0.1.Final'
     compile 'org.hibernate:hibernate-proxool:5.0.1.Final'
     compile 'org.hibernate:hibernate-infinispan:5.0.1.Final'
-    compile 'org.hibernate:hibernate-ehcache:5.0.1.Final'
+    // cache API
+    compile group: 'org.ehcache', name: 'ehcache', version: '3.1.1'
+    compile group: 'org.hibernate', name: 'hibernate-ehcache', version: '5.2.2.Final'
+    compile group: 'org.hibernate', name: 'hibernate-jcache', version: '5.2.2.Final'
+    compile 'org.springframework:spring-context-support:4.2.5.RELEASE'
 }
 
 task wrapper(type: Wrapper) {

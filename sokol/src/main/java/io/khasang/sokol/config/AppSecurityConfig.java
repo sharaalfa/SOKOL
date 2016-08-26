@@ -28,9 +28,9 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter{
                     .usernameParameter("j_username")
                     .passwordParameter("j_password")
                     .failureUrl("/login?error=true")
-//                .and()
-//                    .requiresChannel()
-//                        .antMatchers("/login").requiresSecure()
+                .and()
+                    .requiresChannel()
+                        .antMatchers("/login").requiresSecure()
                 .and()
                     .csrf().disable();
     }
