@@ -16,14 +16,14 @@ repositories {
 war {
     baseName = 'sokol'
     version = '1'
-//    webInf{
-//        from('src/main/resources') {
-//            include 'util.properties'
-//            include 'hibernate.properties'
-//            include 'log4j.properties'
-//            into('WEB-INF/classes/')
-//        }
-//    }
+    webInf{
+        from('src/main/resources') {
+            include 'util.properties'
+            include 'hibernate.properties'
+            include 'log4j.properties'
+            into('WEB-INF/classes/')
+        }
+    }
 }
 
 sourceSets {
