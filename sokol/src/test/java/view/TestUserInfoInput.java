@@ -1,3 +1,5 @@
+package view;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -7,8 +9,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 public class TestUserInfoInput {
-    @Test
-    public void testUserInputForm(){
+//    @Test
+//    public void testUserInputForm(){
 //        WebDriver driver = new HtmlUnitDriver();
 //        driver.get("http://localhost:8080/first");
 //        WebElement nameInput = driver.findElement(By.name("name"));
@@ -22,5 +24,5 @@ public class TestUserInfoInput {
 //        nameInput = driver.findElement(By.id("output-name"));
 //        Assert.assertEquals("Entered Email: vasya@mail.ru", emailInput.getText());
 //        Assert.assertEquals("Entered name: Vasya", nameInput.getText());
-    }
+//    }
 }

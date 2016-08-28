@@ -1,3 +1,5 @@
+package beans;
+
 import io.khasang.sokol.beans.IMessageService;
 import io.khasang.sokol.config.AppContext;
 import org.junit.Assert;
@@ -13,11 +15,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class TestMessageServiceBean {
 //    @Autowired
 //    ApplicationContext context;
-
-    @Test
-    public void testGetInfo(){
+//
+//    @Test
+//    public void testGetInfo(){
 //        IMessageService messageService = context.getBean("messageService", IMessageService.class);
 //        Assert.assertNotNull(messageService);
 //        Assert.assertEquals("Hello", messageService.getInfo());
-    }
+//    }
 }

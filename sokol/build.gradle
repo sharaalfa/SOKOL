@@ -1,10 +1,10 @@
 group 'io.khasang.sokol'
-
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
 apply plugin: 'war'
-apply plugin: 'idea'
+//apply plugin: 'application'
+//apply plugin: 'idea'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -16,22 +16,34 @@ repositories {
 war {
     baseName = 'sokol'
     version = '1'
+    webInf{
+        from('src/main/resources') {
+            include 'util.properties'
+            include 'hibernate.properties'
+            include 'log4j.properties'
+            into('WEB-INF/classes/')
+        }
+    }
 }
 
-//sourceSets {
-//    main {
-//        resources {
-//            srcDir '/src/main/resources'
-//        }
-//    }
-//}
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+            output.classesDir   = 'build/classes/main'
+        }
+        resources {
+            srcDir 'src/main/resources'
+            include '*.properties'
+            output.resourcesDir = 'build/classes/main'
+        }
+    }
+}
 
 dependencies {
     // loggers
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.21'
-    compile 'org.slf4j:slf4j-log4j12:1.7.21'
     compile group: 'commons-logging', name: 'commons-logging', version: '1.2'
-    compile group: 'log4j', name: 'log4j', version: '1.2.17'
     // junit tests
     testCompile group: 'junit', name: 'junit', version: '4.11'
     testCompile 'org.springframework:spring-test:4.2.3.RELEASE'

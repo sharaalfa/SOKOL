@@ -1,3 +1,5 @@
+package view;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -8,8 +10,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.util.List;
 
 public class GoogleSuggest {
-    @Test
-    public void googleSuggestTest(){
+//    @Test
+//    public void googleSuggestTest(){
 //        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Admin\\Documents\\SOKOL\\sokol\\.idea\\chromedriver.exe");
 //        WebDriver driver = new ChromeDriver();
 //        // Открываем страничку Google
@@ -33,5 +35,5 @@ public class GoogleSuggest {
 //        for (WebElement suggestion : allSuggestions) {
 //            System.out.println(suggestion.getText());
 //        }
-    }
+//    }
 }

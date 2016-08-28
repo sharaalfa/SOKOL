@@ -2,6 +2,8 @@ package io.khasang.sokol.controller;
 
 import io.khasang.sokol.beans.IMessageService;
 import io.khasang.sokol.beans.impl.User;
+import io.khasang.sokol.dao.GenericDao;
+import io.khasang.sokol.entity.Role;
 import io.khasang.sokol.model.CreateTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
