@@ -1,6 +1,8 @@
 package io.khasang.sokol.entity;
 
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -9,14 +11,21 @@ import java.util.Date;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     int id;
-
+    int id;
+    @Column(name = "USER_NAME")
     private String login;
-
+    @Column(name = "FIO")
+    private String fio;
+    @Column(name = "EMAIL")
     private String email;
+    @Column(name = "PASSWORD")
+    private String password;
+    @Column(name = "IS_ACTIVE")
+    private Boolean isActive;
 
+    @Column(name = "CREATED_BY")
     private String createdBy;
-
+    @Column(name = "UPDATED_BY")
     private String updatedBy;
 
     private String password;
@@ -30,10 +39,12 @@ public class User {
     @JoinColumn(name = "department_id")
     private Department department;
 
-    @Temporal(TemporalType.DATE)
+    @Column(name = "CREATED_DATE")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createDate;
 
-    @Temporal(TemporalType.DATE)
+    @Column(name = "UPDATED_DATE")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date updatedDate;
 
     @Version
