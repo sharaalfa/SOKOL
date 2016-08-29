@@ -6,12 +6,10 @@ import io.khasang.sokol.dao.GenericDao;
 import io.khasang.sokol.entity.Role;
 import io.khasang.sokol.model.CreateTable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -43,16 +41,15 @@ public class AppController {
             @RequestParam(value = "logout", required = false) String logout){
         ModelAndView model = new ModelAndView();
         model.setViewName("login");
-
         return model;
     }
+
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public ModelAndView register(
             @RequestParam(value = "error", required = false) String error,
             @RequestParam(value = "logout", required = false) String logout){
         ModelAndView model = new ModelAndView();
         model.setViewName("register");
-
         return model;
     }
 
@@ -73,5 +70,11 @@ public class AppController {
     public String createTable(Model model){
         model.addAttribute("createTable", createTable.createTable());
         return "createtable";
+    }
+
+    @RequestMapping(value = "password/{password}", method = RequestMethod.GET)
+    public String password(@PathVariable("password")String password, Model model){
+        model.addAttribute("crypt", new BCryptPasswordEncoder().encode(password));
+        return "password";
     }
 }

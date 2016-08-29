@@ -36,6 +36,11 @@
         <put-attribute name="body" value="/WEB-INF/views/first.jsp"/>
     </definition>
 
+    <definition name="password" extends="base.definition">
+        <put-attribute name="title" value="Your encoded password"/>
+        <put-attribute name="body" value="/WEB-INF/views/password.jsp"/>
+    </definition>
+
     <definition name="second" extends="base.definition">
         <put-attribute name="title" value="Second Page"/>
         <put-attribute name="body" value="/WEB-INF/views/second.jsp"/>

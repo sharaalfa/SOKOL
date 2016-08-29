@@ -21,6 +21,7 @@ war {
             include 'util.properties'
             include 'hibernate.properties'
             include 'log4j.properties'
+            include 'auth.properties'
             into('WEB-INF/classes/')
         }
     }

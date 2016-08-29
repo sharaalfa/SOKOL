@@ -6,7 +6,6 @@ import java.util.Date;
 
 @Entity
 @Table(name = "USERS")
-
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +18,8 @@ public class User {
     private String createdBy;
 
     private String updatedBy;
+
+    private String password;
 
     @ManyToOne
     private Role role;
@@ -119,5 +120,13 @@ public class User {
 
     public void setDepartment(io.khasang.sokol.entity.Department department) {
         this.department = department;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
