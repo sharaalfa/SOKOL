@@ -1,4 +1,4 @@
-package io.khasang.sokol.config;
+package io.khasang.sokol.config.security;
 
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 

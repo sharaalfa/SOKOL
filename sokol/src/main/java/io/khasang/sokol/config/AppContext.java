@@ -3,6 +3,7 @@ package io.khasang.sokol.config;
 import io.khasang.sokol.beans.IMessageService;
 import io.khasang.sokol.beans.impl.HelloMessage;
 import io.khasang.sokol.beans.impl.User;
+import io.khasang.sokol.config.db.HibernateConfig;
 import io.khasang.sokol.model.CreateTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -60,8 +61,8 @@ public class AppContext {
     public UserDetailsService userDetailsService(){
         JdbcDaoImpl jdbcDao = new JdbcDaoImpl();
         jdbcDao.setDataSource(hibernateConfig.dataSource());
-        jdbcDao.setUsersByUsernameQuery(environment.getProperty("rolesByLogin"));
-        jdbcDao.setAuthoritiesByUsernameQuery(environment.getProperty("usersByLogin"));
+        jdbcDao.setAuthoritiesByUsernameQuery(environment.getProperty("rolesByLogin"));
+        jdbcDao.setUsersByUsernameQuery(environment.getProperty("usersByLogin"));
         return jdbcDao;
     }
 }

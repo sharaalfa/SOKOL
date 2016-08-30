@@ -1,6 +1,7 @@
-package io.khasang.sokol.config;
+package io.khasang.sokol.config.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableWebSecurity
 public class AppSecurityConfig extends WebSecurityConfigurerAdapter{
     @Autowired
+    @Qualifier("customUserDetailsService")
     UserDetailsService userDetailsService;
 
     @Autowired
@@ -40,9 +42,10 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter{
     public void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_SUPERADMIN')")
+                    .antMatchers("/admin/**").access("hasRole('ADMIN') or hasRole('SUPERADMIN')")
                 .and()
-                    .formLogin().defaultSuccessUrl("/index", false).loginPage("/login").permitAll()
+                    .formLogin().defaultSuccessUrl("/index", false)
+                    .loginPage("/login").permitAll()
                     .loginProcessingUrl("/j_spring_security_check")
                     .usernameParameter("j_username")
                     .passwordParameter("j_password")

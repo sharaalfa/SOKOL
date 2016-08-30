@@ -1,4 +1,4 @@
-package io.khasang.sokol.config;
+package io.khasang.sokol.config.db;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
