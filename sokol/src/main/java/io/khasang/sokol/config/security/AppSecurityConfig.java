@@ -44,7 +44,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter{
                 .authorizeRequests()
                     .antMatchers("/admin/**").access("hasRole('ADMIN') or hasRole('SUPERADMIN')")
                 .and()
-                    .formLogin().defaultSuccessUrl("/index", false)
+                    .formLogin().defaultSuccessUrl("/", false)
                     .loginPage("/login").permitAll()
                     .loginProcessingUrl("/j_spring_security_check")
                     .usernameParameter("j_username")
