@@ -36,6 +36,99 @@ public class Request {
     @OneToMany(mappedBy = "requestId")
     private Set<FileldValues> fieldValuesSet = new HashSet<>();
 
+    public int getId() {
+        return id;
+    }
 
+    public String getAssignedTo() {
+        return assignedTo;
+    }
 
+    public void setAssignedTo(String assignedTo) {
+        this.assignedTo = assignedTo;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    public String getRequestTypeId() {
+        return requestTypeId;
+    }
+
+    public void setRequestTypeId(String requestTypeId) {
+        this.requestTypeId = requestTypeId;
+    }
+
+    public String getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(String createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public String getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(String updatedDate) {
+        this.updatedDate = updatedDate;
+    }
+
+    public String getUpdatedBy() {
+        return updatedBy;
+    }
+
+    public void setUpdatedBy(String updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+
+    public RequestTypes getRequestTypes() {
+        return requestTypes;
+    }
+
+    public void setRequestTypes(RequestTypes requestTypes) {
+        this.requestTypes = requestTypes;
+    }
+
+    public Set<FileldValues> getFieldValuesSet() {
+        return fieldValuesSet;
+    }
+
+    public void setFieldValuesSet(Set<FileldValues> fieldValuesSet) {
+        this.fieldValuesSet = fieldValuesSet;
+    }
 }
