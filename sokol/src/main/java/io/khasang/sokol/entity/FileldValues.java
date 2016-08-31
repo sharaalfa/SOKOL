@@ -1,4 +1,3 @@
-
 package io.khasang.sokol.entity;
 
 import javax.persistence.*;
@@ -11,4 +10,3 @@ public class FileldValues {
     @JoinColumn( name = "request_id")
     private Request requestId;
 }
-

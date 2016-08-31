@@ -1,8 +1,7 @@
-/*
 package io.khasang.sokol.dao.impl;
 
-//import io.khasang.sokol.dao.RequestDao;
-//import io.khasang.sokol.entity.Request;
+import io.khasang.sokol.dao.RequestDao;
+import io.khasang.sokol.entity.Request;
 import org.springframework.stereotype.Repository;
 
 
@@ -24,4 +23,3 @@ public class RequestDaoImpl extends GenericDaoImpl<Request> implements RequestDa
     }
 
 }
-*/
