@@ -17,7 +17,7 @@ import java.util.Properties;
 
 @Configuration
 @ComponentScan("io.khasang.sokol")
-@PropertySource(value = {"classpath:hibernate.properties", "file:/Users/denspbru/Servers/hibernate.properties"}, ignoreResourceNotFound = true)
+@PropertySource(value = {"classpath:hibernate.properties"})
 @EnableTransactionManagement
 public class HibernateConfig {
     @Autowired

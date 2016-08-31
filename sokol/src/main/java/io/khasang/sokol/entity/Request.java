@@ -33,8 +33,8 @@ public class Request {
     @ManyToOne
     private RequestTypes requestTypes;
 
-    @OneToMany(mappedBy = "requestId")
-    private Set<FileldValues> fieldValuesSet = new HashSet<>();
+//    @OneToMany(mappedBy = "requestId")
+//    private Set<FileldValues> fieldValuesSet = new HashSet<>();
 
     public int getId() {
         return id;
@@ -123,12 +123,12 @@ public class Request {
     public void setRequestTypes(RequestTypes requestTypes) {
         this.requestTypes = requestTypes;
     }
-
-    public Set<FileldValues> getFieldValuesSet() {
-        return fieldValuesSet;
-    }
-
-    public void setFieldValuesSet(Set<FileldValues> fieldValuesSet) {
-        this.fieldValuesSet = fieldValuesSet;
-    }
+//
+//    public Set<FileldValues> getFieldValuesSet() {
+//        return fieldValuesSet;
+//    }
+//
+//    public void setFieldValuesSet(Set<FileldValues> fieldValuesSet) {
+//        this.fieldValuesSet = fieldValuesSet;
+//    }
 }

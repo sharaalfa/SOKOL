@@ -8,15 +8,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@NamedQuery(name = "RequestTypes.findById", query = "SELECT DISTINCT r.title FROM RequestTypes WHERE r.id = :id")
-
+@NamedQuery(name = "RequestTypes.findById", query = "SELECT DISTINCT r.title FROM RequestTypes r WHERE r.id = :id")
 public class RequestTypes {
     @Id
     private int id;
 
-    private  String tittle;
-
-
+    private  String title;
 
     private String description;
 
@@ -39,12 +36,12 @@ public class RequestTypes {
         this.id = id;
     }
 
-    public String getTittle() {
-        return tittle;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTittle(String tittle) {
-        this.tittle = tittle;
+    public void setTitle(String tittle) {
+        this.title = tittle;
     }
 
     public String getDescription() {
