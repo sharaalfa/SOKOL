@@ -1,34 +1,24 @@
 package io.khasang.sokol.entity;
 
 
-import org.hibernate.annotations.Type;
-
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name = "USERS")
+
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
-    @Column(name = "USER_NAME")
+     int id;
+
     private String login;
-    @Column(name = "FIO")
-    private String fio;
-    @Column(name = "EMAIL")
+
     private String email;
-    @Column(name = "PASSWORD")
-    private String password;
-    @Column(name = "IS_ACTIVE")
-    private Boolean isActive;
 
-    @Column(name = "CREATED_BY")
     private String createdBy;
-    @Column(name = "UPDATED_BY")
-    private String updatedBy;
 
-    private boolean enabled;
+    private String updatedBy;
 
     @ManyToOne
     private Role role;
@@ -37,12 +27,10 @@ public class User {
     @JoinColumn(name = "department_id")
     private Department department;
 
-    @Column(name = "CREATED_DATE")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date createDate;
 
-    @Column(name = "UPDATED_DATE")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date updatedDate;
 
     @Version
@@ -129,23 +117,7 @@ public class User {
         this.role = role;
     }
 
-    public void setDepartment(io.khasang.sokol.entity.Department department) {
+    public void setDepartment(Department department) {
         this.department = department;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
     }
 }

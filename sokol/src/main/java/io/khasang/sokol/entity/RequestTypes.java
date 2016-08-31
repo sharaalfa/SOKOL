@@ -1,50 +1,51 @@
+
 package io.khasang.sokol.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@NamedQuery(name = "RequestTypes.findById", query = "SELECT DISTINCT r.title FROM RequestTypes WHERE r.id = :id")
+@Table(name = "REQUEST_TYPES")
 
-public class RequestTypes {
+public class Requesttypes {
     @Id
-    private int id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    int request_type_id;
 
-    private  String tittle;
-
-
+    private String title;
 
     private String description;
 
-    private String createdDate;
-
     private String createdBy;
-
-    private String updatedDate;
 
     private String updatedBy;
 
-    @OneToMany(mappedBy = "requestType")
-    Set<User> userSet = new HashSet<>();
+    @Temporal(TemporalType.DATE)
+    private Date createDate;
 
-    public int getId() {
-        return id;
+    @Temporal(TemporalType.DATE)
+    private Date updatedDate;
+
+@OneToMany
+//(mappedBy = "request_type_id")
+ private Set<Request> requestSet = new HashSet<>();
+
+    public int getRequest_type_id() {
+        return request_type_id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setRequest_type_id(int request_type_id) {
+        this.request_type_id = request_type_id;
     }
 
-    public String getTittle() {
-        return tittle;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTittle(String tittle) {
-        this.tittle = tittle;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDescription() {
@@ -55,44 +56,35 @@ public class RequestTypes {
         this.description = description;
     }
 
-    public String getCreatedDate() {
-        return createdDate;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setCreatedDate(String createdDate) {
-        this.createdDate = createdDate;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
-    public String getUpdatedDate() {
+    public Date getUpdatedDate() {
         return updatedDate;
     }
 
-    public void setUpdatedDate(String updatedDate) {
+    public void setUpdatedDate(Date updatedDate) {
         this.updatedDate = updatedDate;
     }
 
-    public String getUpdatedBy() {
-        return updatedBy;
+    public Requesttypes() {
+        this.createDate = new Date();
     }
 
-    public void setUpdatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
-    }
 
-    public Set<User> getUserSet() {
-        return userSet;
-    }
 
-    public void setUserSet(Set<User> userSet) {
-        this.userSet = userSet;
-    }
 
-    public String getCreatedBy() {
-
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
 }
+
+
+
+
+
+
+
+

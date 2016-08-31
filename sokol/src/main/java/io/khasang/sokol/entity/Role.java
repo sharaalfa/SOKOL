@@ -1,23 +1,16 @@
 package io.khasang.sokol.entity;
 
-import org.hibernate.annotations.Type;
-
 import javax.persistence.*;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-//@NamedQuery(name = "Role.findById", query = "select distinct r from Role r where r.id = :id")
-@Table(name="ROLES")
-public class Role extends AuditableEntity{
+@NamedQuery(name = "Role.findById", query = "select distinct r from Role r where r.id = :id")
+public class Role {
     @Id
     private int id;
-    @Column(name = "ROLE_NAME")
-    private String name;
 
-    @Column(name = "ROLE_DESC")
-    private String description;
+    private String name;
 
     @OneToMany(mappedBy = "role")
     Set<User> userSet = new HashSet<>();
