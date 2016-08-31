@@ -1,76 +1,63 @@
 package io.khasang.sokol.entity;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "REQUESTS")
-
+@NamedQuery(name = "Request.findById", query = "SELECT DISTINCT r.title FROM Request r WHERE r.id = :id")
 public class Request {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    int request_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+     int id;
 
-  //  private String description;
+    private  String title;
 
-    public int getRequest_id() {
-        return request_id;
-    }
+    private String description;
 
-    public void setRequest_id(int request_id) {
-        this.request_id = request_id;
-    }
+    private String assignedTo;
 
-//    public String getDescription() {
-  //      return description;
- //   }
-@ManyToOne
-private Requesttypes requesttypes;
+    private String version;
 
-    public Requesttypes getRequesttypes() {
-        return requesttypes;
-    }
+    private String requestTypeId;
 
-    public void setRequesttypes(Requesttypes requesttypes) {
-        this.requesttypes = requesttypes;
-    }
-
-    public Request() {
-    }
-
-  //    public void setDescription(String description) {
- //      this.description = description;
-  //  }
-  //  //  public Request() {
-    //     this.createDate = new Date();
-
-}
-
- /*   private String assigned_to;
-
-    private Integer version;
+    private String createdDate;
 
     private String createdBy;
 
+    private String updatedDate;
+
     private String updatedBy;
 
-    @Temporal(TemporalType.DATE)
-    private Date createDate;
+    @ManyToOne
+    private RequestTypes requestTypes;
 
-    @Temporal(TemporalType.DATE)
-    private Date updatedDate;
+    @OneToMany(mappedBy = "requestId")
+    private Set<FileldValues> fieldValuesSet = new HashSet<>();
 
-
-
-    public int getRequest_id() {
-        return request_id;
+    public int getId() {
+        return id;
     }
 
-    public void setRequest_id(int request_id) {
-        this.request_id = request_id;
+    public String getAssignedTo() {
+        return assignedTo;
+    }
+
+    public void setAssignedTo(String assignedTo) {
+        this.assignedTo = assignedTo;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDescription() {
@@ -81,20 +68,28 @@ private Requesttypes requesttypes;
         this.description = description;
     }
 
-    public String getAssigned_to() {
-        return assigned_to;
-    }
-
-    public void setAssigned_to(String assigned_to) {
-        this.assigned_to = assigned_to;
-    }
-
-    public Integer getVersion() {
+    public String getVersion() {
         return version;
     }
 
-    public void setVersion(Integer version) {
+    public void setVersion(String version) {
         this.version = version;
+    }
+
+    public String getRequestTypeId() {
+        return requestTypeId;
+    }
+
+    public void setRequestTypeId(String requestTypeId) {
+        this.requestTypeId = requestTypeId;
+    }
+
+    public String getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(String createdDate) {
+        this.createdDate = createdDate;
     }
 
     public String getCreatedBy() {
@@ -105,6 +100,14 @@ private Requesttypes requesttypes;
         this.createdBy = createdBy;
     }
 
+    public String getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(String updatedDate) {
+        this.updatedDate = updatedDate;
+    }
+
     public String getUpdatedBy() {
         return updatedBy;
     }
@@ -113,26 +116,19 @@ private Requesttypes requesttypes;
         this.updatedBy = updatedBy;
     }
 
-    public Date getCreateDate() {
-        return createDate;
+    public RequestTypes getRequestTypes() {
+        return requestTypes;
     }
 
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
+    public void setRequestTypes(RequestTypes requestTypes) {
+        this.requestTypes = requestTypes;
     }
 
-    public Date getUpdatedDate() {
-        return updatedDate;
+    public Set<FileldValues> getFieldValuesSet() {
+        return fieldValuesSet;
     }
 
-    public void setUpdatedDate(Date updatedDate) {
-        this.updatedDate = updatedDate;
-    }*/
-
-
-
-
-
-
-    //}
-//}
+    public void setFieldValuesSet(Set<FileldValues> fieldValuesSet) {
+        this.fieldValuesSet = fieldValuesSet;
+    }
+}
