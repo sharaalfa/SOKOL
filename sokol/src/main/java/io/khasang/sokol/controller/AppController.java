@@ -24,7 +24,7 @@ public class AppController {
     CreateTable createTable;
 
 
-    @RequestMapping("/index")
+    @RequestMapping("/")
     public String hello(Model model){
         model.addAttribute("hello", messageService.getInfo());
         return "index";
