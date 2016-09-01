@@ -8,7 +8,7 @@
             <div class="error">${error}</div>
         </c:when>
         <c:otherwise>
-            <h2 class="form-signin-heading">Добро пожаловать!</h2>
+            <h2 class="form-signin-heading text-center">Добро пожаловать!</h2>
         </c:otherwise>
     </c:choose>
     <c:if test="${not empty msg}">
@@ -16,18 +16,17 @@
     </c:if>
 <s:url var="authUrl" value="/j_spring_security_check"/>
     <form class="form-signin" action="${authUrl}" method="post">
-        <h2 class="form-signin-heading">СОКОЛ</h2>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input name="j_username" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input name="j_password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <label for="inputEmail" class="sr-only">Эл. почта</label>
+        <input name="j_username" type="email" id="inputEmail" class="form-control" placeholder="Эл. почта" required autofocus>
+        <label for="inputPassword" class="sr-only">Пароль</label>
+        <input name="j_password" type="password" id="inputPassword" class="form-control" placeholder="Пароль" required>
         <div class="checkbox">
             <label>
-                <input type="checkbox" value="remember-me"> Remember me
+                <input type="checkbox" value="remember-me"> Запомнить меня
             </label>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Вход</button>
-        Напомнить пароль
+        <%--Напомнить пароль--%>
         <a class="btn btn-lg btn-info btn-block" href="/register">Регистрация</a>
     </form>
 
