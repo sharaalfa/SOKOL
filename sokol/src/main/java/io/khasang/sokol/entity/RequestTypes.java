@@ -25,8 +25,8 @@ public class RequestTypes {
 
     private String updatedBy;
 
-    @OneToMany(mappedBy = "requestType")
-    Set<User> userSet = new HashSet<>();
+//    @OneToMany(mappedBy = "requestType")
+//    Set<User> userSet = new HashSet<>();
 
     public int getId() {
         return id;
@@ -76,13 +76,13 @@ public class RequestTypes {
         this.updatedBy = updatedBy;
     }
 
-    public Set<User> getUserSet() {
-        return userSet;
-    }
-
-    public void setUserSet(Set<User> userSet) {
-        this.userSet = userSet;
-    }
+//    public Set<User> getUserSet() {
+//        return userSet;
+//    }
+//
+//    public void setUserSet(Set<User> userSet) {
+//        this.userSet = userSet;
+//    }
 
     public String getCreatedBy() {
 

@@ -1,7 +1,9 @@
 package io.khasang.sokol.controller;
 
 import io.khasang.sokol.beans.IMessageService;
-import io.khasang.sokol.beans.impl.User;
+import io.khasang.sokol.dao.RoleDao;
+import io.khasang.sokol.dao.UserDao;
+import io.khasang.sokol.entity.User;
 import io.khasang.sokol.dao.GenericDao;
 import io.khasang.sokol.entity.Role;
 import io.khasang.sokol.model.CreateTable;
@@ -12,16 +14,22 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
 public class AppController {
     @Autowired
     private IMessageService messageService;
 
-    @Autowired
-    private User user;
+//    @Autowired
+//    private User user;
 
     @Autowired
     CreateTable createTable;
+    @Autowired
+    UserDao userDao;
+    @Autowired
+    RoleDao roleDao;
 
 
     @RequestMapping("/")
@@ -59,10 +67,21 @@ public class AppController {
         return model;
     }
 
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public ModelAndView register( User usr  ){
+        ModelAndView model = new ModelAndView();
+        model.addObject("message", "Post registration form"+ usr.getLogin());
+        List<Role> roles =  roleDao.getAll();
+        usr.setRole(roles.get(0));
+
+        userDao.save(usr);
+        model.setViewName("register");
+        return model;
+    }
 
     @RequestMapping("/first")
     public String firstPage(Model model){
-        model.addAttribute("user", user);
+        model.addAttribute("user", new User().getLogin());
         return "first";
     }
 
