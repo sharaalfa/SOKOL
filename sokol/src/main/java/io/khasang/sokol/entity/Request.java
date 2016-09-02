@@ -8,6 +8,9 @@ import java.util.Set;
 @Table(name = "REQUESTS")
 @NamedQuery(name = "Request.findById", query = "SELECT DISTINCT r.title FROM Request r WHERE r.id = :id")
 public class Request {
+
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
      int id;
@@ -30,11 +33,16 @@ public class Request {
 
     private String updatedBy;
 
-    @ManyToOne
-    private RequestTypes requestTypes;
+    @OneToMany(mappedBy = "request")
+    private Set<RequestTypes> requesttypes = new HashSet<>();
 
-//    @OneToMany(mappedBy = "requestId")
-//    private Set<FileldValues> fieldValuesSet = new HashSet<>();
+    public Set<RequestTypes> getRequesttypes() {
+        return requesttypes;
+    }
+
+    public void setRequesttypes(Set<RequestTypes> requesttypes) {
+        this.requesttypes = requesttypes;
+    }
 
     public int getId() {
         return id;
@@ -116,19 +124,5 @@ public class Request {
         this.updatedBy = updatedBy;
     }
 
-    public RequestTypes getRequestTypes() {
-        return requestTypes;
-    }
 
-    public void setRequestTypes(RequestTypes requestTypes) {
-        this.requestTypes = requestTypes;
-    }
-//
-//    public Set<FileldValues> getFieldValuesSet() {
-//        return fieldValuesSet;
-//    }
-//
-//    public void setFieldValuesSet(Set<FileldValues> fieldValuesSet) {
-//        this.fieldValuesSet = fieldValuesSet;
-//    }
 }
