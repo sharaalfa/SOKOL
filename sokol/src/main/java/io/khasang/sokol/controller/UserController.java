@@ -1,5 +1,6 @@
 package io.khasang.sokol.controller;
 
+import io.khasang.sokol.dao.UserDao;
 import io.khasang.sokol.dao.impl.UserDaoImpl;
 import io.khasang.sokol.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping("/api/users")
 public class UserController {
     @Autowired
-    UserDaoImpl userDao;
+    UserDao userDao;
 
     @RequestMapping(value ="/{login}", method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
