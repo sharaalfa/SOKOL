@@ -14,6 +14,7 @@ public class User {
     int id;
     @Column(name = "USER_NAME")
     private String login;
+
     @Column(name = "FIO")
     private String fio;
     @Column(name = "EMAIL")
