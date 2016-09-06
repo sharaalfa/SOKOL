@@ -26,8 +26,8 @@ public class RequestTypes {
     @ManyToOne
     private Request request;
 
-    @ManyToOne
-    private Fields field;
+//    @ManyToOne
+//    private Fields field;
 
     public Request getRequest() {
         return request;
@@ -37,13 +37,13 @@ public class RequestTypes {
         this.request = request;
     }
 
-    public Fields getField() {
-        return field;
-    }
+//    public Fields getField() {
+//        return field;
+//    }
 
-    public void setField(Fields field) {
-        this.field = field;
-    }
+//    public void setField(Fields field) {
+//        this.field = field;
+//    }
 
     public int getId() {
         return id;
