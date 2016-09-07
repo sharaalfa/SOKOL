@@ -60,10 +60,10 @@ public class AppController {
     }
 
 
-    @RequestMapping("/first")
+    @RequestMapping("/addRequest")
     public String firstPage(Model model){
         model.addAttribute("user", user);
-        return "first";
+        return "addRequest";
     }
 
     @RequestMapping("/second")
