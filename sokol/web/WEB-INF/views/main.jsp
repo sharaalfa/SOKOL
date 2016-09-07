@@ -8,8 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-
-<title>Сокол|Главная</title>
+<meta name="title" content="">
 
 <!-- Bootstrap Core CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -56,6 +55,7 @@
                 <li>
                     <a href="#contact">Contact</a>
                 </li>
+
             </ul>
         </div>
         <!-- /.navbar-collapse -->
