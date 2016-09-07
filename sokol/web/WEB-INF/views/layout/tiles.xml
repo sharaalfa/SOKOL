@@ -11,7 +11,7 @@
     </definition>
 
     <definition name="index" extends="base.definition">
-        <put-attribute name="title" value="Main Page"/>
+        <put-attribute name="title" value="СОКОЛ|Главная"/>
         <put-attribute name="body" value="/WEB-INF/views/main.jsp"/>
     </definition>
 
