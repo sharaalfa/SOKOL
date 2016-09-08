@@ -3,6 +3,7 @@ package io.khasang.sokol.config;
 import io.khasang.sokol.beans.IMessageService;
 import io.khasang.sokol.beans.impl.HelloMessage;
 import io.khasang.sokol.beans.impl.User;
+import io.khasang.sokol.config.db.AppInitialiser;
 import io.khasang.sokol.config.db.HibernateConfig;
 import io.khasang.sokol.model.CreateTable;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,11 @@ public class AppContext {
     @Bean
     public User user(){
         return new User();
+    }
+
+    @Bean
+    public AppInitialiser dataLoader(){
+        return new AppInitialiser();
     }
 
     @Bean
