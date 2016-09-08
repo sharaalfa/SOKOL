@@ -1,6 +1,7 @@
 package io.khasang.sokol.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,39 +14,54 @@ public class Request {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     int id;
+    @Column(name = "REQUEST_ID")
+    private Integer requestId;
 
+    @Column(name = "TITLE")
     private  String title;
 
+    @Column(name = "DESCRIPTION")
     private String description;
 
+    @Column(name = "ASSIGNED_TO")
     private String assignedTo;
 
-    private String version;
-
+    @Column(name = "REQUEST_TYPE_ID")
     private String requestTypeId;
 
-    private String createdDate;
-
+    @Column(name = "CREATED_BY")
     private String createdBy;
 
-    private String updatedDate;
-
+    @Column(name = "UPDATED_BY")
     private String updatedBy;
 
     @OneToMany(mappedBy = "request")
-    private Set<RequestTypes> requesttypes = new HashSet<>();
+    private Set<RequestTypes> requestTypes = new HashSet<>();
 
     public Set<RequestTypes> getRequesttypes() {
-        return requesttypes;
+        return requestTypes;
     }
 
-    public void setRequesttypes(Set<RequestTypes> requesttypes) {
-        this.requesttypes = requesttypes;
+    @Column(name = "CREATED_DATE")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdDate;
+
+    @Column(name = "UPDATED_DATE")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updatedDate;
+
+    @Version
+    private int version;
+
+//    @OneToMany(mappedBy = "requestId")
+//    private Set<FileldValues> fieldValuesSet = new HashSet<>();
+
+    public Integer getRequestId() {
+        return requestId;
     }
 
-    public int getId() {
-        return id;
+    public void setRequestId(Integer requestId) {
+        this.requestId = requestId;
     }
 
     public String getAssignedTo() {
@@ -54,10 +70,6 @@ public class Request {
 
     public void setAssignedTo(String assignedTo) {
         this.assignedTo = assignedTo;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getTitle() {
@@ -76,14 +88,6 @@ public class Request {
         this.description = description;
     }
 
-    public String getVersion() {
-        return version;
-    }
-
-    public void setVersion(String version) {
-        this.version = version;
-    }
-
     public String getRequestTypeId() {
         return requestTypeId;
     }
@@ -92,28 +96,12 @@ public class Request {
         this.requestTypeId = requestTypeId;
     }
 
-    public String getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(String createdDate) {
-        this.createdDate = createdDate;
-    }
-
     public String getCreatedBy() {
         return createdBy;
     }
 
     public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
-    }
-
-    public String getUpdatedDate() {
-        return updatedDate;
-    }
-
-    public void setUpdatedDate(String updatedDate) {
-        this.updatedDate = updatedDate;
     }
 
     public String getUpdatedBy() {
@@ -125,4 +113,39 @@ public class Request {
     }
 
 
+    public void setRequestTypes(RequestTypes requestTypes) {
+        this.requestTypes = (Set<RequestTypes>) requestTypes;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+        public Date getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(Date updatedDate) {
+        this.updatedDate = updatedDate;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+//
+//    public Set<FileldValues> getFieldValuesSet() {
+//        return fieldValuesSet;
+//    }
+//
+//    public void setFieldValuesSet(Set<FileldValues> fieldValuesSet) {
+//        this.fieldValuesSet = fieldValuesSet;
+//    }
 }

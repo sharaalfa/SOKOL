@@ -4,13 +4,11 @@
 
 <div class="container">
     <s:url var="authUrl" value="/j_spring_security_check"/>
-    <form class="form-signin" action="/register" method="post">
+    <form class="form-signin" action="${authUrl}" method="post">
         <h2 class="form-signin-heading">Регистрация</h2>
 
-        <p>${message}</p>
-
         <label for="inputEmail" class="sr-only">Эл. почта</label>
-        <input name="login" id="inputEmail" class="form-control" placeholder="Эл. почта" required autofocus/>
+        <input name="username" id="inputEmail" class="form-control" placeholder="Эл. почта" required autofocus/>
 
         <label for="inputFIO" class="sr-only">Ф.И.О</label>
         <input name="fio" type="fio" id="inputFIO" class="form-control" placeholder="Ф.И.О" required>

@@ -12,7 +12,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
-    @Column(name = "LOGIN")
+    @Column(name = "USER_NAME")
     private String login;
     @Column(name = "FIO")
     private String fio;
@@ -148,8 +148,4 @@ public class User {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
-
-    public String getFio() { return fio; }
-
-    public void setFio(String fio) { this.fio = fio; }
 }
