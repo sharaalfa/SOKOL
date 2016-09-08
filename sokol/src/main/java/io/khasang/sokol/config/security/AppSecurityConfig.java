@@ -42,7 +42,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter{
     public void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/admin/**").access("hasRole('ADMIN') or hasRole('SUPERADMIN')")
+                    .antMatchers("/admin/**").access("hasAnyRole('ROLE_ADMIN')")
                 .and()
                     .formLogin().defaultSuccessUrl("/", false)
                     .loginPage("/login").permitAll()

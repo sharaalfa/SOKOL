@@ -26,6 +26,9 @@
     <definition name="register" extends="base.definition">
         <put-attribute name="body" value="/WEB-INF/views/register.jsp"/>
     </definition>
+    <definition name="admin" extends="base.definition">
+        <put-attribute name="body" value="/WEB-INF/views/admin.jsp"/>
+    </definition>
 
     <definition name="test" extends="base.definition">
         <put-attribute name="body" value="/WEB-INF/views/test.jsp"/>

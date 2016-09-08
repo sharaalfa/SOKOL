@@ -7,17 +7,26 @@ import io.khasang.sokol.entity.User;
 import io.khasang.sokol.dao.GenericDao;
 import io.khasang.sokol.entity.Role;
 import io.khasang.sokol.model.CreateTable;
+import org.apache.commons.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Controller
 public class AppController {
+    private static final Logger log = Logger.getLogger("CreateTable");
     @Autowired
     private IMessageService messageService;
 
@@ -35,12 +44,22 @@ public class AppController {
     @RequestMapping("/")
     public String hello(Model model){
         model.addAttribute("hello", messageService.getInfo());
+        // get security context from thread local
+        SecurityContext context = SecurityContextHolder.getContext();
+        if (context == null)
+            return "index";
+        Authentication authentication = context.getAuthentication();
+        if (authentication == null)
+            return "index";
+        for (GrantedAuthority auth : authentication.getAuthorities()) {
+            log.info("\r\n==================== ROLE = " + auth.getAuthority());
+        }
         return "index";
     }
 
-    @RequestMapping("/admin/test")
+    @RequestMapping("/admin")
     public String hello2(Model model){
-        return "test";
+        return "admin";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -71,9 +90,12 @@ public class AppController {
     public ModelAndView register( User usr  ){
         ModelAndView model = new ModelAndView();
         model.addObject("message", "Post registration form"+ usr.getLogin());
-        List<Role> roles =  roleDao.getAll();
-        usr.setRole(roles.get(0));
 
+        Role role =  roleDao.getByName("ROLE_USER");
+        usr.setRole(role);
+        usr.setPassword(new BCryptPasswordEncoder().encode(usr.getPassword()));
+        usr.setCreatedBy(usr.getLogin());
+        usr.setUpdatedBy(usr.getLogin());
         userDao.save(usr);
         model.setViewName("register");
         return model;

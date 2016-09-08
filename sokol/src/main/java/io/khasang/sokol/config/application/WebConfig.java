@@ -12,7 +12,7 @@ import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan({"io.khasang.sokol.config", "io.khasang.sokol.controller", "io.khasang.sokol"})
+@ComponentScan({"io.khasang.sokol.config", "io.khasang.sokol.controller", "io.khasang.sokol","io.khasang.sokol.config.db",})
 public class WebConfig extends WebMvcConfigurerAdapter {
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
