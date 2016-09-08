@@ -1,13 +1,11 @@
 package io.khasang.sokol.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Table(name = "REQUEST_TYPES")
 @NamedQuery(name = "RequestTypes.findById", query = "SELECT DISTINCT r.title FROM RequestTypes r WHERE r.id = :id")
 public class RequestTypes {
     @Id
@@ -25,8 +23,27 @@ public class RequestTypes {
 
     private String updatedBy;
 
-//    @OneToMany(mappedBy = "requestType")
-//    Set<User> userSet = new HashSet<>();
+    @ManyToOne
+    private Request request;
+
+    @ManyToOne
+    private Fields field;
+
+    public Request getRequest() {
+        return request;
+    }
+
+    public void setRequest(Request request) {
+        this.request = request;
+    }
+
+    public Fields getField() {
+        return field;
+    }
+
+    public void setField(Fields field) {
+        this.field = field;
+    }
 
     public int getId() {
         return id;
@@ -75,14 +92,6 @@ public class RequestTypes {
     public void setUpdatedBy(String updatedBy) {
         this.updatedBy = updatedBy;
     }
-
-//    public Set<User> getUserSet() {
-//        return userSet;
-//    }
-//
-//    public void setUserSet(Set<User> userSet) {
-//        this.userSet = userSet;
-//    }
 
     public String getCreatedBy() {
 
