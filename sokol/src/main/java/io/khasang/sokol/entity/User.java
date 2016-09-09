@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "USERS")
-public class User {
+public class User extends  AuditableEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
@@ -23,11 +23,6 @@ public class User {
     @Column(name = "IS_ACTIVE")
     private Boolean isActive;
 
-    @Column(name = "CREATED_BY")
-    private String createdBy;
-    @Column(name = "UPDATED_BY")
-    private String updatedBy;
-
     private boolean enabled;
 
     @ManyToOne
@@ -37,20 +32,12 @@ public class User {
     @JoinColumn(name = "department_id")
     private Department department;
 
-    @Column(name = "CREATED_DATE")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createDate;
-
-    @Column(name = "UPDATED_DATE")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updatedDate;
-
     @Version
     private int version;
 
 
     public User() {
-        this.createDate = new Date();
+        this.createdDate = new Date();
     }
 
     public int getId() {
@@ -97,14 +84,6 @@ public class User {
         return department;
     }
 
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
-
     public Date getUpdatedDate() {
         return updatedDate;
     }
@@ -147,5 +126,21 @@ public class User {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public String getFio() {
+        return fio;
+    }
+
+    public void setFio(String fio) {
+        this.fio = fio;
+    }
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
     }
 }
