@@ -29,7 +29,6 @@ public class User extends  AuditableEntity {
     private Role role;
 
     @ManyToOne
-    @JoinColumn(name = "department_id")
     private Department department;
 
     @Version
