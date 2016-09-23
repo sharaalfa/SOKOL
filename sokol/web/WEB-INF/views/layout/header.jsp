@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <sec:authentication var="user" property="principal" />
 
-<nav class="navbar navbar-default" role="navigation">
+<nav class="navbar navbar-default topnav" role="navigation">
     <div class="container">
         <p class="navbar-text navbar-right">
 
@@ -14,6 +14,20 @@
                 <a class="btn-sm btn-info" href="/logout">Выйти</a>
             </sec:authorize>
         </p>
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="#about">About</a>
+            </li>
+            <li>
+                <a href="#services">Services</a>
+            </li>
+            <li>
+                <a href="#contact">Contact</a>
+            </li>
+
+        </ul>
+
         <div class="navbar-header">
             <a class="navbar-brand" href="/">СОКОЛ</a>
         </div>
@@ -33,6 +47,7 @@
             </ul>
 
         </div>
+
 
     </div>
 </nav>
