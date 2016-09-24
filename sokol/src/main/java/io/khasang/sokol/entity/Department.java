@@ -5,11 +5,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Table(name = "DEPARTMENTS")
 //@IdClass(DepartmentKey.class)
-public class Department {
+public class Department extends AuditableEntity {
     @Id
     private int id;
-
+    @Column(name = "DEPART_NAME")
     private String name;
 //    @Id
 //    @AttributeOverride(
