@@ -11,10 +11,11 @@ public class FileldValueKey implements Serializable {
     @Column(name = "REQUEST_ID")
     private Integer requestId;
 
-    public  FileldValueKey(Integer fieldId,Integer requestId){
+    public FileldValueKey(Integer fieldId, Integer requestId) {
         this.fieldId = fieldId;
         this.requestId = requestId;
     }
+
     public Integer getFieldId() {
         return fieldId;
     }

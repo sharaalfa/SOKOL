@@ -7,13 +7,13 @@ import java.util.Set;
 @Entity
 @Table(name = "REQUESTS")
 //@NamedQuery(name = "Request.findById", query = "SELECT DISTINCT r.title FROM Requests r WHERE r.id = :id")
-public class Request extends  AuditableEntity {
+public class Request extends AuditableEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "REQUEST_ID")
     private Integer requestId;
     @Column(name = "TITLE")
-    private  String title;
+    private String title;
     @Column(name = "DESCRIPTION")
     private String description;
     @Column(name = "ASSIGNED_TO")
@@ -58,12 +58,11 @@ public class Request extends  AuditableEntity {
         this.description = description;
     }
 
-    public void setVersion(int version) {
-        this.version = version;
-    }
-
     public int getVersion() {
         return version;
     }
 
+    public void setVersion(int version) {
+        this.version = version;
+    }
 }
