@@ -29,8 +29,8 @@ import java.util.logging.Logger;
 @Controller
 public class AppController {
     private static final Logger log = Logger.getLogger("CreateTable");
-    @Autowired
-    private IMessageService messageService;
+//    @Autowired
+//    private IMessageService messageService;
 
 //    @Autowired
 //    private User user;
@@ -72,7 +72,7 @@ public class AppController {
 
     @RequestMapping("/")
     public String hello(Model model){
-        model.addAttribute("hello", messageService.getInfo());
+//        model.addAttribute("hello", messageService.getInfo());
         // get security context from thread local
         SecurityContext context = SecurityContextHolder.getContext();
         if (context == null)
