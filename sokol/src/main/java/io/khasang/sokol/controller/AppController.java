@@ -1,8 +1,10 @@
 package io.khasang.sokol.controller;
 
 import io.khasang.sokol.beans.IMessageService;
+import io.khasang.sokol.dao.RequestDao;
 import io.khasang.sokol.dao.RoleDao;
 import io.khasang.sokol.dao.UserDao;
+import io.khasang.sokol.entity.Request;
 import io.khasang.sokol.entity.User;
 import io.khasang.sokol.dao.GenericDao;
 import io.khasang.sokol.entity.Role;
@@ -39,6 +41,33 @@ public class AppController {
     UserDao userDao;
     @Autowired
     RoleDao roleDao;
+
+    @Autowired
+    RequestDao requestDao;
+
+
+    @RequestMapping("/mytest")
+    public String addmytestPage(Model mytest){
+        mytest.addAttribute("mytest", mytest);
+        return "mytest";
+    }
+
+
+    @RequestMapping(value = "/addRequest", method = RequestMethod.GET)
+    public String addRequestPage(Model addRequest){
+        addRequest.addAttribute("addRequest", addRequest);
+        return "addRequest";
+    }
+
+    @RequestMapping(value = "/addRequest", method = RequestMethod.POST)
+    public String addRequest(Model model,  @RequestParam("name") String name, @RequestParam("performer") String performer ){
+       // requestDao.save(request);
+        model.addAttribute("name", name);
+        model.addAttribute("performer", performer);
+
+        return "hello";
+    }
+
 
 
     @RequestMapping("/")
