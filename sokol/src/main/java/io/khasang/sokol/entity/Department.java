@@ -8,10 +8,10 @@ import java.util.Set;
 @Table(name = "DEPARTMENTS")
 //@IdClass(DepartmentKey.class)
 public class Department extends AuditableEntity {
-    @OneToMany(mappedBy = "department")
-    Set<User> userSet = new HashSet();
     @Id
     private int id;
+    @Column(name = "DEPART_NAME")
+    private String name;
 //    @Id
 //    @AttributeOverride(
 //            {
@@ -21,8 +21,9 @@ public class Department extends AuditableEntity {
 //    )
 //    private int field;
 //    private int request;
-    @Column(name = "DEPART_NAME")
-    private String name;
+
+    @OneToMany(mappedBy = "department")
+    Set<User> userSet = new HashSet();
 
     public Department() {
     }

@@ -11,18 +11,18 @@ import java.io.Serializable;
 import java.util.List;
 
 @Transactional
-public class GenericDaoImpl<T> implements GenericDao<T> {
+public class GenericDaoImpl<T>  implements GenericDao<T> {
     @Autowired
     private SessionFactory sessionFactory;
 
     private Class<T> type;
 
-    public GenericDaoImpl(Class<T> type) {
-        this.type = type;
+    protected Session getSession(){
+        return sessionFactory.getCurrentSession();
     }
 
-    protected Session getSession() {
-        return sessionFactory.getCurrentSession();
+    public GenericDaoImpl(Class<T> type){
+        this.type = type;
     }
 
     @Override
