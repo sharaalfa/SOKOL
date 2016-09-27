@@ -46,13 +46,6 @@ public class AppController {
     RequestDao requestDao;
 
 
-    @RequestMapping("/mytest")
-    public String addmytestPage(Model mytest){
-        mytest.addAttribute("mytest", mytest);
-        return "mytest";
-    }
-
-
     @RequestMapping(value = "/addRequest", method = RequestMethod.GET)
     public String addRequestPage(Model addRequest){
         addRequest.addAttribute("addRequest", addRequest);
@@ -67,6 +60,36 @@ public class AppController {
 
         return "hello";
     }
+
+    @RequestMapping(value = "/addRequestCreator", method = RequestMethod.GET)
+    public String addRequestCreatorPage(Model addRequestCreator){
+        addRequestCreator.addAttribute("addRequestCreator", addRequestCreator);
+        return "addRequestCreator";
+    }
+
+    @RequestMapping(value = "/addRequestCreator", method = RequestMethod.POST)
+    public String addRequestCreator(Model model,  @RequestParam("name") String name, @RequestParam("description") String description ){
+        // requestDao.save(request);
+        model.addAttribute("name", name);
+        model.addAttribute("description", description);
+        return "hello";
+    }
+
+    @RequestMapping(value = "/addRequestPerformer", method = RequestMethod.GET)
+    public String addRequestPerformerPage(Model addRequestPerformer){
+        addRequestPerformer.addAttribute("addRequestPerformer", addRequestPerformer);
+        return "addRequestPerformer";
+    }
+
+    @RequestMapping(value = "/addRequestPerformer", method = RequestMethod.POST)
+    public String addRequestPerformer(Model model,  @RequestParam("name") String name, @RequestParam("description") String description ){
+        // requestDao.save(request);
+        model.addAttribute("name", name);
+        model.addAttribute("description", description);
+        return "hello";
+    }
+
+
 
 
 
