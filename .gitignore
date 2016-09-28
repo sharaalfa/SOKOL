@@ -5,3 +5,9 @@ sokol/out/
 sokol/lib/
 untitled/.idea/
 untitled/
+*.jar
+*.war
+*.ear
+*.class
+*.idea
+*.iml
