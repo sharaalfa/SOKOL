@@ -7,14 +7,14 @@ import java.util.Date;
 import java.util.jar.Attributes;
 
 public class AuditableEntity {
-    @Column(name="CREATED_BY")
+    @Column(name = "CREATED_BY")
     protected String createdBy;
-    @Column(name="CREATED_DATE")
+    @Column(name = "CREATED_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     protected Date createdDate;
-    @Column(name="UPDATED_BY")
+    @Column(name = "UPDATED_BY")
     protected String updatedBy;
-    @Column(name="UPDATED_DATE")
+    @Column(name = "UPDATED_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     protected Date updatedDate;
 
