@@ -55,7 +55,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter{
 //                        .antMatchers("/login").requiresSecure()
                 .and()
                     .rememberMe()
-                        .key("myKey").tokenValiditySeconds(60*60*24)
+                        .key("RememberMe").tokenValiditySeconds(60*60*24)
                 .and()
                     .logout()
                         .invalidateHttpSession(true)
