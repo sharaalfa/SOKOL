@@ -6,32 +6,17 @@ import java.util.Set;
 
 @Entity
 @Table(name = "DEPARTMENTS")
-//@IdClass(DepartmentKey.class)
 public class Department extends AuditableEntity {
     @Id
     private int id;
     @Column(name = "DEPART_NAME")
     private String name;
-//    @Id
-//    @AttributeOverride(
-//            {
-//                @AttributeOverride(name = "field", column =  @Column(name = "field"))
-//                @AttributeOverride(name = "request", column =  @Column(name = "request"))
-//            }
-//    )
-//    private int field;
-//    private int request;
 
     @OneToMany(mappedBy = "department")
     Set<User> userSet = new HashSet();
 
     public Department() {
     }
-
-//    public Department(DepartmentKey key){
-//        field = key.getField();
-//        request = key.getRequest();
-//    }
 
     public int getId() {
         return id;

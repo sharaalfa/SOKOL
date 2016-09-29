@@ -1,8 +1,10 @@
 package io.khasang.sokol.controller;
 
 import io.khasang.sokol.beans.IMessageService;
+import io.khasang.sokol.dao.RequestDao;
 import io.khasang.sokol.dao.RoleDao;
 import io.khasang.sokol.dao.UserDao;
+import io.khasang.sokol.entity.Request;
 import io.khasang.sokol.entity.User;
 import io.khasang.sokol.dao.GenericDao;
 import io.khasang.sokol.entity.Role;
@@ -27,8 +29,8 @@ import java.util.logging.Logger;
 @Controller
 public class AppController {
     private static final Logger log = Logger.getLogger("CreateTable");
-    @Autowired
-    private IMessageService messageService;
+//    @Autowired
+//    private IMessageService messageService;
 
 //    @Autowired
 //    private User user;
@@ -40,10 +42,60 @@ public class AppController {
     @Autowired
     RoleDao roleDao;
 
+    @Autowired
+    RequestDao requestDao;
+
+
+    @RequestMapping(value = "/addRequest", method = RequestMethod.GET)
+    public String addRequestPage(Model addRequest){
+        addRequest.addAttribute("addRequest", addRequest);
+        return "addRequest";
+    }
+
+    @RequestMapping(value = "/addRequest", method = RequestMethod.POST)
+    public String addRequest(Model model,  @RequestParam("name") String name, @RequestParam("performer") String performer ){
+       // requestDao.save(request);
+        model.addAttribute("name", name);
+        model.addAttribute("performer", performer);
+
+        return "hello";
+    }
+
+    @RequestMapping(value = "/addRequestCreator", method = RequestMethod.GET)
+    public String addRequestCreatorPage(Model addRequestCreator){
+        addRequestCreator.addAttribute("addRequestCreator", addRequestCreator);
+        return "addRequestCreator";
+    }
+
+    @RequestMapping(value = "/addRequestCreator", method = RequestMethod.POST)
+    public String addRequestCreator(Model model,  @RequestParam("name") String name, @RequestParam("description") String description ){
+        // requestDao.save(request);
+        model.addAttribute("name", name);
+        model.addAttribute("description", description);
+        return "hello";
+    }
+
+    @RequestMapping(value = "/addRequestPerformer", method = RequestMethod.GET)
+    public String addRequestPerformerPage(Model addRequestPerformer){
+        addRequestPerformer.addAttribute("addRequestPerformer", addRequestPerformer);
+        return "addRequestPerformer";
+    }
+
+    @RequestMapping(value = "/addRequestPerformer", method = RequestMethod.POST)
+    public String addRequestPerformer(Model model,  @RequestParam("name") String name, @RequestParam("description") String description ){
+        // requestDao.save(request);
+        model.addAttribute("name", name);
+        model.addAttribute("description", description);
+        return "hello";
+    }
+
+
+
+
 
     @RequestMapping("/")
     public String hello(Model model){
-        model.addAttribute("hello", messageService.getInfo());
+//        model.addAttribute("hello", messageService.getInfo());
         // get security context from thread local
         SecurityContext context = SecurityContextHolder.getContext();
         if (context == null)

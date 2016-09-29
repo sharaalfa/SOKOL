@@ -1,6 +1,5 @@
 package io.khasang.sokol.config.application;
 
-import io.khasang.sokol.config.application.WebConfig;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 

@@ -5,13 +5,10 @@ import io.khasang.sokol.entity.Request;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-
 @Repository
-public class RequestDaoImpl extends GenericDaoImpl<Request> implements RequestDao{
-
-    public RequestDaoImpl(){
+public class RequestDaoImpl extends GenericDaoImpl<Request> implements RequestDao {
+    public RequestDaoImpl() {
         super(Request.class);
-
     }
 
     @Override
@@ -25,5 +22,4 @@ public class RequestDaoImpl extends GenericDaoImpl<Request> implements RequestDa
                 .add(Restrictions.eq("name", name))
                 .uniqueResult();
     }
-
 }
