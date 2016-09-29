@@ -18,6 +18,9 @@ public class Request extends  AuditableEntity {
     private String description;
     @Column(name = "ASSIGNED_TO")
     private String assignedTo;
+    @Enumerated(EnumType.STRING)
+    @Column(name="STATUS", nullable=true)
+    private RequestStatus status;
 
     @ManyToOne
     @JoinColumn(name = "REQUEST_TYPE_ID")
@@ -66,4 +69,9 @@ public class Request extends  AuditableEntity {
         return version;
     }
 
+    public RequestStatus getStatus() { return status; }
+
+    public void setStatus(RequestStatus status) { this.status = status; }
 }
+
+
