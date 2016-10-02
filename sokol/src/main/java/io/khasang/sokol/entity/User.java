@@ -1,17 +1,23 @@
 package io.khasang.sokol.entity;
 
 
+import io.khasang.sokol.validators.PasswordMatcher;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
 @Table(name = "USERS")
+@PasswordMatcher
 public class User extends  AuditableEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
+    @Size(min = 3, max = 20)
+    @NotNull
     @Column(name = "USER_NAME")
     private String login;
     @Column(name = "FIO")
@@ -110,6 +116,7 @@ public class User extends  AuditableEntity {
     public void setDepartment(io.khasang.sokol.entity.Department department) {
         this.department = department;
     }
+
 
     public String getPassword() {
         return password;

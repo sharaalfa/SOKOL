@@ -23,7 +23,8 @@
         <input name="j_password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
         <div class="checkbox">
             <label>
-                <input type="checkbox" value="remember-me"> Remember me
+                <%--<input type="checkbox" id="j_remember" name="_spring_security_remember_me" > Remember me--%>
+                <input type="checkbox" id="j_remember" name="remember-me" > Remember me
             </label>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Вход</button>

@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 @Configuration
 @PropertySource(value = {"classpath:util.properties"})
@@ -68,5 +69,10 @@ public class AppContext {
         jdbcDao.setAuthoritiesByUsernameQuery(environment.getProperty("rolesByLogin"));
         jdbcDao.setUsersByUsernameQuery(environment.getProperty("usersByLogin"));
         return jdbcDao;
+    }
+
+    @Bean
+    public LocalValidatorFactoryBean validator(){
+        return new LocalValidatorFactoryBean();
     }
 }
