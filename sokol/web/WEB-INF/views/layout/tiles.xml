@@ -50,4 +50,9 @@
         <put-attribute name="body" value="/WEB-INF/views/second.jsp"/>
     </definition>
 
+    <definition name="requestTypes" extends="base.definition">
+        <put-attribute name="title" value="Second Page"/>
+        <put-attribute name="body" value="/WEB-INF/views/requestTypes.jsp"/>
+    </definition>
+
 </tiles-definitions>

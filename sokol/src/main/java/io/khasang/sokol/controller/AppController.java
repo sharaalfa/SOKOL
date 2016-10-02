@@ -1,12 +1,9 @@
 package io.khasang.sokol.controller;
 
 import io.khasang.sokol.beans.IMessageService;
-import io.khasang.sokol.dao.RequestDao;
-import io.khasang.sokol.dao.RoleDao;
-import io.khasang.sokol.dao.UserDao;
+import io.khasang.sokol.dao.*;
 import io.khasang.sokol.entity.Request;
 import io.khasang.sokol.entity.User;
-import io.khasang.sokol.dao.GenericDao;
 import io.khasang.sokol.entity.Role;
 import io.khasang.sokol.model.CreateTable;
 import org.apache.commons.logging.Log;
@@ -15,15 +12,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.security.Principal;
-import java.util.List;
 import java.util.logging.Logger;
 
 @Controller
@@ -41,10 +35,8 @@ public class AppController {
     UserDao userDao;
     @Autowired
     RoleDao roleDao;
-
     @Autowired
     RequestDao requestDao;
-
 
     @RequestMapping(value = "/addRequest", method = RequestMethod.GET)
     public String addRequestPage(Model addRequest){
@@ -57,7 +49,6 @@ public class AppController {
        // requestDao.save(request);
         model.addAttribute("name", name);
         model.addAttribute("performer", performer);
-
         return "hello";
     }
 
@@ -98,11 +89,13 @@ public class AppController {
 //        model.addAttribute("hello", messageService.getInfo());
         // get security context from thread local
         SecurityContext context = SecurityContextHolder.getContext();
-        if (context == null)
+        if (context == null) {
             return "index";
+        }
         Authentication authentication = context.getAuthentication();
-        if (authentication == null)
+        if (authentication == null) {
             return "index";
+        }
         for (GrantedAuthority auth : authentication.getAuthorities()) {
             log.info("\r\n==================== ROLE = " + auth.getAuthority());
         }
