@@ -42,7 +42,7 @@ public class User extends  AuditableEntity {
 
 
     public User() {
-        this.createdDate = new Date();
+        super();
     }
 
     public int getId() {

@@ -80,10 +80,6 @@ public class AppController {
         return "hello";
     }
 
-
-
-
-
     @RequestMapping("/")
     public String hello(Model model){
 //        model.addAttribute("hello", messageService.getInfo());
