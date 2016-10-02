@@ -1,12 +1,13 @@
 package io.khasang.sokol.entity;
 
 import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import java.util.Date;
 import java.util.jar.Attributes;
-
-public class AuditableEntity {
+@MappedSuperclass
+public abstract class AuditableEntity {
     @Column(name = "CREATED_BY")
     protected String createdBy;
     @Column(name = "CREATED_DATE")
@@ -17,6 +18,12 @@ public class AuditableEntity {
     @Column(name = "UPDATED_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     protected Date updatedDate;
+
+    public AuditableEntity() {
+
+        this.createdDate = new Date();
+        this.updatedDate = new Date();
+    }
 
     public String getCreatedBy() {
         return createdBy;
