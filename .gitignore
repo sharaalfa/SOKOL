@@ -6,7 +6,6 @@ sokol/lib/
 untitled/.idea/
 untitled/
 *.jar
-*.java
 *.war
 *.ear
 *.class
