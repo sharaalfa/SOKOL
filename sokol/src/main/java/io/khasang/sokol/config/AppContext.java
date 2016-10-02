@@ -71,8 +71,8 @@ public class AppContext {
         return jdbcDao;
     }
 
-    @Bean
-    public LocalValidatorFactoryBean validator(){
-        return new LocalValidatorFactoryBean();
-    }
+//    @Bean
+//    public LocalValidatorFactoryBean validator(){
+//        return new LocalValidatorFactoryBean();
+//    }
 }
