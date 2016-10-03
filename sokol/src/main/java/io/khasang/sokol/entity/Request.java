@@ -1,6 +1,7 @@
 package io.khasang.sokol.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -9,7 +10,7 @@ import java.util.Set;
 //@NamedQuery(name = "Request.findById", query = "SELECT DISTINCT r.title FROM Requests r WHERE r.id = :id")
 public class Request extends  AuditableEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "REQUEST_ID")
     private Integer requestId;
     @Column(name = "TITLE")
@@ -28,6 +29,12 @@ public class Request extends  AuditableEntity {
 
     @Version
     private int version;
+
+    public Request() {
+         this.createdDate = new Date();
+        this.updatedDate = new Date();
+
+    }
 
     public Integer getRequestId() {
         return requestId;
@@ -72,6 +79,16 @@ public class Request extends  AuditableEntity {
     public RequestStatus getStatus() { return status; }
 
     public void setStatus(RequestStatus status) { this.status = status; }
+
+    public RequestType getRequestType() {
+        return requestType;
+    }
+
+    public void setRequestType(RequestType requestType) {
+        this.requestType = requestType;
+    }
+
+
 }
 
 
