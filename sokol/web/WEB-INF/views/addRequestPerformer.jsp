@@ -1,5 +1,6 @@
 
 <html lang="ru">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
 
@@ -36,8 +37,9 @@
             <p>Название</p>
         </div>
 
-                <div class="col-sm-5">
-            <input name="name" class="form-control" id="name" placeholder="Название запроса"/>
+        <div class="col-sm-5">
+        <input name="name" class="form-control" id="id" placeholder="${request.title}"/>
+
         </div>
 
         <div class="col-sm-1">
@@ -45,8 +47,8 @@
         </div>
 
         <div class="col-sm-3">
-            <h4 class="form-control-static">Иванов Иван Иванович</h4>
-        </div>
+            <input name="creator" class="form-control" id="idCreator" placeholder="${request.assignedTo}" readonly/>
+         </div>
     </div>
 
 
@@ -56,7 +58,8 @@
         </div>
 
         <div class="col-sm-5">
-            <textarea class="form-control" name = "description"  id="description" rows="3" placeholder="Описание запроса"></textarea>
+           <textarea class="form-control" name = "description2"  id="description2" rows="3"
+                     placeholder="${request.description}"></textarea>
         </div>
 
         <div class="col-sm-1">
@@ -64,7 +67,7 @@
         </div>
 
         <div class="col-sm-3">
-            <h4 class="form-control-static">27.09.2016</h4>
+            <input name="dateCreator" class="form-control" id="idDateCreator" placeholder="${request.createdDate}" readonly/>
         </div>
     </div>
 
@@ -76,7 +79,7 @@
         </div>
 
         <div class="col-sm-4">
-            <select name="typerequest" class="selectpicker">
+            <select name="typerequest" class="selectpicker" placeholder="${request.requestType.title}">
                 <option>ИТ</option>
                 <option>Бухгалтерия</option>
                 <option>Кадры</option>
