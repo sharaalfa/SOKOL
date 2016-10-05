@@ -37,7 +37,7 @@
         </div>
 
         <div class="col-sm-5">
-            <input name="name" class="form-control" id="name" placeholder="Название запроса"/>
+            <input name="name" class="form-control" placeholder="Название запроса"/>
         </div>
     </div>
 
@@ -48,7 +48,7 @@
         </div>
 
         <div class="col-sm-5">
-            <textarea class="form-control" name = "description"  id="description" rows="3" placeholder="Описание запроса"></textarea>
+            <textarea class="form-control" name = "description" rows="3" placeholder="Описание запроса"></textarea>
         </div>
     </div>
 
