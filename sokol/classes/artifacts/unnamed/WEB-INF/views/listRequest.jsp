@@ -12,7 +12,6 @@
 
 <body>
 
-<form action="listRequest" method="GET" >
 <style>
     table {
         width: 100%;
@@ -72,6 +71,6 @@
         </c:forEach>
 
 </table>
-    </form>
+
 </body>
 </html>

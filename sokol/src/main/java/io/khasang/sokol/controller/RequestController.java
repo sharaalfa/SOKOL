@@ -2,7 +2,6 @@ package io.khasang.sokol.controller;
 
 import io.khasang.sokol.dao.RequestDao;
 import io.khasang.sokol.dao.RequestTypeDao;
-import io.khasang.sokol.dao.TempDao;
 import io.khasang.sokol.entity.Request;
 import io.khasang.sokol.entity.RequestType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +15,9 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Date;
 import java.util.List;
 
-import static io.khasang.sokol.entity.RequestStatus.Closed;
+
 import static io.khasang.sokol.entity.RequestStatus.New;
+import static io.khasang.sokol.entity.RequestStatus.Closed;
 
 /**
  * Created by Andrey on 02.10.2016.
