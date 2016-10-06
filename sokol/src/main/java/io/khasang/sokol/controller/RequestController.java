@@ -1,0 +1,94 @@
+package io.khasang.sokol.controller;
+
+import io.khasang.sokol.dao.RequestDao;
+import io.khasang.sokol.dao.RequestTypeDao;
+import io.khasang.sokol.dao.TempDao;
+import io.khasang.sokol.entity.Request;
+import io.khasang.sokol.entity.RequestType;
+import io.khasang.sokol.entity.Temp;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Date;
+import java.util.List;
+
+import static io.khasang.sokol.entity.RequestStatus.Closed;
+import static io.khasang.sokol.entity.RequestStatus.New;
+
+/**
+ * Created by Andrey on 02.10.2016.
+ */
+@Controller
+public class RequestController {
+    @Autowired
+    RequestDao requestDao;
+    @Autowired
+    TempDao tempDao;
+    @Autowired
+    RequestTypeDao requestTypeDao;
+
+
+    @RequestMapping(value = "/listRequest", method = RequestMethod.GET)
+    public String listRequestPage(Model listRequest){
+        List<Request> listRequests =  requestDao.getAll();
+        listRequest.addAttribute("listRequests", listRequests);
+        return "listRequest";
+    }
+
+    @RequestMapping(value = "/addRequestCreator", method = RequestMethod.GET)
+   public String addRequestCreatorPage(Model addRequestCreator){
+        addRequestCreator.addAttribute("addRequestCreator", addRequestCreator);
+        return "addRequestCreator";
+    }
+
+/*    @RequestMapping(value = "/addRequestCreator", method = RequestMethod.POST)
+    public String addRequestCreator(Model model,  @RequestParam("name") String name, @RequestParam("description") String description ){
+        //Request request = new Request();
+        //requestDao.save(request);
+        model.addAttribute("name", name);
+        model.addAttribute("description", description);
+        return "hello";
+    }*/
+
+   @RequestMapping(value = "/addRequestCreator", method = RequestMethod.POST)
+   public ModelAndView addRequestCreator(@RequestParam("name") String name,
+                                         @RequestParam("description") String description,
+                                         @RequestParam("typerequest") String typerequest) {
+       ModelAndView model = new ModelAndView();
+       Request request = new Request();
+       request.setTitle(name);
+       request.setDescription(description);
+       request.setStatus(New);
+       request.setVersion(1);
+
+       request.setCreatedDate(new Date());
+       RequestType requestType =  requestTypeDao.getByTitle(typerequest);
+       request.setRequestType(requestType);
+       requestDao.save(request);
+       model.setViewName("addRequestCreator");
+       return model;
+   }
+
+// добавление запроса на редкатирование
+    @RequestMapping(value = "/addRequestPerformer", method = RequestMethod.GET)
+    public String addRequestPerformerPage(Model addRequestPerformer, @RequestParam("idRequest") String idRequest){
+        Request request =  requestDao.getByRequestId(Integer.parseInt(idRequest));
+        addRequestPerformer.addAttribute("request", request);
+        return "addRequestPerformer";
+    }
+
+    /*    @RequestMapping(value = "/addRequestPerformer", method = RequestMethod.POST)
+    public String addRequestPerformer(Model model,  @RequestParam("name") String name, @RequestParam("description") String description ){
+        // requestDao.save(request);
+        model.addAttribute("name", name);
+        model.addAttribute("description", description);
+        return "hello";
+    }*/
+
+
+}
