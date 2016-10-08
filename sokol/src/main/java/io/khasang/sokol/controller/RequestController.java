@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -38,7 +39,12 @@ public class RequestController {
 
     @RequestMapping(value = "/addRequestCreator", method = RequestMethod.GET)
     public String addRequestCreatorPage(Model addRequestCreator){
-        addRequestCreator.addAttribute("addRequestCreator", addRequestCreator);
+        List<RequestType> requestTypes =  requestTypeDao.getAll();
+        List listTitleRequestTypes = new ArrayList();
+        for (RequestType temp : requestTypes
+             ) {listTitleRequestTypes.add(temp.getTitle());
+        }
+        addRequestCreator.addAttribute("listTitleRequestTypes", listTitleRequestTypes);
         return "addRequestCreator";
     }
 
