@@ -9,6 +9,7 @@ import java.util.Set;
 //@NamedQuery(name = "RequestTypes.findById", query = "SELECT DISTINCT r.title FROM REQUEST_TYPES r WHERE r.id = :id")
 public class RequestType extends  AuditableEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "REQUEST_TYPE_ID")
     private int id;
 
