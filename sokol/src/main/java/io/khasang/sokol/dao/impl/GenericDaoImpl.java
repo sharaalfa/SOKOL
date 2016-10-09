@@ -31,6 +31,11 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
     }
 
     @Override
+    public void update(T object) {
+        getSession().update(object);
+    }
+
+    @Override
     public void delete(T object) {
         getSession().delete(object);
     }

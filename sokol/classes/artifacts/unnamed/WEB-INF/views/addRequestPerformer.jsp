@@ -34,12 +34,23 @@
 
     <div class="row">
         <div class="col-sm-2">
+            <p>№ запроса</p>
+        </div>
+
+        <div class="col-sm-2">
+           <input name="idRequest" class="form-control" value="${request.requestId}"
+                  placeholder="${request.requestId}" readonly/>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2">
             <p>Название</p>
         </div>
 
         <div class="col-sm-5">
-        <input name="name" class="form-control" id="id" placeholder="${request.title}"/>
-
+             <input name="name" class="form-control" value="${request.title}"
+                    placeholder="${request.title}"/>
         </div>
 
         <div class="col-sm-1">
@@ -47,8 +58,9 @@
         </div>
 
         <div class="col-sm-3">
-            <input name="creator" class="form-control" id="idCreator" placeholder="${request.assignedTo}" readonly/>
-         </div>
+            <input name="creator" class="form-control" value="${request.assignedTo}"
+                   placeholder="${request.assignedTo}" readonly/>
+        </div>
     </div>
 
 
@@ -58,7 +70,7 @@
         </div>
 
         <div class="col-sm-5">
-           <textarea class="form-control" name = "description2"  id="description2" rows="3"
+           <textarea class="form-control" name = "description" rows="3"
                      placeholder="${request.description}"></textarea>
         </div>
 
@@ -67,7 +79,8 @@
         </div>
 
         <div class="col-sm-3">
-            <input name="dateCreator" class="form-control" id="idDateCreator" placeholder="${request.createdDate}" readonly/>
+            <input name="dateCreator" class="form-control" value="${request.createdDate}"
+                   placeholder="${request.createdDate}" readonly/>
         </div>
     </div>
 
@@ -79,10 +92,10 @@
         </div>
 
         <div class="col-sm-4">
-            <select name="typerequest" class="selectpicker" placeholder="${request.requestType.title}">
-                <option>ИТ</option>
-                <option>Бухгалтерия</option>
-                <option>Кадры</option>
+            <select name="typerequest" class="selectpicker">
+                <c:forEach items="${listTitleRequestTypes}" var="titleRequestType" >
+                    <option><c:out value="${titleRequestType}"/></option>
+                </c:forEach>
             </select>
         </div>
     </div>
@@ -100,7 +113,7 @@
         </div>
 
         <div class="col-sm-1">
-            <a class="btn btn-danger" href="/addRequestCreator">Отменить</a>
+            <a class="btn btn-danger" href="/addRequestPerformer">Отменить</a>
         </div>
 
         <div class="col-sm-5"></div>
