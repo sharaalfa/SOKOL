@@ -16,6 +16,10 @@ public class RequestTypeDaoImpl extends GenericDaoImpl<RequestType> implements R
         return getSession().get(RequestType.class, id);
     }
 
+    @Override
+    public void update(RequestType requestType) {
+        getSession().update(requestType);
+    }
 
     @Override
     public RequestType getByTitle(String title) {
