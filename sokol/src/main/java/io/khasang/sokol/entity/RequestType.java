@@ -8,7 +8,7 @@ import java.util.Set;
 @Table(name = "REQUEST_TYPES")
 public class RequestType extends AuditableEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "REQUEST_TYPE_ID")
     private int id;
 

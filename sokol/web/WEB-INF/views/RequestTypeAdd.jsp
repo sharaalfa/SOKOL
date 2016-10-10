@@ -1,4 +1,4 @@
-<%--
+﻿<%--
   Created by IntelliJ IDEA.
   User: bmik98
   Date: 09.10.2016
@@ -24,7 +24,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/bootstrap-select.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/i18n/defaults-*.min.js"></script>
 
-<form action="addRequestType" method="post">
+<form action="add" method="post">
     <style>
         p {
             margin-top: 0.5em; /* Отступ сверху */

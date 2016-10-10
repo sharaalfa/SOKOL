@@ -16,32 +16,33 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Date;
 
 @Controller
+@RequestMapping(value = "/request/type")
 public class RequestTypeController {
     private final Logger logger = LoggerFactory.getLogger(RequestTypeController.class);
 
     @Autowired
     RequestTypeDao requestTypeDao;
 
-    @RequestMapping(value = "/request/types", method = RequestMethod.GET)
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String showAllRequestTypes(Model model) {
         model.addAttribute("listRequestTypes", requestTypeDao.getAll());
         return "RequestTypeList";
     }
 
-    @RequestMapping(value = "/request/type/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/show/{id}", method = RequestMethod.GET)
     public String showRequestType(@PathVariable("id") int id, Model model) {
         model.addAttribute("requestType", requestTypeDao.getById(id));
         return "RequestTypeEdit";
     }
 
-    @RequestMapping(value = "/request/type/add", method = RequestMethod.GET)
-    public String addRequestType(Model model) {
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public String add(Model model) {
         model.addAttribute("RequestTypeAdd", model);
         return "RequestTypeAdd";
     }
 
-    @RequestMapping(value = "/request/type/add", method = RequestMethod.POST)
-    public ModelAndView addRequestType(
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public ModelAndView add(
             @RequestParam("name") String name,
             @RequestParam("description") String description) {
         ModelAndView model = new ModelAndView();
