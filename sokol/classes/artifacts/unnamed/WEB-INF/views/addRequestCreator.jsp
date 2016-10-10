@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html lang="ru">
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -60,11 +61,13 @@
     </div>
 
     <div class="col-sm-4">
-        <select name="typerequest" class="selectpicker">
-            <option>ИТ</option>
-            <option>Бухгалтерия</option>
-            <option>Кадры</option>
-        </select>
+
+    <select name="typerequest" class="selectpicker">
+        <c:forEach items="${listTitleRequestTypes}" var="titleRequestType" >
+            <option><c:out value="${titleRequestType}"/></option>
+        </c:forEach>
+    </select>
+
     </div>
     </div>
 

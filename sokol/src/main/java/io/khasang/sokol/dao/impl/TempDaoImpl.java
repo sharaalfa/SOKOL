@@ -13,6 +13,11 @@ public class TempDaoImpl extends GenericDaoImpl<Temp> implements TempDao{
     public TempDaoImpl() {
         super(Temp.class);
     }
+
+    @Override
+    public Temp getById(Integer id) {
+        return getSession().get(Temp.class, id);
+    }
 }
 
 
