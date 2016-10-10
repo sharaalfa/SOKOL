@@ -15,6 +15,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/css/bootstrap-select.min.css"
           rel="stylesheet"/>
 </head>
+
 <body>
 
 <script src="js/bootstrap.min.js"></script>

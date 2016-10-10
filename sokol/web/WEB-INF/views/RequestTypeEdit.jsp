@@ -22,17 +22,9 @@
 <script src="https://code.jquery.com/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/bootstrap-select.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/i18n/defaults-*.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/i18n/defaults-ru_RU.min.js"></script>
 
 <form action="editRequestType" method="post">
-    <style>
-        p {
-            margin-top: 0.5em; /* Отступ сверху */
-            margin-bottom: 1.5em; /* Отступ снизу */
-            text-align: right;
-            font-weight: 600;
-        }
-    </style>
 
     <div class="panel panel-default">
         <div class="panel-heading">СОКОЛ</div>
