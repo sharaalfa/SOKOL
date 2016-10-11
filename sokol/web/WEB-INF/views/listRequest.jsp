@@ -12,6 +12,7 @@
 
 <body>
 
+
 <style>
     table {
         width: 100%;
@@ -51,26 +52,33 @@
         <th style="width: 3%">№</th>
         <th style="width: 8%">Статус</th>
         <th style="width: 20%">Название</th>
-        <th style="width: 45%">Описание</th>
+        <th style="width: 40%">Описание</th>
         <th style="width: 8%">Тип</th>
-
         <th style="width: 8%">Создано</th>
         <th style="width: 8%">Обновлено</th>
+        <th style="width: 5%">Удалить</th>
     </tr>
 
-        <c:forEach items="${listRequests}" var="lists" step="1">
-    <tr class="row2">
+    <c:forEach items="${listRequests}" var="lists" step="1">
+      <tr class="row2">
         <td>  <a href="/addRequestPerformer?idRequest=${lists.requestId}"> <c:out value="${lists.requestId}" /> </a></td>
         <td>  <c:out value="${lists.status}"/></td>
-     <td>     <c:out value="${lists.title}"/></td>
-     <td>     <c:out value="${lists.description}"/></td>
-        <td>     <c:out value="${lists.requestType.title}"/></td>
-        <td>     <c:out value="${lists.createdDate}"/></td>
-        <td>     <c:out value="${lists.updatedDate}"/></td>
-    </tr>
-        </c:forEach>
+        <td>  <c:out value="${lists.title}"/></td>
+        <td>  <c:out value="${lists.description}"/></td>
+        <td>  <c:out value="${lists.requestType.title}"/></td>
+        <td>  <c:out value="${lists.createdDate}"/></td>
+        <td>  <c:out value="${lists.updatedDate}"/></td>
+       <%-- <td> <button type="submit" class="btn btn-link"> <span class="glyphicon glyphicon-remove"></span></button></td>--%>
+       <%-- <td> <a href="/listRequest/delete?idRequest=${lists.requestId}" class="btn btn-default">
+            <span class="glyphicon glyphicon-remove"></span> role="button"></a></td>--%>
+
+          <td> <a class="btn btn-default" href="/listRequest/delete?idRequest=${lists.requestId}"
+             role="button"><span class="glyphicon glyphicon-remove"></span></a></td>
+      </tr>
+    </c:forEach>
 
 </table>
+
 
 </body>
 </html>

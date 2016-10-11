@@ -45,6 +45,14 @@ public class RequestController {
         return "listRequest";
     }
 
+    @RequestMapping(value = "/listRequest/delete", method = RequestMethod.GET)
+    public String delRequestPage(Model delRequest, @RequestParam("idRequest") String idRequest){
+        Request request =  requestDao.getByRequestId(Integer.parseInt(idRequest));
+        requestDao.delete(request);
+        delRequest.addAttribute("request", request);
+        return "redirect:/listRequest";
+    }
+
     @RequestMapping(value = "/addRequestCreator", method = RequestMethod.GET)
     public String addRequestCreatorPage(Model addRequestCreator){
         List<RequestType> requestTypes =  requestTypeDao.getAll();
@@ -74,7 +82,7 @@ public class RequestController {
         return model;
     }
 
-    // добавление запроса на редкатирование
+    // добавление запроса на редактирование
     @RequestMapping(value = "/addRequestPerformer", method = RequestMethod.GET)
     public String addRequestPerformerPage(Model addRequestPerformer, @RequestParam("idRequest") String idRequest){
         Request request =  requestDao.getByRequestId(Integer.parseInt(idRequest));
