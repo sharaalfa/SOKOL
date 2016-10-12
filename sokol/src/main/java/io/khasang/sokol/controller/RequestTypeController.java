@@ -16,16 +16,16 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Date;
 
 @Controller
-@RequestMapping(value = "/request/type")
+@RequestMapping(value = "/requestTypes")
 public class RequestTypeController {
     private final Logger logger = LoggerFactory.getLogger(RequestTypeController.class);
 
     @Autowired
     RequestTypeDao requestTypeDao;
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String showAllRequestTypes(Model model) {
-        model.addAttribute("listRequestTypes", requestTypeDao.getAll());
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public String requestTypeList(Model model) {
+        model.addAttribute("requestTypeList", requestTypeDao.getAll());
         return "RequestTypeList";
     }
 
@@ -36,8 +36,8 @@ public class RequestTypeController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public String add(Model model) {
-        model.addAttribute("RequestTypeAdd", model);
+    public String showAddRequestTypeForm(Model model) {
+        model.addAttribute("requestTypeForm", model);
         return "RequestTypeAdd";
     }
 

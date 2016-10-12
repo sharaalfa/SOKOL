@@ -56,7 +56,7 @@
         <th style="width: 8%">Обновлено</th>
     </tr>
 
-    <c:forEach items="${listRequestTypes}" var="list" step="1">
+    <c:forEach items="${requestTypeList}" var="list" step="1">
         <tr class="row2">
             <td><a href="/editRequestType?id=${list.id}"> <c:out value="${list.id}"/> </a>
             </td>
