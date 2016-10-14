@@ -49,8 +49,8 @@
         </div>
 
         <div class="col-sm-5">
-           <input class="form-control" name="description" id="description" rows="3"
-                     placeholder="${requestType.description}"/>
+            <input class="form-control" name="description" id="description" rows="3"
+                   placeholder="${requestType.description}"/>
         </div>
 
         <div class="col-sm-1">
@@ -70,18 +70,18 @@
 
     <div class="panel-body"></div>
 
-     <div class="panel-body"></div>
+    <div class="panel-body"></div>
     <div class="panel-body"></div>
     <div class="panel-body"></div>
     <div class="panel-body"></div>
 
     <div class="row">
         <div class="col-sm-1">
-            <button type="submit" class="btn btn-success">Подтвердить</button>
+            <button type="submit" class="btn-success" href="/requestTypes">Подтвердить</button>
         </div>
 
         <div class="col-sm-1">
-            <a class="btn btn-danger" href="/listRequest">Отменить</a>
+            <button type="button" class="btn-danger" href="/requestTypes">Отменить</button>
         </div>
         <div class="col-sm-5"></div>
     </div>
