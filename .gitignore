@@ -1,5 +1,6 @@
 sokol/.idea/
 sokol/build/
+sokol/classes/*
 sokol/.gradle/
 sokol/out/
 sokol/lib/
