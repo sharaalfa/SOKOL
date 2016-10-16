@@ -3,7 +3,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<h2>My panel</h2>
+<h2>Моя панель</h2>
 <script type="text/javascript">
     function onCreateRequest() {
         $('#myModal .modal-title').text("Создать запрос");
