@@ -37,7 +37,6 @@
                         <a class="btn-sm btn-info" href="/logout">Выйти</a>
                     </sec:authorize>
                 </li>
-
             </ul>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
