@@ -1,9 +1,11 @@
 package io.khasang.sokol.controller;
 
 import io.khasang.sokol.dao.RequestDao;
+import io.khasang.sokol.dao.RequestStatusDao;
 import io.khasang.sokol.dao.RequestTypeDao;
 import io.khasang.sokol.dao.TempDao;
 import io.khasang.sokol.entity.Request;
+import io.khasang.sokol.entity.RequestStatus;
 import io.khasang.sokol.entity.RequestType;
 import io.khasang.sokol.entity.Temp;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +23,6 @@ import java.util.Date;
 import java.util.List;
 
 
-import static io.khasang.sokol.entity.RequestStatus.Declined;
-import static io.khasang.sokol.entity.RequestStatus.New;
-import static io.khasang.sokol.entity.RequestStatus.Closed;
-
 /**
  * Created by Andrey on 02.10.2016.
  */
@@ -34,7 +32,8 @@ public class RequestController {
     RequestDao requestDao;
     @Autowired
     RequestTypeDao requestTypeDao;
-
+    @Autowired
+    RequestStatusDao requestStatusDao;
     @Autowired
     TempDao tempDao;
 
@@ -61,10 +60,12 @@ public class RequestController {
                                           @RequestParam("description") String description,
                                           @RequestParam("typerequest") String typerequest) {
         ModelAndView model = new ModelAndView();
+
         Request request = new Request();
         request.setTitle(name);
         request.setDescription(description);
-        request.setStatus(New);
+        RequestStatus status =  requestStatusDao.getById(1);
+        request.setStatus(status);
         request.setVersion(1);
         request.setCreatedDate(new Date());
         RequestType requestType =  requestTypeDao.getByTitle(typerequest);
@@ -100,7 +101,8 @@ public class RequestController {
         Request request = requestDao.getByRequestId(Integer.parseInt(idRequest));
         request.setTitle(name);
         request.setDescription(description);
-        request.setStatus(Declined);
+        RequestStatus status = requestStatusDao.getById(4);
+        request.setStatus(status);
         request.setUpdatedDate(new Date());
         RequestType requestType =  requestTypeDao.getByTitle(typerequest);
         request.setRequestType(requestType);

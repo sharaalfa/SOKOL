@@ -36,6 +36,7 @@ public class AppController {
 //        model.addAttribute("hello", messageService.getInfo());
         // get security context from thread local
         SecurityContext context = SecurityContextHolder.getContext();
+        context.getAuthentication().getName();
         if (context == null) {
             return "index";
         }
