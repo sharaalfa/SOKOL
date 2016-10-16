@@ -42,7 +42,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <sec:authorize access="hasAnyRole('ROLE_USER','ROLE_ADMIN')">
-                        <li><a href="/requests">Запросы</a></li>
+                        <li><a href="/listRequest">Запросы</a></li>
                     </sec:authorize>
 
                     <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
