@@ -11,9 +11,6 @@
 
     <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="/css/signin.css" type="text/css"  rel="stylesheet" />
-    <script type="text/javascript" href="/js/jquery-3.1.0.min.js"></script>
-    <script type="text/javascript" href="/css/bootstrap/js/bootstrap.min.js"></script>
-
     <!-- Custom CSS    -->
     <link href="css/landing-page.css" rel="stylesheet">
 
@@ -21,11 +18,17 @@
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
+
+    <%--<script type="text/javascript" href="/js/jquery-3.1.1.min.js"></script>--%>
+    <%--<script type="text/javascript" href="/js/bootstrap.js"></script>--%>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <!--<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>-->
+    <!--<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>-->
     <![endif]-->
 
     <title><tiles:getAsString name="title"/></title>
@@ -34,5 +37,7 @@
 <tiles:insertAttribute name="header"/>
 <tiles:insertAttribute name="body"/>
 <tiles:insertAttribute name="footer"/>
+
+
 </body>
 </html>
