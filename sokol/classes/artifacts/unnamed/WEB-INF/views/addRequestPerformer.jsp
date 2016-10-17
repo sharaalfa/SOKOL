@@ -113,7 +113,7 @@
         </div>
 
         <div class="col-sm-1">
-            <a class="btn btn-danger" href="/addRequestPerformer">Отменить</a>
+            <a class="btn btn-danger" href="/listRequest">Отменить</a>
         </div>
 
         <div class="col-sm-5"></div>

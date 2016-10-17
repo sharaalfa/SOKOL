@@ -11,7 +11,7 @@
 </head>
 <body>
 
-<script src="js/bootstrap.min.js"></script>
+<script src="/web/WEB-INF/views/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/bootstrap-select.min.js"></script>
@@ -84,7 +84,7 @@
         </div>
 
         <div class="col-sm-1">
-            <a class="btn btn-danger" href="/addRequestCreator">Отменить</a>
+            <a class="btn btn-danger" href="/listRequest">Отменить</a>
         </div>
 
         <div class="col-sm-5"></div>
