@@ -1,8 +1,10 @@
 package io.khasang.sokol.config.db;
 
 
+import io.khasang.sokol.dao.RequestStatusDao;
 import io.khasang.sokol.dao.RoleDao;
 import io.khasang.sokol.dao.UserDao;
+import io.khasang.sokol.entity.RequestStatus;
 import io.khasang.sokol.entity.Role;
 import io.khasang.sokol.entity.User;
 import org.osgi.service.component.annotations.Component;
@@ -23,6 +25,8 @@ public class AppInitialiser implements ApplicationListener<ContextRefreshedEvent
     @Autowired
     UserDao userDao;
     @Autowired
+    RequestStatusDao requestStatusDao;
+    @Autowired
     RoleDao roleDao;
 
     @Override
@@ -34,10 +38,41 @@ public class AppInitialiser implements ApplicationListener<ContextRefreshedEvent
         Role admin_role = CheckForAdminRole();
         CheckForUserRole();
         CheckForAdminUser(admin_role);
-
+        CheckForStatuses();
         alreadySetup = true;
     }
+    private void CheckForStatuses()
+    {
+        RequestStatus status  = requestStatusDao.getById(1);
+        if(status == null){
+            status = new RequestStatus();
+            status.setRequestStatusId(1);
+            status.setRequestStatusName("Новая");
+            requestStatusDao.save(status);
+        }
+        status  = requestStatusDao.getById(2);
+        if(status == null){
+            status = new RequestStatus();
+            status.setRequestStatusId(2);
+            status.setRequestStatusName("В заботе");
+            requestStatusDao.save(status);
+        }
+        status  = requestStatusDao.getById(3);
+        if(status == null){
+            status = new RequestStatus();
+            status.setRequestStatusId(3);
+            status.setRequestStatusName("Закрыта");
+            requestStatusDao.save(status);
+        }
+        status  = requestStatusDao.getById(4);
+        if(status == null){
+            status = new RequestStatus();
+            status.setRequestStatusId(4);
+            status.setRequestStatusName("Отклонена");
+            requestStatusDao.save(status);
+        }
 
+    }
     private Role CheckForUserRole() {
         Role admin_role  = roleDao.getByName("ROLE_USER");
         if(admin_role == null){

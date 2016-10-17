@@ -17,10 +17,11 @@ public class Request extends  AuditableEntity {
     private  String title;
     @Column(name = "DESCRIPTION")
     private String description;
-    @Column(name = "ASSIGNED_TO")
-    private String assignedTo;
-    @Enumerated(EnumType.STRING)
-    @Column(name="STATUS", nullable=true)
+    @ManyToOne
+    @JoinColumn(name = "ASSIGNED_TO")
+    private User assignedTo;
+    @ManyToOne
+    @JoinColumn(name = "REQUEST_STATUS_ID")
     private RequestStatus status;
 
     @ManyToOne
@@ -42,14 +43,6 @@ public class Request extends  AuditableEntity {
 
     public void setRequestId(Integer requestId) {
         this.requestId = requestId;
-    }
-
-    public String getAssignedTo() {
-        return assignedTo;
-    }
-
-    public void setAssignedTo(String assignedTo) {
-        this.assignedTo = assignedTo;
     }
 
     public String getTitle() {
