@@ -53,7 +53,7 @@ public class RequestController {
         return "redirect:/listRequest";
     }
 
-    @RequestMapping(value = "/addRequestCreator", method = RequestMethod.GET)
+    @RequestMapping(value = "/listRequest/add", method = RequestMethod.GET)
     public String addRequestCreatorPage(Model addRequestCreator){
         List<RequestType> requestTypes =  requestTypeDao.getAll();
         List listTitleRequestTypes = new ArrayList();
@@ -64,8 +64,34 @@ public class RequestController {
         return "addRequestCreator";
     }
 
+
+    @RequestMapping(value = "/confirmRemoveRequest", method = RequestMethod.GET)
+    public String listConfirmRemoveRequest(Model confirmRemoveRequest){
+
+       // confirmRemoveRequest.addAttribute("listRequests", listRequests);
+        return "confirmRemoveRequest";
+    }
+
+
+/*    @RequestMapping(value = "/addRequestCreator", method = RequestMethod.GET)
+    public String addRequestCreatorPage(Model addRequestCreator){
+        List<RequestType> requestTypes =  requestTypeDao.getAll();
+        List listTitleRequestTypes = new ArrayList();
+        for (RequestType requestType : requestTypes
+                ) {listTitleRequestTypes.add(requestType.getTitle());
+        }
+        addRequestCreator.addAttribute("listTitleRequestTypes", listTitleRequestTypes);
+        return "addRequestCreator";
+    }*/
+
+
+
+
+
+
+
     @RequestMapping(value = "/addRequestCreator", method = RequestMethod.POST)
-    public ModelAndView addRequestCreator(@RequestParam("name") String name,
+    public String addRequestCreator(@RequestParam("name") String name,
                                           @RequestParam("description") String description,
                                           @RequestParam("typerequest") String typerequest) {
         ModelAndView model = new ModelAndView();
@@ -79,7 +105,7 @@ public class RequestController {
         request.setRequestType(requestType);
         requestDao.save(request);
         model.setViewName("addRequestCreator");
-        return model;
+        return "redirect:/listRequest";
     }
 
     // добавление запроса на редактирование
