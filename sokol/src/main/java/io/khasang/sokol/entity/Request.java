@@ -19,7 +19,9 @@ public class Request extends  AuditableEntity {
     private String description;
     @ManyToOne
     @JoinColumn(name = "ASSIGNED_TO")
+
     private User assignedTo;
+
     @ManyToOne
     @JoinColumn(name = "REQUEST_STATUS_ID")
     private RequestStatus status;
@@ -81,7 +83,13 @@ public class Request extends  AuditableEntity {
         this.requestType = requestType;
     }
 
+    public User getAssignedTo() {
+        return assignedTo;
+    }
 
+    public void setAssignedTo(User assignedTo) {
+        this.assignedTo = assignedTo;
+    }
 }
 
 
