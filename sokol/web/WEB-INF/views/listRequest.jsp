@@ -10,7 +10,11 @@
 
         <script type="text/javascript">
             function confirmAction(id) {
-                return confirm("Вы действительно хотите удалить запрос № " + id + " ?")
+                if (confirm("Вы действительно хотите удалить запрос № " + id + " ?")) {
+                    return true;
+                } else {
+                   return false;
+                }
             }
         </script>
     </head>
@@ -68,7 +72,7 @@
         <c:forEach items="${listRequests}" var="lists" step="1">
              <tr class="row2">
                 <td>  <c:out value="${lists.requestId}"/></td>
-                <td>  <c:out value="${lists.status}"/></td>
+                <td>  <c:out value="${lists.status.requestStatusName}"/></td>
                 <td>  <c:out value="${lists.title}"/></td>
                 <td>  <c:out value="${lists.description}"/></td>
                 <td>  <c:out value="${lists.requestType.title}"/></td>
@@ -78,7 +82,7 @@
                         role="button"><span class="glyphicon glyphicon-eye-open"></span></a>
                 </td>
                  <td> <a class="btn btn-default" href="/listRequest/delete?idRequest=${lists.requestId}"
-                         onclick="confirmAction(${lists.requestId})"
+                         onclick="return confirmAction(${lists.requestId})"
                          role="button">
                          <span class="glyphicon glyphicon-remove"></span></a>
                  </td>

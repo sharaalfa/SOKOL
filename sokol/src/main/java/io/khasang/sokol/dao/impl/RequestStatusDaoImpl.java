@@ -15,3 +15,5 @@ public class RequestStatusDaoImpl extends GenericDaoImpl<RequestStatus> implemen
         return getSession().get(RequestStatus.class, id);
     }
 }
+
+
