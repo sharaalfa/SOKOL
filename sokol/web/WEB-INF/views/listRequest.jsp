@@ -6,7 +6,9 @@
         <title>Request</title>
         <!-- Bootstrap -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
+<%--
         <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/css/bootstrap-select.min.css" rel="stylesheet" >
+--%>
 
         <script type="text/javascript">
             function confirmAction(id) {
@@ -24,7 +26,7 @@
     <script src="https://code.jquery.com/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/bootstrap-select.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/i18n/defaults-*.min.js"></script>
+<%--    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/i18n/defaults-*.min.js"></script>--%>
 
     <style>
         table {
@@ -53,7 +55,13 @@
 
 
     <div class="panel panel-default">
-          <div class="panel-body">Список запросов</div>
+
+
+    <div class="panel-body">
+       <a class="btn btn-default" href="/addRequestCreator "
+          role="button"><span class="glyphicon glyphicon-plus"></span>
+       </a>
+       Список запросов
     </div>
 
     <table>
