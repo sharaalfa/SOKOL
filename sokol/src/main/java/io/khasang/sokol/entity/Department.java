@@ -8,12 +8,15 @@ import java.util.Set;
 @Table(name = "DEPARTMENTS")
 public class Department extends AuditableEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "DEPARTMENT_ID")
     private int id;
-    @Column(name = "DEPART_NAME")
-    private String name;
+
+    @Column(name = "TITLE")
+    private String title;
 
     @OneToMany(mappedBy = "department")
-    Set<User> userSet = new HashSet();
+    Set<User> userSet = new HashSet<>();
 
     public Department() {
     }
@@ -26,11 +29,11 @@ public class Department extends AuditableEntity {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String name) {
+        this.title = name;
     }
 }
