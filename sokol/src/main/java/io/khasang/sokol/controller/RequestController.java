@@ -1,13 +1,7 @@
 package io.khasang.sokol.controller;
 
-import io.khasang.sokol.dao.RequestDao;
-import io.khasang.sokol.dao.RequestStatusDao;
-import io.khasang.sokol.dao.RequestTypeDao;
-import io.khasang.sokol.dao.TempDao;
-import io.khasang.sokol.entity.Request;
-import io.khasang.sokol.entity.RequestStatus;
-import io.khasang.sokol.entity.RequestType;
-import io.khasang.sokol.entity.Temp;
+import io.khasang.sokol.dao.*;
+import io.khasang.sokol.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,10 +11,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 
+import javax.jws.soap.SOAPBinding;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import static org.bouncycastle.asn1.eac.CertificateBody.requestType;
 
 
 /**
@@ -34,6 +31,10 @@ public class RequestController {
     RequestTypeDao requestTypeDao;
     @Autowired
     RequestStatusDao requestStatusDao;
+
+    @Autowired
+    UserDao userDao;
+
     @Autowired
     TempDao tempDao;
 
@@ -82,6 +83,17 @@ public class RequestController {
                 ) {listTitleRequestTypes.add(requestType.getTitle());
         }
         addRequestCreator.addAttribute("listTitleRequestTypes", listTitleRequestTypes);
+
+        List<User> users = userDao.getAll();
+        List listFio = new ArrayList();
+        for (User user : users
+                ) {listFio.add(user.getFio());
+        }
+        addRequestCreator.addAttribute("listFio", listFio);
+
+
+
+
         return "addRequestCreator";
     }
 
@@ -94,7 +106,8 @@ public class RequestController {
     @RequestMapping(value = "/addRequestCreator", method = RequestMethod.POST)
     public String addRequestCreator(@RequestParam("name") String name,
                                           @RequestParam("description") String description,
-                                          @RequestParam("typerequest") String typerequest) {
+                                          @RequestParam("typerequest") String typerequest,
+                                          @RequestParam("userFio") String userFio){
         ModelAndView model = new ModelAndView();
 
         Request request = new Request();
@@ -102,11 +115,20 @@ public class RequestController {
         request.setDescription(description);
         RequestStatus status =  requestStatusDao.getById(1);
         request.setStatus(status);
+
+
         request.setVersion(1);
         request.setCreatedDate(new Date());
+
+        User user = userDao.getByFio(userFio);
+        request.setAssignedTo(user);
+
+
         RequestType requestType =  requestTypeDao.getByTitle(typerequest);
         request.setRequestType(requestType);
         requestDao.save(request);
+
+
         model.setViewName("addRequestCreator");
         return "redirect:/listRequest";
     }

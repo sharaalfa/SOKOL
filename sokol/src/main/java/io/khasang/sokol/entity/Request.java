@@ -17,9 +17,9 @@ public class Request extends  AuditableEntity {
     private  String title;
     @Column(name = "DESCRIPTION")
     private String description;
+
     @ManyToOne
     @JoinColumn(name = "ASSIGNED_TO")
-
     private User assignedTo;
 
     @ManyToOne
