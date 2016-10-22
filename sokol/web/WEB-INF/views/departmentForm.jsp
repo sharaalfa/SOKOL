@@ -9,13 +9,12 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
-    <title>RequestTypeForm</title>
+    <title>DepartmentForm</title>
 </head>
 <body>
 <h1>Request Type</h1>
-<sf:form method="post" commandName="requestType">
+<sf:form method="post" commandName="department">
     Title: <sf:input path="title"/><br/>
-    Description: <sf:input path="description"/><br/>
     <input type="submit" value="Register"/>
     <a class="btn btn-danger" href="${cancelUrl}">Cancel</a>
 </sf:form>
