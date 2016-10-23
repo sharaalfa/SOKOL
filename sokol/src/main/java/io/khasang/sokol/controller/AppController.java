@@ -47,6 +47,8 @@ public class AppController {
         for (GrantedAuthority auth : authentication.getAuthorities()) {
             log.info("\r\n==================== ROLE = " + auth.getAuthority());
         }
+        if(authentication.getName() != "anonymousUser")
+            return "redirect:/mypanel";
         return "index";
     }
 
@@ -90,7 +92,7 @@ public class AppController {
         usr.setCreatedBy(usr.getLogin());
         usr.setUpdatedBy(usr.getLogin());
         userDao.save(usr);
-        model.setViewName("register");
+        model.setViewName("mypanel");
         return model;
     }
 

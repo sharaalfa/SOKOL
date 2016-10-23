@@ -6,6 +6,7 @@
 <h2>Моя панель</h2>
 <script type="text/javascript">
     function onCreateRequest() {
+        window.location = '/addRequestCreator'
         $('#myModal .modal-title').text("Создать запрос");
         $('#requestId').val('');
         $('#title').val('');
@@ -15,6 +16,7 @@
     }
 
     function onEditRequest(requestId) {
+        window.location = '/addRequestPerformer?idRequest=' + requestId;
         $('#myModal .modal-title').text("Изменить запрос");
         $('#requestId').val($('#request-' + requestId).find('.request-id').val());
         $('#title').val($('#request-' + requestId).find('.request-title').text());
