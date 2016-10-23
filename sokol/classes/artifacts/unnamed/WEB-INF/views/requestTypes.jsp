@@ -14,8 +14,7 @@
 <body>
 <script type="text/javascript">
     function confirm_delete(type_id) {
-        if (confirm("you want to delete the user?")) // this will pop up confirmation box and if yes is clicked it call servlet else return to page
-        {
+        if (confirm("you want to delete the user?")) {
             window.location = "/requestType/" + type_id + "/delete";
         } else {
             return false;

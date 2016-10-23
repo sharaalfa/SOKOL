@@ -2,6 +2,7 @@
 <html lang="ru">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <head>
 
     <title>Request</title>
@@ -15,7 +16,7 @@
 <script src="https://code.jquery.com/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/bootstrap-select.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/i18n/defaults-*.min.js"></script>
+<%--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/i18n/defaults-*.min.js"></script>--%>
 
 <form action="addRequestPerformer" method="post" >
     <style>
@@ -28,7 +29,6 @@
 </style>
 
     <div class="panel panel-default">
-        <div class="panel-heading">СОКОЛ</div>
         <div class="panel-body">Редактирование запроса</div>
     </div>
 
@@ -58,8 +58,8 @@
         </div>
 
         <div class="col-sm-3">
-            <input name="creator" class="form-control" value="${request.assignedTo}"
-                   placeholder="${request.assignedTo}" readonly/>
+            <input name="creator" class="form-control" value="${request.createdBy}"
+                   placeholder="${request.createdBy}" readonly/>
         </div>
     </div>
 
@@ -100,6 +100,19 @@
         </div>
     </div>
 
+
+    <div class="row">
+        <div class="col-sm-2">
+            <p>Исполнитель</p>
+        </div>
+        <div class="col-sm-4">
+            <select name="userFio" class="selectpicker">
+                <c:forEach items="${listFio}" var="namePerformerRequest" >
+                    <option><c:out value="${namePerformerRequest}"/></option>
+                </c:forEach>
+            </select>
+        </div>
+    </div>
 
     <div class="panel-body"></div>
     <div class="panel-body"></div>

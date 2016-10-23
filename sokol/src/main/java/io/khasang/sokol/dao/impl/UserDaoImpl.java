@@ -19,4 +19,16 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
         return (User) getSession().createCriteria(User.class)
                 .add(Restrictions.eq("login", login)).uniqueResult();
     }
+
+    @Override
+    public User getByFio(String fio) {
+        return (User) getSession().createCriteria(User.class)
+                .add(Restrictions.eq("fio", fio)).uniqueResult();
+    }
 }
+
+/*
+    public RequestType getByTitle(String title) {
+        return (RequestType) getSession().createCriteria(RequestType.class)
+                .add(Restrictions.eq("title", title)).uniqueResult();
+    }*/

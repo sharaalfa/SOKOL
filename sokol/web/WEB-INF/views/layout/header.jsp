@@ -33,9 +33,28 @@
                 </li>
                 <li>
                     <sec:authorize access="isAuthenticated()">
-                        Вы вошли как <b style="padding-right: 10px;"> ${user.getUsername()}</b>
-                        <a class="btn-sm btn-info" href="/logout">Выйти</a>
+<%--                        Вы вошли как <b style="padding-right: 10px;"> ${user.getUsername()}</b>
+                        <a class="btn-sm btn-info" href="/logout">Выйти</a>--%>
+                        <table>
+                            <tr>
+                                <th>
+                                    Вы вошли как <b> ${user.getUsername()}</b>
+                                </th>
+
+                                <th>
+                                    <a class="btn-sm btn-info" href="/logout">Выйти</a>
+
+                                </th>
+
+                            </tr>
+
+                        </table>
+                     <%--   <a class="btn btn-default" title="Выйти"
+                           role="button"><span class="glyphicon glyphicon-eye-open"></span></a>--%>
                     </sec:authorize>
+
+
+
                 </li>
 
             </ul>
