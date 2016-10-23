@@ -71,64 +71,36 @@ public class RequestController {
     @RequestMapping(value = "/addRequestCreator", method = RequestMethod.GET)
     public String addRequestCreatorPage(Model addRequestCreator){
         List<RequestType> requestTypes =  requestTypeDao.getAll();
-        List listTitleRequestTypes = new ArrayList();
-        for (RequestType requestType : requestTypes
-                ) {listTitleRequestTypes.add(requestType.getTitle());
-        }
-        addRequestCreator.addAttribute("listTitleRequestTypes", listTitleRequestTypes);
-
-        List<User> users = userDao.getAll();
-        List listFio = new ArrayList();
-        for (User user : users
-                ) {listFio.add(user.getFio());
-        }
-        addRequestCreator.addAttribute("listFio", listFio);
+        addRequestCreator.addAttribute("requestTypes", requestTypes);
+        List<User> users =  userDao.getAll();
+        addRequestCreator.addAttribute("users", users);
         return "addRequestCreator";
     }
-
-
-
-
-
 
 
     @RequestMapping(value = "/addRequestCreator", method = RequestMethod.POST)
     public String addRequestCreator(@RequestParam("name") String name,
                                           @RequestParam("description") String description,
-                                          @RequestParam("typerequest") String typerequest,
-                                          @RequestParam("userFio") String userFio,
-                                          @RequestParam("creator") String creator){
+                                          @RequestParam("idrequest") String idrequest,
+                                          @RequestParam("iduser") String iduser){
         ModelAndView model = new ModelAndView();
         Request request = new Request();
         request.setTitle(name);
         request.setDescription(description);
 
-        request.setCreatedBy(creator);
+      //  request.setCreatedBy(creator);
         RequestStatus status =  requestStatusDao.getById(1);
         request.setStatus(status);
         request.setVersion(1);
         request.setCreatedDate(new Date());
-        User user = userDao.getByFio(userFio);
+        User user = userDao.getById(Integer.parseInt(iduser));
         request.setAssignedTo(user);
-        RequestType requestType =  requestTypeDao.getByTitle(typerequest);
+        RequestType requestType =  requestTypeDao.getById(Integer.parseInt(idrequest));
         request.setRequestType(requestType);
         SecurityContext context = SecurityContextHolder.getContext();
         request.setCreatedBy(context.getAuthentication().getName());
         request.setUpdatedBy(context.getAuthentication().getName());
         requestDao.save(request);
-
-
-
-
-
-
-
-
-
-
-
-
-
         model.setViewName("addRequestCreator");
         return "redirect:/listRequest";
     }

@@ -14,6 +14,13 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
         super(User.class);
     }
 
+
+    @Override
+    public User getById(Integer userId) {return getSession().get(User.class, userId);
+    }
+
+
+
     @Override
     public User getByLogin(String login) {
         return (User) getSession().createCriteria(User.class)

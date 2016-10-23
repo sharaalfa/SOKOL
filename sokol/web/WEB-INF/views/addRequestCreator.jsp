@@ -78,9 +78,9 @@
             <p>Тип запроса</p>
         </div>
         <div class="col-sm-4">
-            <select name="typerequest" class="selectpicker">
-                <c:forEach items="${listTitleRequestTypes}" var="titleRequestType" >
-                    <option><c:out value="${titleRequestType}"/></option>
+            <select name="idrequest" class="selectpicker">
+                <c:forEach items="${requestTypes}" var="titleRequestType" >
+                    <option value="${titleRequestType.id}"> <c:out value="${titleRequestType.title}"/></option>
                 </c:forEach>
             </select>
         </div>
@@ -91,9 +91,9 @@
             <p>Исполнитель</p>
         </div>
         <div class="col-sm-4">
-            <select name="userFio" class="selectpicker">
-                <c:forEach items="${listFio}" var="namePerformerRequest" >
-                    <option><c:out value="${namePerformerRequest}"/></option>
+            <select name="iduser" class="selectpicker">
+                <c:forEach items="${users}" var="nameusers" >
+                    <option value="${nameusers.id}"><c:out value="${nameusers.fio}"/></option>
                 </c:forEach>
             </select>
         </div>
