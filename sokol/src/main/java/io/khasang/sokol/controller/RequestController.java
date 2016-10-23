@@ -66,15 +66,6 @@ public class RequestController {
     }
 */
 
-
-    @RequestMapping(value = "/confirmRemoveRequest", method = RequestMethod.GET)
-    public String listConfirmRemoveRequest(Model confirmRemoveRequest){
-
-       // confirmRemoveRequest.addAttribute("listRequests", listRequests);
-        return "confirmRemoveRequest";
-    }
-
-
     @RequestMapping(value = "/addRequestCreator", method = RequestMethod.GET)
     public String addRequestCreatorPage(Model addRequestCreator){
         List<RequestType> requestTypes =  requestTypeDao.getAll();
@@ -90,10 +81,6 @@ public class RequestController {
                 ) {listFio.add(user.getFio());
         }
         addRequestCreator.addAttribute("listFio", listFio);
-
-
-
-
         return "addRequestCreator";
     }
 
@@ -107,26 +94,34 @@ public class RequestController {
     public String addRequestCreator(@RequestParam("name") String name,
                                           @RequestParam("description") String description,
                                           @RequestParam("typerequest") String typerequest,
-                                          @RequestParam("userFio") String userFio){
+                                          @RequestParam("userFio") String userFio,
+                                          @RequestParam("creator") String creator){
         ModelAndView model = new ModelAndView();
-
         Request request = new Request();
         request.setTitle(name);
         request.setDescription(description);
+
+        request.setCreatedBy(creator);
         RequestStatus status =  requestStatusDao.getById(1);
         request.setStatus(status);
-
-
         request.setVersion(1);
         request.setCreatedDate(new Date());
-
         User user = userDao.getByFio(userFio);
         request.setAssignedTo(user);
-
-
         RequestType requestType =  requestTypeDao.getByTitle(typerequest);
         request.setRequestType(requestType);
         requestDao.save(request);
+
+
+
+
+
+
+
+
+
+
+
 
 
         model.setViewName("addRequestCreator");
@@ -150,7 +145,7 @@ public class RequestController {
     }
 
     @RequestMapping(value = "/addRequestPerformer", method = RequestMethod.POST)
-    public ModelAndView addRequestPerformer(@RequestParam("idRequest") String idRequest,
+    public String  addRequestPerformer(@RequestParam("idRequest") String idRequest,
                                             @RequestParam("name") String name,
                                             @RequestParam("description") String description,
                                             @RequestParam("dateCreator") String dateCreator,
@@ -177,7 +172,7 @@ public class RequestController {
         }
         requestDao.update(request);
         model.setViewName("addRequestPerformer");
-        return model;
+        return "redirect:/listRequest";
     }
 }
 /*              Temp temp = tempDao.getById(Integer.parseInt(idRequest));

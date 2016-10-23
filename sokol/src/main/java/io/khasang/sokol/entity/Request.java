@@ -18,6 +18,12 @@ public class Request extends  AuditableEntity {
     @Column(name = "DESCRIPTION")
     private String description;
 
+    @Column(name = "CREATED_BY")
+    private String createdBy;
+
+
+
+
     @ManyToOne
     @JoinColumn(name = "ASSIGNED_TO")
     private User assignedTo;
@@ -61,6 +67,17 @@ public class Request extends  AuditableEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+
+    @Override
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    @Override
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
     }
 
     public void setVersion(int version) {

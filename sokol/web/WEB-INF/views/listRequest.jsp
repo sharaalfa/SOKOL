@@ -1,6 +1,7 @@
 <html lang="ru">
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+    <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 
     <head>
         <title>Request</title>
@@ -29,6 +30,9 @@
 <%--    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/i18n/defaults-*.min.js"></script>--%>
 
     <style>
+
+        <s:url var="authUrl" value="/j_spring_security_check"/>
+
         table {
             width: 100%;
         }
@@ -55,8 +59,8 @@
 
 
     <div class="panel panel-default">
-
-
+        <div class="panel panel-default">
+        <div class="panel panel-default">
     <div class="panel-body">
        <a class="btn btn-default" href="/addRequestCreator "
           role="button"><span class="glyphicon glyphicon-plus"></span>
