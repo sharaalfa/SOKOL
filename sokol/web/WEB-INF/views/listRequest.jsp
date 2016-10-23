@@ -30,9 +30,6 @@
 <%--    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/i18n/defaults-*.min.js"></script>--%>
 
     <style>
-
-        <s:url var="authUrl" value="/j_spring_security_check"/>
-
         table {
             width: 100%;
         }
@@ -62,7 +59,7 @@
         <div class="panel panel-default">
         <div class="panel panel-default">
     <div class="panel-body">
-       <a class="btn btn-default" href="/addRequestCreator "
+       <a class="btn btn-default" title="Добавление запроса" href="/addRequestCreator "
           role="button"><span class="glyphicon glyphicon-plus"></span>
        </a>
        Список запросов
@@ -92,10 +89,12 @@
                  <td>  <c:out value="${lists.requestType.title}"/></td>
                 <td>  <c:out value="${lists.createdDate}"/></td>
                 <td>  <c:out value="${lists.updatedDate}"/></td>
-                <td> <a class="btn btn-default" href="/addRequestPerformer?idRequest=${lists.requestId} "
+                <td> <a class="btn btn-default" title="Редактирование запроса"
+                        href="/addRequestPerformer?idRequest=${lists.requestId} "
                         role="button"><span class="glyphicon glyphicon-eye-open"></span></a>
                 </td>
-                 <td> <a class="btn btn-default" href="/listRequest/delete?idRequest=${lists.requestId}"
+                 <td> <a class="btn btn-default" title="Удаление запроса"
+                         href="/listRequest/delete?idRequest=${lists.requestId}"
                          onclick="return confirmAction(${lists.requestId})"
                          role="button">
                          <span class="glyphicon glyphicon-remove"></span></a>

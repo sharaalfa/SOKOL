@@ -101,6 +101,19 @@
     </div>
 
 
+    <div class="row">
+        <div class="col-sm-2">
+            <p>Исполнитель</p>
+        </div>
+        <div class="col-sm-4">
+            <select name="userFio" class="selectpicker">
+                <c:forEach items="${listFio}" var="namePerformerRequest" >
+                    <option><c:out value="${namePerformerRequest}"/></option>
+                </c:forEach>
+            </select>
+        </div>
+    </div>
+
     <div class="panel-body"></div>
     <div class="panel-body"></div>
     <div class="panel-body"></div>

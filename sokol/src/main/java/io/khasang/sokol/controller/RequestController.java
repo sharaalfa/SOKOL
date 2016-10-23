@@ -141,6 +141,15 @@ public class RequestController {
         }
         addRequestPerformer.addAttribute("listTitleRequestTypes", listTitleRequestTypes);
 
+
+        List<User> users = userDao.getAll();
+        List listFio = new ArrayList();
+        for (User user : users
+                ) {listFio.add(user.getFio());
+        }
+        addRequestPerformer.addAttribute("listFio", listFio);
+
+
         return "addRequestPerformer";
     }
 
@@ -149,7 +158,8 @@ public class RequestController {
                                             @RequestParam("name") String name,
                                             @RequestParam("description") String description,
                                             @RequestParam("dateCreator") String dateCreator,
-                                            @RequestParam("typerequest") String typerequest) {
+                                            @RequestParam("typerequest") String typerequest,
+                                            @RequestParam("userFio") String userFio){
         ModelAndView model = new ModelAndView();
         Request request = requestDao.getByRequestId(Integer.parseInt(idRequest));
         request.setTitle(name);
@@ -157,6 +167,10 @@ public class RequestController {
         RequestStatus status = requestStatusDao.getById(4);
         request.setStatus(status);
         request.setUpdatedDate(new Date());
+
+        User user = userDao.getByFio(userFio);
+        request.setAssignedTo(user);
+
         RequestType requestType =  requestTypeDao.getByTitle(typerequest);
         request.setRequestType(requestType);
       //  request.setVersion(1);
