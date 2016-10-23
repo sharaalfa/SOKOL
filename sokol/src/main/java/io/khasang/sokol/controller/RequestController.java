@@ -9,6 +9,8 @@ import io.khasang.sokol.entity.RequestStatus;
 import io.khasang.sokol.entity.RequestType;
 import io.khasang.sokol.entity.Temp;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -106,6 +108,9 @@ public class RequestController {
         request.setCreatedDate(new Date());
         RequestType requestType =  requestTypeDao.getByTitle(typerequest);
         request.setRequestType(requestType);
+        SecurityContext context = SecurityContextHolder.getContext();
+        request.setCreatedBy(context.getAuthentication().getName());
+        request.setUpdatedBy(context.getAuthentication().getName());
         requestDao.save(request);
         model.setViewName("addRequestCreator");
         return "redirect:/listRequest";
