@@ -16,7 +16,7 @@
 <sf:form method="post" commandName="requestType">
     Title: <sf:input path="title"/><br/>
     Description: <sf:input path="description"/><br/>
-    <input type="submit" value="Register"/>
+    <input class="btn btn-success" type="submit" value="Register"/>
     <a class="btn btn-danger" href="${cancelUrl}">Cancel</a>
 </sf:form>
 </body>

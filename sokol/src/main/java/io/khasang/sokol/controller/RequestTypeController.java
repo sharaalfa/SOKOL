@@ -15,57 +15,60 @@ import java.util.Date;
 @RequestMapping(value = "/requestType")
 public class RequestTypeController {
     private static final String REDIRECT_TO_LIST = "redirect:/requestType/list";
-    private static final String LIST_URL = "/requestType/list";
-    private static final String REQUEST_TYPE_VIEW = "requestTypeForm";
-    private static final String REQUEST_TYPE_LIST_VIEW = "requestTypes";
+    private static final String LIST_MAP = "/requestType/list";
+    private static final String FORM_VIEW = "requestType";
+    private static final String LIST_VIEW = "requestTypes";
+
+    final private RequestTypeDao requestTypeDao;
 
     @Autowired
-    RequestTypeDao requestTypeDao;
+    public RequestTypeController(RequestTypeDao requestTypeDao) {
+        this.requestTypeDao = requestTypeDao;
+    }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String showRequestTypes(Model model) {
+    public String showAll(Model model) {
         model.addAttribute("requestTypes", requestTypeDao.getAll());
-        return REQUEST_TYPE_LIST_VIEW;
+        return LIST_VIEW;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String editRequestType(@PathVariable int id, Model model) {
+    public String show(@PathVariable int id, Model model) {
         model.addAttribute("requestType", requestTypeDao.getById(id));
         configureCancelUrl(model);
-        return REQUEST_TYPE_VIEW;
+        return FORM_VIEW;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.POST)
-    public String updateRequestType(@PathVariable int id, RequestType requestType) {
-        requestType.setId(id);
-        requestType.setUpdatedDate(new Date());
-        requestTypeDao.update(requestType);
+    public String update(@PathVariable int id, RequestType requestType) {
+        RequestType updated = requestTypeDao.getById(id);
+        updated.setTitle(requestType.getTitle());
+        updated.setDescription(requestType.getDescription());
+        updated.setUpdatedDate(requestType.getUpdatedDate());
+        requestTypeDao.update(updated);
         return REDIRECT_TO_LIST;
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public String newRequestType(Model model) {
+    public String showNew(Model model) {
         model.addAttribute("requestType", new RequestType());
         configureCancelUrl(model);
-        return REQUEST_TYPE_VIEW;
+        return FORM_VIEW;
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String saveRequestType(RequestType requestType) {
-        Date now = new Date();
-        requestType.setCreatedDate(now);
-        requestType.setUpdatedDate(now);
+    public String add(RequestType requestType) {
         requestTypeDao.save(requestType);
         return REDIRECT_TO_LIST;
     }
 
-    @RequestMapping(value = "/{id}/delete", method = RequestMethod.GET)
-    public String deleteRequestType(@PathVariable int id) {
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public String delete(@PathVariable int id) {
         requestTypeDao.delete(requestTypeDao.getById(id));
         return REDIRECT_TO_LIST;
     }
 
     private void configureCancelUrl(Model model) {
-        model.addAttribute("cancelUrl", LIST_URL);
+        model.addAttribute("cancelUrl", LIST_MAP);
     }
 }

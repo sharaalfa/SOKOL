@@ -13,12 +13,17 @@
 
 <body>
 <script type="text/javascript">
-    function confirm_delete(type_id) {
-        if (confirm("you want to delete the user?")) {
-            window.location = "/requestType/" + type_id + "/delete";
+    function confirm_delete(id) {
+        if (confirm("Are you sure?")) {
+            window.location = "/requestType/delete/" + id;
         } else {
             return false;
         }
+        return true;
+    }
+
+    function open_form(id) {
+        window.location = "/requestType/" + id;
         return true;
     }
 </script>
@@ -29,26 +34,26 @@
 </div>
 
 <br/>
-<a class="btn btn-success" href="/requestType/add">NEW</a>
+<a class="btn btn-success" href="<c:url value="/requestType/add"/>">NEW</a>
 <br/>
 <table>
     <tr>
-        <th style="width: 3%">X</th>
-        <th style="width: 3%">?</th>
-        <th style="width: 5%">id</th>
+        <th style="width: 5%">X</th>
+        <th style="width: 5%">?</th>
+        <th style="width: 10%">id</th>
         <th style="width: 20%">Название</th>
-        <th style="width: 45%">Описание</th>
-
+        <th style="width: 40%">Описание</th>
         <th style="width: 10%">Создано</th>
         <th style="width: 10%">Обновлено</th>
     </tr>
-
     <c:forEach items="${requestTypes}" var="list" step="1">
         <tr class="row2">
-            <td><input type="submit" name="delete" value="delete"
-                       onclick="return confirm_delete(${list.id})"/></td>
-                <%--<td><a href="/requestType/${list.id}/delete"> X </a></td>--%>
-            <td><a href="/requestType/${list.id}"> ? </a></td>
+            <td>
+                <a class="btn btn-danger" onclick="return confirm_delete(${list.id})">Delete</a>
+            </td>
+            <td>
+                <a class="btn btn-info" href="<c:url value="/requestType/${list.id}"/>">Edit</a>
+            </td>
             <td><c:out value="${list.id}"/> </a></td>
             <td><c:out value="${list.title}"/></td>
             <td><c:out value="${list.description}"/></td>
@@ -56,8 +61,6 @@
             <td><c:out value="${list.updatedDate}"/></td>
         </tr>
     </c:forEach>
-
 </table>
-
 </body>
 </html>
