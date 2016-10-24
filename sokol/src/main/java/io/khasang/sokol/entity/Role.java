@@ -25,6 +25,14 @@ public class Role extends AuditableEntity{
     public Role() {
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public int getId() {
         return id;
     }

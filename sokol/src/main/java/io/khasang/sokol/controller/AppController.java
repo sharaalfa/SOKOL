@@ -1,12 +1,9 @@
 package io.khasang.sokol.controller;
 
-import io.khasang.sokol.beans.IMessageService;
 import io.khasang.sokol.dao.*;
-import io.khasang.sokol.entity.Request;
 import io.khasang.sokol.entity.User;
 import io.khasang.sokol.entity.Role;
 import io.khasang.sokol.model.CreateTable;
-import org.apache.commons.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -77,18 +74,21 @@ public class AppController {
             @RequestParam(value = "error", required = false) String error,
             @RequestParam(value = "logout", required = false) String logout){
         ModelAndView model = new ModelAndView();
+        model.getModel().put("roles", roleDao.getForRegisterForm());
         model.setViewName("register");
         return model;
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public ModelAndView register( User usr  ){
+    public ModelAndView register( User usr, String roleId  ){
         ModelAndView model = new ModelAndView();
         model.addObject("message", "Post registration form"+ usr.getLogin());
 
         Role role =  roleDao.getByName("ROLE_USER");
+        usr.setLogin(usr.getEmail());
         usr.setRole(role);
         usr.setPassword(new BCryptPasswordEncoder().encode(usr.getPassword()));
+        usr.setEnabled(true);
         usr.setCreatedBy(usr.getLogin());
         usr.setUpdatedBy(usr.getLogin());
         userDao.save(usr);

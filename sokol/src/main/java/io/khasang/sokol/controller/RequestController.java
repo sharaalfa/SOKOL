@@ -93,10 +93,12 @@ public class RequestController {
         request.setStatus(status);
         request.setVersion(1);
         request.setCreatedDate(new Date());
-        User user = userDao.getById(Integer.parseInt(iduser));
-        request.setAssignedTo(user);
         RequestType requestType =  requestTypeDao.getById(Integer.parseInt(idrequest));
         request.setRequestType(requestType);
+
+        User user = userDao.getById(Integer.parseInt(iduser));
+        request.setAssignedTo(user);
+
         SecurityContext context = SecurityContextHolder.getContext();
         request.setCreatedBy(context.getAuthentication().getName());
         request.setUpdatedBy(context.getAuthentication().getName());
@@ -110,47 +112,38 @@ public class RequestController {
     public String addRequestPerformerPage(Model addRequestPerformer, @RequestParam("idRequest") String idRequest){
         Request request =  requestDao.getByRequestId(Integer.parseInt(idRequest));
         addRequestPerformer.addAttribute("request", request);
-
         List<RequestType> requestTypes =  requestTypeDao.getAll();
-        List listTitleRequestTypes = new ArrayList();
-        for (RequestType requestType : requestTypes
-                ) {listTitleRequestTypes.add(requestType.getTitle());
-        }
-        addRequestPerformer.addAttribute("listTitleRequestTypes", listTitleRequestTypes);
-
-
-        List<User> users = userDao.getAll();
-        List listFio = new ArrayList();
-        for (User user : users
-                ) {listFio.add(user.getFio());
-        }
-        addRequestPerformer.addAttribute("listFio", listFio);
-
-
+        addRequestPerformer.addAttribute("requestTypes", requestTypes);
+        List<User> users =  userDao.getAll();
+        addRequestPerformer.addAttribute("users", users);
         return "addRequestPerformer";
     }
 
     @RequestMapping(value = "/addRequestPerformer", method = RequestMethod.POST)
-    public String  addRequestPerformer(@RequestParam("idRequest") String idRequest,
+    public String  addRequestPerformer(@RequestParam("idrequest") String idrequest,
                                             @RequestParam("name") String name,
                                             @RequestParam("description") String description,
                                             @RequestParam("dateCreator") String dateCreator,
-                                            @RequestParam("typerequest") String typerequest,
-                                            @RequestParam("userFio") String userFio){
+                                            @RequestParam("creator") String creator,
+                                            @RequestParam("idrequesttypes") String idrequesttypes,
+                                            @RequestParam("iduser") String iduser){
         ModelAndView model = new ModelAndView();
-        Request request = requestDao.getByRequestId(Integer.parseInt(idRequest));
+        Request request = requestDao.getByRequestId(Integer.parseInt(idrequest));
         request.setTitle(name);
         request.setDescription(description);
-        RequestStatus status = requestStatusDao.getById(4);
+        RequestStatus status = requestStatusDao.getById(2);
         request.setStatus(status);
+       // request.setVersion(1);
         request.setUpdatedDate(new Date());
+        RequestType requestType =  requestTypeDao.getById(Integer.parseInt(idrequesttypes));
+        request.setRequestType(requestType);
 
-        User user = userDao.getByFio(userFio);
+        request.setCreatedBy(creator);
+
+        User user = userDao.getById(Integer.parseInt(iduser));
         request.setAssignedTo(user);
 
-        RequestType requestType =  requestTypeDao.getByTitle(typerequest);
-        request.setRequestType(requestType);
-      //  request.setVersion(1);
+
         try
         {
             SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy hh:mm");
@@ -161,6 +154,11 @@ public class RequestController {
         {
             e.printStackTrace();
         }
+
+
+
+        SecurityContext context = SecurityContextHolder.getContext();
+        request.setUpdatedBy(context.getAuthentication().getName());
         requestDao.update(request);
         model.setViewName("addRequestPerformer");
         return "redirect:/listRequest";

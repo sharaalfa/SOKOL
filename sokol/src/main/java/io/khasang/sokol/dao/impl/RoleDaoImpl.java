@@ -5,6 +5,8 @@ import io.khasang.sokol.entity.Role;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class RoleDaoImpl extends GenericDaoImpl<Role> implements RoleDao {
     public RoleDaoImpl() {
@@ -22,4 +24,11 @@ public class RoleDaoImpl extends GenericDaoImpl<Role> implements RoleDao {
         return (Role) getSession().createCriteria(Role.class)
                 .add(Restrictions.eq("name", name)).uniqueResult();
     }
+
+    @Override
+    public List<Role> getForRegisterForm() {
+        return  (List<Role>) getSession().createCriteria(Role.class)
+                .add(Restrictions.ne("name", "ROLE_ADMIN")).list();
+    }
+
 }

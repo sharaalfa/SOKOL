@@ -37,6 +37,7 @@ public class AppInitialiser implements ApplicationListener<ContextRefreshedEvent
 
         Role admin_role = CheckForAdminRole();
         CheckForUserRole();
+        CheckForManagerRole();
         CheckForAdminUser(admin_role);
         CheckForStatuses();
         alreadySetup = true;
@@ -73,11 +74,25 @@ public class AppInitialiser implements ApplicationListener<ContextRefreshedEvent
         }
 
     }
+    private Role CheckForManagerRole() {
+        Role roleManager  = roleDao.getByName("ROLE_MANAGER");
+        if(roleManager == null){
+            roleManager = new Role();
+            roleManager.setId(3);
+            roleManager.setDescription("Менеджер");
+            roleManager.setName("ROLE_MANAGER");
+            roleManager.setCreatedBy("SYSTEM");
+            roleManager.setUpdatedBy("SYSTEM");
+            roleDao.save(roleManager);
+        }
+        return  roleManager;
+    }
     private Role CheckForUserRole() {
         Role admin_role  = roleDao.getByName("ROLE_USER");
         if(admin_role == null){
             admin_role = new Role();
             admin_role.setId(2);
+            admin_role.setDescription("Сотрудник");
             admin_role.setName("ROLE_USER");
             admin_role.setCreatedBy("SYSTEM");
             admin_role.setUpdatedBy("SYSTEM");
@@ -91,6 +106,7 @@ public class AppInitialiser implements ApplicationListener<ContextRefreshedEvent
         if(admin_role == null){
             admin_role = new Role();
             admin_role.setId(1);
+            admin_role.setDescription("Адмнистратор");
             admin_role.setName("ROLE_ADMIN");
             admin_role.setCreatedBy("SYSTEM");
             admin_role.setUpdatedBy("SYSTEM");
