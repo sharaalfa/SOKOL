@@ -38,7 +38,7 @@
         </div>
 
         <div class="col-sm-2">
-           <input name="idRequest" class="form-control" value="${request.requestId}"
+           <input name="idrequest" class="form-control" value="${request.requestId}"
                   placeholder="${request.requestId}" readonly/>
         </div>
     </div>
@@ -92,9 +92,18 @@
         </div>
 
         <div class="col-sm-4">
-            <select name="typerequest" class="selectpicker">
-                <c:forEach items="${listTitleRequestTypes}" var="titleRequestType" >
-                    <option><c:out value="${titleRequestType}"/></option>
+            <select name="idrequesttypes" class="selectpicker">
+                <c:forEach items="${requestTypes}" var="titleRequestType" >
+                     <c:if test="${titleRequestType.id == request.requestType.id}">
+                        <option value="${titleRequestType.id}" selected>
+                        <c:out value="${titleRequestType.title}"/>
+                        </option>
+                    </c:if>
+                    <c:if test="${titleRequestType.id != request.requestType.id}">
+                        <option value="${titleRequestType.id}">
+                            <c:out value="${titleRequestType.title}"/>
+                        </option>
+                    </c:if>
                 </c:forEach>
             </select>
         </div>
@@ -106,9 +115,9 @@
             <p>Исполнитель</p>
         </div>
         <div class="col-sm-4">
-            <select name="userFio" class="selectpicker">
-                <c:forEach items="${listFio}" var="namePerformerRequest" >
-                    <option><c:out value="${namePerformerRequest}"/></option>
+            <select name="iduser" class="selectpicker">
+                <c:forEach items="${users}" var="nameusers" >
+                    <option value="${nameusers.id}"><c:out value="${nameusers.fio}"/></option>
                 </c:forEach>
             </select>
         </div>
