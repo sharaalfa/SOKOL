@@ -8,22 +8,22 @@
             <div class="col-lg-12">
                 <ul class="list-inline">
                     <li>
-                        <a href="/">Home</a>
+                        <a href="/">Домой</a>
                     </li>
                     <li class="footer-menu-divider">&sdot;</li>
                     <li>
-                        <a href="#about">About</a>
+                        <a href="#about">О нас</a>
                     </li>
                     <li class="footer-menu-divider">&sdot;</li>
                     <li>
-                        <a href="#">Services</a>
+                        <a href="#">Сервисы</a>
                     </li>
                     <li class="footer-menu-divider">&sdot;</li>
                     <li>
-                        <a href="#">Contact</a>
+                        <a href="#">Контакты</a>
                     </li>
                 </ul>
-                <p class="copyright text-muted small">Copyright &copy; SOKOL 2016. All Rights Reserved</p>
+                <p class="copyright text-muted small">&copy; Сокол 2016</p>
             </div>
         </div>
     </div>
