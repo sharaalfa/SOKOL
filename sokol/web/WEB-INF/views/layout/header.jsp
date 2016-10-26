@@ -1,13 +1,13 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html>
-<html lang="ru">
+ <html lang="ru">
 
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<sec:authentication var="user" property="principal" />
+  <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+  <sec:authentication var="user" property="principal" />
 
-<!-- Navigation -->
-<nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+  <!-- Navigation -->
+  <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
     <div class="container topnav">
         <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
@@ -21,9 +21,6 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="#contact">О нас</a>
-                </li>
-                <li>
                     <a href="/register">Регистрация</a>
                 </li>
                 <li>
@@ -31,32 +28,14 @@
                     <a href="/login">Войти</a>
                 </sec:authorize>
                 </li>
-                <li>
-                    <sec:authorize access="isAuthenticated()">
-<%--                        Вы вошли как <b style="padding-right: 10px;"> ${user.getUsername()}</b>
-                        <a class="btn-sm btn-info" href="/logout">Выйти</a>--%>
-                        <table>
-                            <tr>
-                                <th>
-                                    Вы вошли как <b> ${user.getUsername()}</b>
-                                </th>
 
-                                <th>
-                                    <a class="btn-sm btn-info" href="/logout">Выйти</a>
-
-                                </th>
-
-                            </tr>
-
-                        </table>
-                     <%--   <a class="btn btn-default" title="Выйти"
-                           role="button"><span class="glyphicon glyphicon-eye-open"></span></a>--%>
-                    </sec:authorize>
-
-
-
+                   <sec:authorize access="isAuthenticated()">
+                      <li>
+                         <a href="/logout">Выход</a>
+                       </li>
+                      <h4 class="navbar-text"><b>${user.getUsername()}</b> </h4>
+                   </sec:authorize>
                 </li>
-
             </ul>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -72,12 +51,10 @@
                         <li><a href="/admin">Настройки</a> </li>
                     </sec:authorize>
                 </ul>
-
             </div>
-
         </div>
         <!-- /.navbar-collapse -->
     </div>
     <!-- /.container -->
-</nav>
+  </nav>
 </html>
