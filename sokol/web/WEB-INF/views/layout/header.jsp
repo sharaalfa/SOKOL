@@ -20,6 +20,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
+
                 <li>
                     <a href="/register">Регистрация</a>
                 </li>
@@ -43,12 +44,20 @@
                         <li><a href="/listRequest">Запросы</a></li>
                     </sec:authorize>
 
-                    <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
+<%--                    <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
                         <li><a href="/users">Пользователи</a></li>
-                    </sec:authorize>
+                    </sec:authorize>--%>
 
                     <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
-                        <li><a href="/admin">Настройки</a> </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Настройки<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li class="divider"></li>
+                                <li><a href="#">Департаменты</a></li>
+                                <li><a href="#">Пользователи</a></li>
+                                <li><a href="#">Типы запросов</a></li>
+                            </ul>
+                        </li>
                     </sec:authorize>
                 </ul>
             </div>
