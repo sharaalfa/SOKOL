@@ -55,7 +55,7 @@ public class RequestController {
         return "redirect:/listRequest";
     }
 
-/*
+
     @RequestMapping(value = "/listRequest/add", method = RequestMethod.GET)
     public String addRequestCreatorPage(Model addRequestCreator){
         List<RequestType> requestTypes =  requestTypeDao.getAll();
@@ -66,10 +66,10 @@ public class RequestController {
         addRequestCreator.addAttribute("listTitleRequestTypes", listTitleRequestTypes);
         return "addRequestCreator";
     }
-*/
+
 
     @RequestMapping(value = "/addRequestCreator", method = RequestMethod.GET)
-    public String addRequestCreatorPage(Model addRequestCreator){
+    public String addRequestCreatorPage2(Model addRequestCreator){
         List<RequestType> requestTypes =  requestTypeDao.getAll();
         addRequestCreator.addAttribute("requestTypes", requestTypes);
         List<User> users =  userDao.getAll();
