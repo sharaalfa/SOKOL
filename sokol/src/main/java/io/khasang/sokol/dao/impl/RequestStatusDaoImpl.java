@@ -5,15 +5,8 @@ import io.khasang.sokol.entity.RequestStatus;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class RequestStatusDaoImpl extends GenericDaoImpl<RequestStatus> implements RequestStatusDao {
+public class RequestStatusDaoImpl extends GenericDaoImpl<RequestStatus, Integer> implements RequestStatusDao {
     public RequestStatusDaoImpl() {
         super(RequestStatus.class);
     }
-
-    @Override
-    public RequestStatus getById(Integer id) {
-        return getSession().get(RequestStatus.class, id);
-    }
 }
-
-

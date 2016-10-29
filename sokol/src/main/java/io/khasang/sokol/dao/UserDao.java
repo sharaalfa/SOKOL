@@ -2,8 +2,8 @@ package io.khasang.sokol.dao;
 
 import io.khasang.sokol.entity.User;
 
-public interface UserDao extends GenericDao<User> {
-    User getById(Integer userId);
+public interface UserDao extends GenericDao<User, Integer> {
     User getByLogin(String login);
+
     User getByFio(String fio);
 }
