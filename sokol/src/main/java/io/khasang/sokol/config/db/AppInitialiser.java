@@ -55,7 +55,7 @@ public class AppInitialiser implements ApplicationListener<ContextRefreshedEvent
         if(status == null){
             status = new RequestStatus();
             status.setRequestStatusId(2);
-            status.setRequestStatusName("В заботе");
+            status.setRequestStatusName("В работе");
             requestStatusDao.save(status);
         }
         status  = requestStatusDao.getById(3);

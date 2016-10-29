@@ -7,21 +7,21 @@
 <script type="text/javascript">
     function onCreateRequest() {
         window.location = '/addRequestCreator'
-        $('#myModal .modal-title').text("Создать запрос");
-        $('#requestId').val('');
-        $('#title').val('');
-        $('#description').val('');
-
-        $('#myModal').modal("show");
+//        $('#myModal .modal-title').text("Создать запрос");
+//        $('#requestId').val('');
+//        $('#title').val('');
+//        $('#description').val('');
+//
+//        $('#myModal').modal("show");
     }
 
     function onEditRequest(requestId) {
         window.location = '/addRequestPerformer?idRequest=' + requestId;
-        $('#myModal .modal-title').text("Изменить запрос");
-        $('#requestId').val($('#request-' + requestId).find('.request-id').val());
-        $('#title').val($('#request-' + requestId).find('.request-title').text());
-        $('#description').val($('#request-' + requestId).find('.request-description').text());
-        $('#myModal').modal("show");
+//        $('#myModal .modal-title').text("Изменить запрос");
+//        $('#requestId').val($('#request-' + requestId).find('.request-id').val());
+//        $('#title').val($('#request-' + requestId).find('.request-title').text());
+//        $('#description').val($('#request-' + requestId).find('.request-description').text());
+//        $('#myModal').modal("show");
     }
 </script>
 
