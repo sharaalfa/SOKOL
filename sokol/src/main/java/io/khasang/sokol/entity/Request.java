@@ -22,7 +22,9 @@ public class Request extends  AuditableEntity {
     private String createdBy;
 
 
-
+    @ManyToOne
+    @JoinColumn(name = "DEPARTMENTS")
+    private Department department;
 
     @ManyToOne
     @JoinColumn(name = "ASSIGNED_TO")
@@ -106,6 +108,14 @@ public class Request extends  AuditableEntity {
 
     public void setAssignedTo(User assignedTo) {
         this.assignedTo = assignedTo;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 }
 

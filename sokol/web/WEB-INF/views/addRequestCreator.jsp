@@ -79,8 +79,8 @@
         </div>
         <div class="col-sm-4">
             <select name="idrequest" class="selectpicker">
-                <c:forEach items="${requestTypes}" var="titleRequestType" >
-                    <option value="${titleRequestType.id}"> <c:out value="${titleRequestType.title}"/></option>
+                <c:forEach items="${requestTypes}" var="requestType" >
+                    <option value="${requestType.id}"> <c:out value="${requestType.title}"/></option>
                 </c:forEach>
             </select>
         </div>
@@ -88,12 +88,12 @@
 
     <div class="row">
         <div class="col-sm-2">
-            <p>Исполнитель</p>
+            <p>Департамент</p>
         </div>
         <div class="col-sm-4">
-            <select name="iduser" class="selectpicker">
-                <c:forEach items="${users}" var="nameusers" >
-                    <option value="${nameusers.id}"><c:out value="${nameusers.fio}"/></option>
+            <select name="iddepartment" class="selectpicker">
+                <c:forEach items="${departments}" var="department" >
+                    <option value="${department.id}"><c:out value="${department.title}"/></option>
                 </c:forEach>
             </select>
         </div>
