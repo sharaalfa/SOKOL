@@ -3,7 +3,8 @@
 
 <!-- Footer -->
 <footer>
-    <div class="container">
+    <nav class="navbar navbar-default  navbar-fixed-bottom" role="navigation">
+      <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <ul class="list-inline">
@@ -26,5 +27,6 @@
                 <p class="copyright text-muted small">&copy; Сокол 2016</p>
             </div>
         </div>
-    </div>
+      </div>
+    </nav>
 </footer>

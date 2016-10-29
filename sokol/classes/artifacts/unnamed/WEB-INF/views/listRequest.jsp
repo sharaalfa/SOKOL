@@ -7,10 +7,6 @@
         <title>Request</title>
         <!-- Bootstrap -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
-<%--
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/css/bootstrap-select.min.css" rel="stylesheet" >
---%>
-
         <script type="text/javascript">
             function confirmAction(id) {
                 if (confirm("Вы действительно хотите удалить запрос № " + id + " ?")) {
@@ -27,7 +23,6 @@
     <script src="https://code.jquery.com/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/bootstrap-select.min.js"></script>
-<%--    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/i18n/defaults-*.min.js"></script>--%>
 
     <style>
         table {
@@ -54,7 +49,6 @@
         }
     </style>
 
-
     <div class="panel panel-default">
         <div class="panel panel-default">
         <div class="panel panel-default">
@@ -69,9 +63,11 @@
          <tr>
              <th style="width: 3%">№</th>
              <th style="width: 8%">Статус</th>
-             <th style="width: 20%">Название</th>
-             <th style="width: 29%">Описание</th>
+             <th style="width: 16%">Название</th>
+             <th style="width: 16%">Описание</th>
+             <th style="width: 8%">Создатель</th>
              <th style="width: 8%">Исполнитель</th>
+             <th style="width: 8%">Департамент</th>
              <th style="width: 8%">Тип</th>
              <th style="width: 8%">Создано</th>
              <th style="width: 8%">Обновлено</th>
@@ -88,22 +84,20 @@
 
                         <c:out value="${lists.title}"/>
                      </a>
-
                  </td>
-                <td>  <c:out value="${lists.description}"/></td>
+                 <td>  <c:out value="${lists.description}"/></td>
+                 <td>  <c:out value="${lists.createdBy}"/></td>
                  <td>  <c:out value="${lists.assignedTo.fio}"/></td>
+                 <td>  <c:out value="${lists.department.title}"/></td>
                  <td>  <c:out value="${lists.requestType.title}"/></td>
-                <td>  <c:out value="${lists.createdDate}"/></td>
-                <td>  <c:out value="${lists.updatedDate}"/></td>
-<%--                <td> <a class="btn btn-default" title="Редактирование запроса"
-                        href="/addRequestPerformer?idRequest=${lists.requestId} "
-                        role="button"><span class="glyphicon glyphicon-eye-open"></span></a>
-                </td>--%>
-                 <td> <a class="btn btn-default" title="Удаление запроса"
-                         href="/listRequest/delete?idRequest=${lists.requestId}"
-                         onclick="return confirmAction(${lists.requestId})"
-                         role="button">
-                         <span class="glyphicon glyphicon-remove"></span></a>
+                 <td>  <c:out value="${lists.createdDate}"/></td>
+                 <td>  <c:out value="${lists.updatedDate}"/></td>
+                 <td>  <a class="btn btn-default" title="Удаление запроса"
+                          href="/listRequest/delete?idRequest=${lists.requestId}"
+                          onclick="return confirmAction(${lists.requestId})"
+                          role="button">
+                          <span class="glyphicon glyphicon-remove"></span>
+                       </a>
                  </td>
              </tr>
          </c:forEach>
