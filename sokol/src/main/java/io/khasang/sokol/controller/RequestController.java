@@ -40,6 +40,9 @@ public class RequestController {
     @Autowired
     TempDao tempDao;
 
+    @Autowired
+    DepartmentDao departmentDao;
+
     @RequestMapping(value = "/listRequest", method = RequestMethod.GET)
     public String listRequestPage(Model listRequest){
         List<Request> listRequests =  requestDao.getAll();
@@ -72,8 +75,8 @@ public class RequestController {
     public String addRequestCreatorPage2(Model addRequestCreator){
         List<RequestType> requestTypes =  requestTypeDao.getAll();
         addRequestCreator.addAttribute("requestTypes", requestTypes);
-        List<User> users =  userDao.getAll();
-        addRequestCreator.addAttribute("users", users);
+        List<Department> departments = departmentDao.getAll();
+        addRequestCreator.addAttribute("departments", departments);
         return "addRequestCreator";
     }
 
@@ -82,23 +85,19 @@ public class RequestController {
     public String addRequestCreator(@RequestParam("name") String name,
                                           @RequestParam("description") String description,
                                           @RequestParam("idrequest") String idrequest,
-                                          @RequestParam("iduser") String iduser){
+                                          @RequestParam("iddepartment") String iddepartment){
         ModelAndView model = new ModelAndView();
         Request request = new Request();
         request.setTitle(name);
         request.setDescription(description);
-
-      //  request.setCreatedBy(creator);
         RequestStatus status =  requestStatusDao.getById(1);
         request.setStatus(status);
         request.setVersion(1);
         request.setCreatedDate(new Date());
         RequestType requestType =  requestTypeDao.getById(Integer.parseInt(idrequest));
         request.setRequestType(requestType);
-
-        User user = userDao.getById(Integer.parseInt(iduser));
-        request.setAssignedTo(user);
-
+        Department department = departmentDao.getById(Integer.parseInt(iddepartment));
+        request.setDepartment(department);
         SecurityContext context = SecurityContextHolder.getContext();
         request.setCreatedBy(context.getAuthentication().getName());
         request.setUpdatedBy(context.getAuthentication().getName());
@@ -114,8 +113,8 @@ public class RequestController {
         addRequestPerformer.addAttribute("request", request);
         List<RequestType> requestTypes =  requestTypeDao.getAll();
         addRequestPerformer.addAttribute("requestTypes", requestTypes);
-        List<User> users =  userDao.getAll();
-        addRequestPerformer.addAttribute("users", users);
+        List<Department> departments = departmentDao.getAll();
+        addRequestPerformer.addAttribute("departments", departments);
         return "addRequestPerformer";
     }
 
@@ -126,7 +125,7 @@ public class RequestController {
                                             @RequestParam("dateCreator") String dateCreator,
                                             @RequestParam("creator") String creator,
                                             @RequestParam("idrequesttypes") String idrequesttypes,
-                                            @RequestParam("iduser") String iduser){
+                                            @RequestParam("iddepartment") String iddepartment){
         ModelAndView model = new ModelAndView();
         Request request = requestDao.getByRequestId(Integer.parseInt(idrequest));
         request.setTitle(name);
@@ -137,13 +136,9 @@ public class RequestController {
         request.setUpdatedDate(new Date());
         RequestType requestType =  requestTypeDao.getById(Integer.parseInt(idrequesttypes));
         request.setRequestType(requestType);
-
         request.setCreatedBy(creator);
-
-        User user = userDao.getById(Integer.parseInt(iduser));
-        request.setAssignedTo(user);
-
-
+        Department department = departmentDao.getById(Integer.parseInt(iddepartment));
+        request.setDepartment(department);
         try
         {
             SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy hh:mm");
@@ -154,9 +149,6 @@ public class RequestController {
         {
             e.printStackTrace();
         }
-
-
-
         SecurityContext context = SecurityContextHolder.getContext();
         request.setUpdatedBy(context.getAuthentication().getName());
         requestDao.update(request);

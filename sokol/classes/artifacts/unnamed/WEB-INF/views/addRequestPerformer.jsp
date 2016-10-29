@@ -112,12 +112,12 @@
 
     <div class="row">
         <div class="col-sm-2">
-            <p>Исполнитель</p>
+            <p>Департамент</p>
         </div>
         <div class="col-sm-4">
-            <select name="iduser" class="selectpicker">
-                <c:forEach items="${users}" var="nameusers" >
-                    <option value="${nameusers.id}"><c:out value="${nameusers.fio}"/></option>
+            <select name="iddepartment" class="selectpicker">
+                <c:forEach items="${departments}" var="department">
+                    <option value="${department.id}"><c:out value="${department.title}"/></option>
                 </c:forEach>
             </select>
         </div>
