@@ -9,17 +9,10 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
+public class UserDaoImpl extends GenericDaoImpl<User, Integer> implements UserDao {
     public UserDaoImpl() {
         super(User.class);
     }
-
-
-    @Override
-    public User getById(Integer userId) {return getSession().get(User.class, userId);
-    }
-
-
 
     @Override
     public User getByLogin(String login) {
@@ -33,9 +26,3 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
                 .add(Restrictions.eq("fio", fio)).uniqueResult();
     }
 }
-
-/*
-    public RequestType getByTitle(String title) {
-        return (RequestType) getSession().createCriteria(RequestType.class)
-                .add(Restrictions.eq("title", title)).uniqueResult();
-    }*/

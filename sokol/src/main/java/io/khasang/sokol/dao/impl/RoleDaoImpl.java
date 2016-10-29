@@ -8,15 +8,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class RoleDaoImpl extends GenericDaoImpl<Role> implements RoleDao {
+public class RoleDaoImpl extends GenericDaoImpl<Role, Integer> implements RoleDao {
     public RoleDaoImpl() {
         super(Role.class);
-    }
-
-    @Override
-    public Role getById(Integer id) {
-        return getSession().get(Role.class, id);
-        //return (Role) getSession().getNamedQuery("Role.findById").uniqueResult();
     }
 
     @Override
@@ -30,5 +24,4 @@ public class RoleDaoImpl extends GenericDaoImpl<Role> implements RoleDao {
         return  (List<Role>) getSession().createCriteria(Role.class)
                 .add(Restrictions.ne("name", "ROLE_ADMIN")).list();
     }
-
 }

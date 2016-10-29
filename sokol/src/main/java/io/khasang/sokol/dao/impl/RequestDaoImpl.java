@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class RequestDaoImpl extends GenericDaoImpl<Request> implements RequestDao {
+public class RequestDaoImpl extends GenericDaoImpl<Request, Integer> implements RequestDao {
     public RequestDaoImpl() {
         super(Request.class);
     }
@@ -46,5 +46,4 @@ public class RequestDaoImpl extends GenericDaoImpl<Request> implements RequestDa
                 .add(Restrictions.eq("name", name))
                 .uniqueResult();
     }
-
 }
