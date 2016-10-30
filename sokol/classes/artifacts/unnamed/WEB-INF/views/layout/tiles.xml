@@ -60,20 +60,20 @@
         <put-attribute name="body" value="/WEB-INF/views/mypanel.jsp"/>
     </definition>
 
-    <definition name="listRequest" extends="base.definition">
-        <put-attribute name="title" value="list Request"/>
-        <put-attribute name="body" value="/WEB-INF/views/listRequest.jsp"/>
+    <definition name="requestList" extends="base.definition">
+        <put-attribute name="title" value="request list"/>
+        <put-attribute name="body" value="/WEB-INF/views/requestList.jsp"/>
     </definition>
 
 
-    <definition name="addRequestCreator" extends="base.definition">
-        <put-attribute name="title" value="create Request "/>
-        <put-attribute name="body" value="/WEB-INF/views/addRequestCreator.jsp"/>
+    <definition name="requestAdd" extends="base.definition">
+        <put-attribute name="title" value="add Request "/>
+        <put-attribute name="body" value="/WEB-INF/views/requestAdd.jsp"/>
     </definition>
 
-    <definition name="addRequestPerformer" extends="base.definition">
+    <definition name="requestEdit" extends="base.definition">
         <put-attribute name="title" value="edit Request"/>
-        <put-attribute name="body" value="/WEB-INF/views/addRequestPerformer.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/views/requestEdit.jsp"/>
     </definition>
 
 </tiles-definitions>

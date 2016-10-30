@@ -43,14 +43,14 @@ public class RequestController {
     @Autowired
     DepartmentDao departmentDao;
 
-    @RequestMapping(value = "/listRequest", method = RequestMethod.GET)
-    public String listRequestPage(Model listRequest){
-        List<Request> listRequests =  requestDao.getAll();
-        listRequest.addAttribute("listRequests", listRequests);
-        return "listRequest";
+    @RequestMapping(value = "/requestList", method = RequestMethod.GET)
+    public String requestListPage(Model requestListModel){
+        List<Request> requestAll =  requestDao.getAll();
+        requestListModel.addAttribute("requestAll", requestAll);
+        return "requestList";
     }
 
-    @RequestMapping(value = "/listRequest/delete", method = RequestMethod.GET)
+    @RequestMapping(value = "/requestList/delete", method = RequestMethod.GET)
     public String delRequestPage(Model delRequest, @RequestParam("idRequest") String idRequest){
         Request request =  requestDao.getByRequestId(Integer.parseInt(idRequest));
         requestDao.delete(request);
@@ -59,18 +59,16 @@ public class RequestController {
     }
 
 
-    @RequestMapping(value = "/listRequest/add", method = RequestMethod.GET)
-    public String addRequestCreatorPage(Model addRequestCreator){
-        List<RequestType> requestTypes =  requestTypeDao.getAll();
-        List listTitleRequestTypes = new ArrayList();
-        for (RequestType requestType : requestTypes
-             ) {listTitleRequestTypes.add(requestType.getTitle());
-        }
-        addRequestCreator.addAttribute("listTitleRequestTypes", listTitleRequestTypes);
-        return "addRequestCreator";
+    @RequestMapping(value = "/requestList/add", method = RequestMethod.GET)
+    public String requestAddPage(Model requestAddModel){
+        List<RequestType> requestTypeAll =  requestTypeDao.getAll();
+        requestAddModel.addAttribute("requestTypeAll", requestTypeAll);
+/*        List<Department> departmentAll = departmentDao.getAll();
+        requestAddModel.addAttribute("departmentAll", departmentAll);*/
+        return "requestAdd";
     }
 
-
+/*
     @RequestMapping(value = "/addRequestCreator", method = RequestMethod.GET)
     public String addRequestCreatorPage2(Model addRequestCreator){
         List<RequestType> requestTypes =  requestTypeDao.getAll();
@@ -78,11 +76,11 @@ public class RequestController {
         List<Department> departments = departmentDao.getAll();
         addRequestCreator.addAttribute("departments", departments);
         return "addRequestCreator";
-    }
+    }*/
 
 
-    @RequestMapping(value = "/addRequestCreator", method = RequestMethod.POST)
-    public String addRequestCreator(@RequestParam("name") String name,
+    @RequestMapping(value = "/requestList/add", method = RequestMethod.POST)
+    public String requestAdd(@RequestParam("name") String name,
                                           @RequestParam("description") String description,
                                           @RequestParam("idrequest") String idrequest,
                                           @RequestParam("iddepartment") String iddepartment){
@@ -102,8 +100,8 @@ public class RequestController {
         request.setCreatedBy(context.getAuthentication().getName());
         request.setUpdatedBy(context.getAuthentication().getName());
         requestDao.save(request);
-        model.setViewName("addRequestCreator");
-        return "redirect:/listRequest";
+        model.setViewName("requestAdd");
+        return "redirect:/requestList";
     }
 
     // добавление запроса на редактирование
