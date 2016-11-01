@@ -92,7 +92,7 @@ public class AppController {
         usr.setCreatedBy(usr.getLogin());
         usr.setUpdatedBy(usr.getLogin());
         userDao.save(usr);
-        model.setViewName("mypanel");
+        model.setViewName("registerSuccess");
         return model;
     }
 
