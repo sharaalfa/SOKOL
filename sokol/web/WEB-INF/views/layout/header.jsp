@@ -20,6 +20,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
+                <sec:authorize access="isAnonymous()">
                 <li>
                     <a href="#contact">О нас</a>
                 </li>
@@ -27,10 +28,9 @@
                     <a href="/register">Регистрация</a>
                 </li>
                 <li>
-                <sec:authorize access="isAnonymous()">
                     <a href="/login">Войти</a>
-                </sec:authorize>
                 </li>
+                </sec:authorize>
                 <li>
                     <sec:authorize access="isAuthenticated()">
 <%--                        Вы вошли как <b style="padding-right: 10px;"> ${user.getUsername()}</b>

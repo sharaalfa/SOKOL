@@ -65,6 +65,7 @@
         <div class="panel" id="request-${request.requestId}">
             <div class="request-id">${request.requestId}</div>
             <div><a href="#" class="request-title" onclick="onEditRequest(${request.requestId})">${request.title}</a></div>
+            <div class="request-status">${request.status.requestStatusName}</div>
             <div class="request-description">${request.description}</div>
         </div>
     </c:forEach>
@@ -78,6 +79,7 @@
             <div class="panel"  id="request-${request.requestId}">
                 <div  class="request-id">${request.requestId}</div>
                 <div><a href="#" class="request-title" onclick="onEditRequest(${request.requestId})">${request.title}</a></div>
+                <div class="request-status">${request.status.requestStatusName}</div>
                 <div class="request-description">${request.description}</div>
             </div>
         </c:forEach>

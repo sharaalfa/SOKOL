@@ -21,12 +21,17 @@
     </definition>
 
     <definition name="createtable" extends="base.definition">
-        <put-attribute name="body" value="/WEB-INF/views/createtable.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/views/gitcreatetable.jsp"/>
     </definition>
 
     <definition name="register" extends="base.definition">
         <put-attribute name="body" value="/WEB-INF/views/register.jsp"/>
     </definition>
+
+    <definition name="registerSuccess" extends="base.definition">
+        <put-attribute name="body" value="/WEB-INF/views/registerSuccess.jsp"/>
+    </definition>
+
     <definition name="admin" extends="base.definition">
         <put-attribute name="body" value="/WEB-INF/views/admin.jsp"/>
     </definition>
