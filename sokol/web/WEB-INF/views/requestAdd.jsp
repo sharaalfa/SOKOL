@@ -1,28 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-
-<html lang="ru">
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <sec:authentication var="user" property="principal" />
-<head>
 
-    <title>Request</title>
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/css/bootstrap-select.min.css" rel="stylesheet" >
-</head>
-<body>
-
-
-<script src="js/bootstrap.min.js"></script>
-<script src="https://code.jquery.com/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/bootstrap-select.min.js"></script>
-
-
-
-
-<form action="addRequestCreator" method="post" >
+<form action="requestAdd" method="post" >
     <style>
         p {
             margin-top: 0.5em; /* Отступ сверху */
@@ -60,7 +42,6 @@
         </div>
     </div>
 
-
     <div class="row">
         <div class="col-sm-2">
             <p>Описание</p>
@@ -79,8 +60,8 @@
         </div>
         <div class="col-sm-4">
             <select name="idrequest" class="selectpicker">
-                <c:forEach items="${requestTypes}" var="requestType" >
-                    <option value="${requestType.id}"> <c:out value="${requestType.title}"/></option>
+                <c:forEach items="${requestTypeAll}" var="requestType2">
+                    <option value="${requestType2.id}"> <c:out value="${requestType2.title}"/></option>
                 </c:forEach>
             </select>
         </div>
@@ -92,14 +73,12 @@
         </div>
         <div class="col-sm-4">
             <select name="iddepartment" class="selectpicker">
-                <c:forEach items="${departments}" var="department" >
+                <c:forEach items="${departmentAll}" var="department">
                     <option value="${department.id}"><c:out value="${department.title}"/></option>
                 </c:forEach>
             </select>
         </div>
     </div>
-
-
 
     <div class="panel-body"></div>
     <div class="panel-body"></div>
@@ -112,21 +91,18 @@
         </div>
 
         <div class="col-sm-1">
-            <a class="btn btn-danger" href="/listRequest">Отменить</a>
+            <a class="btn btn-danger" href="/requestList">Отменить</a>
         </div>
 
         <div class="col-sm-5"></div>
     </div>
-
-
-
 </form>
 
 
 
 
-</body>
-</html>
+
+
 
 
 
