@@ -1,7 +1,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
-<!DOCTYPE html>
- <html lang="ru">
+<%--<!DOCTYPE html>
+ <html lang="ru">--%>
 
   <%@ page contentType="text/html;charset=UTF-8" language="java" %>
   <sec:authentication var="user" property="principal" />
@@ -41,7 +41,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <sec:authorize access="hasAnyRole('ROLE_USER','ROLE_ADMIN')">
-                        <li><a href="/listRequest">Запросы</a></li>
+                        <li><a href="/requestList">Запросы</a></li>
                     </sec:authorize>
 
 <%--                    <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
@@ -66,4 +66,4 @@
     </div>
     <!-- /.container -->
   </nav>
-</html>
+<%--</html>--%>

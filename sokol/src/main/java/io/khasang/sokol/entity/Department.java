@@ -15,8 +15,11 @@ public class Department extends AuditableEntity {
     @Column(name = "TITLE")
     private String title;
 
-    @OneToMany(mappedBy = "department")
-    Set<User> userSet = new HashSet<>();
+/*    @OneToMany(mappedBy = "department")
+    Set<User> userSet = new HashSet<>();*/
+
+    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Request> requestSet = new HashSet<>();
 
     public Department() {
     }
@@ -36,4 +39,6 @@ public class Department extends AuditableEntity {
     public void setTitle(String name) {
         this.title = name;
     }
+
+
 }
