@@ -1,24 +1,9 @@
-
-<html lang="ru">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<head>
+<%@ taglib prefix="th" uri="http://www.springframework.org/tags/form" %>
 
-    <title>Request</title>
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/css/bootstrap-select.min.css" rel="stylesheet" >
-</head>
-<body>
-
-<script src="js/bootstrap.min.js"></script>
-<script src="https://code.jquery.com/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/bootstrap-select.min.js"></script>
-<%--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/i18n/defaults-*.min.js"></script>--%>
-
-<form action="addRequestPerformer" method="post" >
+<form action="#" th:action="@{/requestList/edit}" method="post" >
     <style>
     p {
         margin-top: 0.5em; /* Отступ сверху */
@@ -26,7 +11,7 @@
         text-align: right;
         font-weight: 600;
     }
-</style>
+    </style>
 
     <div class="panel panel-default">
         <div class="panel-body">Редактирование запроса</div>
@@ -63,7 +48,6 @@
         </div>
     </div>
 
-
     <div class="row">
         <div class="col-sm-2">
             <p>Описание</p>
@@ -93,15 +77,15 @@
 
         <div class="col-sm-4">
             <select name="idrequesttypes" class="selectpicker">
-                <c:forEach items="${requestTypes}" var="titleRequestType" >
-                     <c:if test="${titleRequestType.id == request.requestType.id}">
-                        <option value="${titleRequestType.id}" selected>
-                        <c:out value="${titleRequestType.title}"/>
+                <c:forEach items="${requestTypeAll}" var="requesttype" >
+                     <c:if test="${requesttype.id == request.requestType.id}">
+                        <option value="${requesttype.id}" selected>
+                        <c:out value="${requesttype.title}"/>
                         </option>
                     </c:if>
-                    <c:if test="${titleRequestType.id != request.requestType.id}">
-                        <option value="${titleRequestType.id}">
-                            <c:out value="${titleRequestType.title}"/>
+                    <c:if test="${requesttype.id != request.requestType.id}">
+                        <option value="${requesttype.id}">
+                            <c:out value="${requesttype.title}"/>
                         </option>
                     </c:if>
                 </c:forEach>
@@ -116,8 +100,17 @@
         </div>
         <div class="col-sm-4">
             <select name="iddepartment" class="selectpicker">
-                <c:forEach items="${departments}" var="department">
-                    <option value="${department.id}"><c:out value="${department.title}"/></option>
+                <c:forEach items="${departmentAll}" var="department" >
+                    <c:if test="${department.id == request.department.id}">
+                        <option value="${department.id}" selected>
+                            <c:out value="${department.title}"/>
+                        </option>
+                    </c:if>
+                    <c:if test="${department.id != request.department.id}">
+                        <option value="${department.id}">
+                            <c:out value="${department.title}"/>
+                        </option>
+                    </c:if>
                 </c:forEach>
             </select>
         </div>
@@ -135,22 +128,12 @@
         </div>
 
         <div class="col-sm-1">
-            <a class="btn btn-danger" href="/listRequest">Отменить</a>
+            <a class="btn btn-danger" href="/requestList">Отменить</a>
         </div>
 
         <div class="col-sm-5"></div>
     </div>
-
-
-
 </form>
-
-
-
-
-</body>
-</html>
-
 
 
 

@@ -26,6 +26,7 @@ import static org.bouncycastle.asn1.eac.CertificateBody.requestType;
  * Created by Andrey on 02.10.2016.
  */
 @Controller
+@RequestMapping(value = "/requestList")
 public class RequestController {
     @Autowired
     RequestDao requestDao;
@@ -33,33 +34,30 @@ public class RequestController {
     RequestTypeDao requestTypeDao;
     @Autowired
     RequestStatusDao requestStatusDao;
-
     @Autowired
     UserDao userDao;
-
     @Autowired
     TempDao tempDao;
-
     @Autowired
     DepartmentDao departmentDao;
 
-    @RequestMapping(value = "/requestList", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public String requestListPage(Model requestListModel){
         List<Request> requestAll =  requestDao.getAll();
         requestListModel.addAttribute("requestAll", requestAll);
         return "requestList";
     }
 
-    @RequestMapping(value = "/requestList/delete", method = RequestMethod.GET)
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public String delRequestPage(Model delRequest, @RequestParam("idRequest") String idRequest){
         Request request =  requestDao.getByRequestId(Integer.parseInt(idRequest));
         requestDao.delete(request);
         delRequest.addAttribute("request", request);
-        return "redirect:/listRequest";
+        return "redirect:/requestList";
     }
 
 
-    @RequestMapping(value = "/requestList/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String requestAddPage(Model requestAddModel){
         List<RequestType> requestTypeAll =  requestTypeDao.getAll();
         requestAddModel.addAttribute("requestTypeAll", requestTypeAll);
@@ -68,7 +66,7 @@ public class RequestController {
         return "requestAdd";
     }
 
-    @RequestMapping(value = "/requestList/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String requestAdd(@RequestParam("name") String name,
                                           @RequestParam("description") String description,
                                           @RequestParam("idrequest") String idrequest,
@@ -94,18 +92,18 @@ public class RequestController {
     }
 
     // добавление запроса на редактирование
-    @RequestMapping(value = "/addRequestPerformer", method = RequestMethod.GET)
-    public String addRequestPerformerPage(Model addRequestPerformer, @RequestParam("idRequest") String idRequest){
+    @RequestMapping(value = "/edit", method = RequestMethod.GET)
+    public String requestEditPage(Model requestEditModel, @RequestParam("idRequest") String idRequest){
         Request request =  requestDao.getByRequestId(Integer.parseInt(idRequest));
-        addRequestPerformer.addAttribute("request", request);
-        List<RequestType> requestTypes =  requestTypeDao.getAll();
-        addRequestPerformer.addAttribute("requestTypes", requestTypes);
-        List<Department> departments = departmentDao.getAll();
-        addRequestPerformer.addAttribute("departments", departments);
-        return "addRequestPerformer";
+        requestEditModel.addAttribute("request", request);
+        List<RequestType> requestTypeAll =  requestTypeDao.getAll();
+        requestEditModel.addAttribute("requestTypeAll", requestTypeAll);
+        List<Department> departmentAll = departmentDao.getAll();
+        requestEditModel.addAttribute("departmentAll", departmentAll);
+        return "requestEdit";
     }
 
-    @RequestMapping(value = "/addRequestPerformer", method = RequestMethod.POST)
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public String  addRequestPerformer(@RequestParam("idrequest") String idrequest,
                                             @RequestParam("name") String name,
                                             @RequestParam("description") String description,
@@ -139,13 +137,7 @@ public class RequestController {
         SecurityContext context = SecurityContextHolder.getContext();
         request.setUpdatedBy(context.getAuthentication().getName());
         requestDao.update(request);
-        model.setViewName("addRequestPerformer");
-        return "redirect:/listRequest";
+        model.setViewName("requestEdit");
+        return "redirect:/requestList";
     }
 }
-/*              Temp temp = tempDao.getById(Integer.parseInt(idRequest));
-        temp.setName(description);
-     //   temp.setCreatedBy("CreatedBy2");
-        temp.setCreatedBy(dateCreator);
-        temp.setUpdatedDate(new Date());
-        tempDao.update(temp);*/

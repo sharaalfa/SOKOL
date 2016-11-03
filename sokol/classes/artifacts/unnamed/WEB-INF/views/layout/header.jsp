@@ -1,11 +1,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<%--<!DOCTYPE html>
- <html lang="ru">--%>
-
-  <%@ page contentType="text/html;charset=UTF-8" language="java" %>
   <sec:authentication var="user" property="principal" />
-
   <!-- Navigation -->
   <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
     <div class="container topnav">
@@ -40,13 +36,10 @@
             </ul>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+
                     <sec:authorize access="hasAnyRole('ROLE_USER','ROLE_ADMIN')">
                         <li><a href="/requestList">Запросы</a></li>
                     </sec:authorize>
-
-<%--                    <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
-                        <li><a href="/users">Пользователи</a></li>
-                    </sec:authorize>--%>
 
                     <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
                         <li class="dropdown">
@@ -66,4 +59,3 @@
     </div>
     <!-- /.container -->
   </nav>
-<%--</html>--%>
