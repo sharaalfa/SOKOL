@@ -1,12 +1,10 @@
-<html lang="ru">
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 
-    <head>
         <title>Request</title>
         <!-- Bootstrap -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
+
         <script type="text/javascript">
             function confirmAction(id) {
                 if (confirm("Вы действительно хотите удалить запрос № " + id + " ?")) {
@@ -16,13 +14,6 @@
                 }
             }
         </script>
-    </head>
-
-<body>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/bootstrap-select.min.js"></script>
 
     <style>
         table {
@@ -53,7 +44,7 @@
         <div class="panel panel-default">
         <div class="panel panel-default">
     <div class="panel-body">
-       <a class="btn btn-default" title="Добавление запроса" href="/addRequestCreator "
+       <a class="btn btn-default" title="Добавление запроса" href="/requestList/add"
           role="button"><span class="glyphicon glyphicon-plus"></span>
        </a>
        Список запросов
@@ -74,14 +65,13 @@
              <th style="width: 5%"></th>
          </tr>
 
-        <c:forEach items="${listRequests}" var="lists" step="1">
+        <c:forEach items="${requestAll}" var="lists" step="1">
              <tr class="row2">
                 <td>  <c:out value="${lists.requestId}"/></td>
                 <td>  <c:out value="${lists.status.requestStatusName}"/></td>
                  <td>
                      <a title="Редактирование запроса"
-                        href="/addRequestPerformer?idRequest=${lists.requestId}">
-
+                        href="/requestEdit?idRequest=${lists.requestId}">
                         <c:out value="${lists.title}"/>
                      </a>
                  </td>
@@ -93,7 +83,7 @@
                  <td>  <c:out value="${lists.createdDate}"/></td>
                  <td>  <c:out value="${lists.updatedDate}"/></td>
                  <td>  <a class="btn btn-default" title="Удаление запроса"
-                          href="/listRequest/delete?idRequest=${lists.requestId}"
+                          href="/requestList/delete?idRequest=${lists.requestId}"
                           onclick="return confirmAction(${lists.requestId})"
                           role="button">
                           <span class="glyphicon glyphicon-remove"></span>
@@ -103,5 +93,3 @@
          </c:forEach>
     </table>
 
-</body>
-</html>
