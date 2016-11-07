@@ -28,9 +28,9 @@ public class TestAppController {
 
     @Before
     public void setup(){
-        mockMvc = MockMvcBuilders
-                .webAppContextSetup(webApplicationContext)
-                .build();
+//        mockMvc = MockMvcBuilders
+//                .webAppContextSetup(webApplicationContext)
+//                .build();
     }
 
     @Test
