@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class DepartmentDaoImpl extends GenericDaoImpl<Department, Integer> implements DepartmentDao {
-    public DepartmentDaoImpl() {
-        super(Department.class);
-    }
+//    public DepartmentDaoImpl() {
+//        super(Department.class);
+//    }
 }
