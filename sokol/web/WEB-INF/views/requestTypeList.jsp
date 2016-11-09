@@ -1,17 +1,6 @@
-<html lang="ru">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<head>
 
-    <title>Request</title>
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/css/bootstrap-select.min.css"
-          rel="stylesheet">
-</head>
-
-
-<body>
 <script type="text/javascript">
     function confirm_delete(type_id) {
         if (confirm("you want to delete the user?")) {
@@ -58,6 +47,3 @@
     </c:forEach>
 
 </table>
-
-</body>
-</html>
