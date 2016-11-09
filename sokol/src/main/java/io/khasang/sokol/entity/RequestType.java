@@ -1,8 +1,8 @@
 package io.khasang.sokol.entity;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "REQUEST_TYPES")
@@ -19,10 +19,14 @@ public class RequestType extends AuditableEntity {
     private String description;
 
     @OneToMany(mappedBy = "requestType", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Request> requests = new HashSet<>();
+    private List<Request> requests = new ArrayList<>();
 
-    @OneToMany(mappedBy = "requestType", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Field> fields = new HashSet<>();
+//    @OneToMany(mappedBy = "requestType", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private Set<Field> fields = new HashSet<>();
+
+    @ManyToOne
+    @JoinColumn(name = "DEPARTMENT_ID", foreignKey = @ForeignKey(name = "DEPARTMENT_ID_FK"))
+    private Department department;
 
     public int getId() {
         return id;
@@ -46,5 +50,13 @@ public class RequestType extends AuditableEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 }
