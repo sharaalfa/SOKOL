@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.Date;
+
 @Controller
 @RequestMapping(value = "/department")
 public class DepartmentController {
@@ -35,7 +37,9 @@ public class DepartmentController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.POST)
     public String update(@PathVariable int id, final Department department) {
-        department.setId(id);
+        Department updated = departmentDao.getById(id);
+        updated.setTitle(department.getTitle());
+        updated.setUpdatedDate(new Date());
         departmentDao.update(department);
         return REDIRECT_TO_LIST;
     }

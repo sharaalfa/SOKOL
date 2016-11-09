@@ -1,6 +1,8 @@
 package io.khasang.sokol.controller;
 
+import io.khasang.sokol.dao.DepartmentDao;
 import io.khasang.sokol.dao.RequestTypeDao;
+import io.khasang.sokol.entity.Department;
 import io.khasang.sokol.entity.RequestType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,10 +19,13 @@ public class RequestTypeController {
     private static final String REDIRECT_TO_LIST = "redirect:/requestType/list";
     private static final String LIST_URL = "/requestType/list";
     private static final String REQUEST_TYPE_VIEW = "requestTypeForm";
-    private static final String REQUEST_TYPE_LIST_VIEW = "requestTypes";
+    private static final String REQUEST_TYPE_LIST_VIEW = "requestTypeList";
 
     @Autowired
     RequestTypeDao requestTypeDao;
+
+    @Autowired
+    DepartmentDao departmentDao;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String showRequestTypes(Model model) {
@@ -31,14 +36,19 @@ public class RequestTypeController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String editRequestType(@PathVariable int id, Model model) {
         model.addAttribute("requestType", requestTypeDao.getById(id));
+        model.addAttribute("departments", departmentDao.getAll());
         configureCancelUrl(model);
         return REQUEST_TYPE_VIEW;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.POST)
-    public String updateRequestType(@PathVariable int id, RequestType requestType) {
-        requestType.setId(id);
-        requestType.setUpdatedDate(new Date());
+    public String updateRequestType(@PathVariable int id, RequestType requestType, Department department) {
+        RequestType updated = requestTypeDao.getById(id);
+        updated.setDescription(requestType.getDescription());
+        updated.setTitle(requestType.getTitle());
+        updated.setDepartment(department);
+        updated.setUpdatedDate(new Date());
+        updated.setDepartment(requestType.getDepartment());
         requestTypeDao.update(requestType);
         return REDIRECT_TO_LIST;
     }
@@ -46,6 +56,7 @@ public class RequestTypeController {
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String newRequestType(Model model) {
         model.addAttribute("requestType", new RequestType());
+        model.addAttribute("departments", departmentDao.getAll());
         configureCancelUrl(model);
         return REQUEST_TYPE_VIEW;
     }
