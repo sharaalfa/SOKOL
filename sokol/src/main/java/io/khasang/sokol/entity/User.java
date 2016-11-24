@@ -3,6 +3,7 @@ package io.khasang.sokol.entity;
 
 import io.khasang.sokol.validators.PasswordMatcher;
 import org.hibernate.annotations.Type;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -44,6 +45,20 @@ public class User extends  AuditableEntity {
     public User() {
         super();
     }
+
+    public void Merge(User usr){
+        this.login = usr.login;
+        this.email = usr.email;
+        this.fio = usr.fio;
+        this.role = usr.role;
+        this.department= usr.department;
+    }
+    public void Merge(User usr, String password)
+    {
+        this.Merge(usr);
+        this.setPassword(new BCryptPasswordEncoder().encode(password));
+    }
+
 
     public int getId() {
         return id;
