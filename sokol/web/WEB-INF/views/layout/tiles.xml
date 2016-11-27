@@ -80,4 +80,13 @@
         <put-attribute name="body" value="/WEB-INF/views/requestList.jsp"/>
     </definition>
 
+    <definition name="userList" extends="base.definition">
+        <put-attribute name="title" value="Users list"/>
+        <put-attribute name="body" value="/WEB-INF/views/userList.jsp"/>
+    </definition>
+
+    <definition name="userEdit" extends="base.definition">
+        <put-attribute name="title" value="Users edit"/>
+        <put-attribute name="body" value="/WEB-INF/views/userEdit.jsp"/>
+    </definition>
 </tiles-definitions>

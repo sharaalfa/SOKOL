@@ -1,35 +1,165 @@
 package io.khasang.sokol.controller;
 
+import io.khasang.sokol.Exception.ResourceNotFoundException;
+import io.khasang.sokol.dao.DepartmentDao;
+import io.khasang.sokol.dao.RoleDao;
 import io.khasang.sokol.dao.UserDao;
 import io.khasang.sokol.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindException;
-import org.springframework.validation.BindingResult;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletResponse;
+import javax.persistence.criteria.CriteriaBuilder;
+import java.util.Date;
+import java.util.List;
 
 @Controller
-@RequestMapping("/api/users")
+@RequestMapping("/users")
 public class UserController {
+    private static final String REDIRECT_TO_LIST = "redirect:/users/list";
+    private static final String USER_LIST_VIEW = "userList";
+    private static final String USER_EDIT_VIEW = "userEdit";
+
     @Autowired
     UserDao userDao;
+    @Autowired
+    RoleDao roleDao;
+    @Autowired
+    DepartmentDao departmentDao;
 
-    @RequestMapping(value ="/{login}", method = RequestMethod.DELETE)
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteUser(@PathVariable("login") String login){
-        userDao.delete(userDao.getByLogin(login));
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public String List(Model model) {
+        //Достаем информацию о текущем пользователе
+        User user = getCurrentUser();
+
+        //Получаем списов пользователей, которые может
+        //просматривать текущйи пользователь в соответствии со своей ролью
+        List<User> users = userDao.getUserListByUser(user);
+        model.addAttribute("userList", users);
+
+        return USER_LIST_VIEW;
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.CREATED)
-    public @ResponseBody User createUser(@RequestBody User user, BindingResult result, HttpServletResponse response) throws BindException {
-        if(result.hasErrors()){
-            throw new BindException(result);
+    @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
+    public String Edit(@PathVariable int userId, Model model) throws ResourceNotFoundException {
+        //Достаем пользователя, которого хотим редактирвоать
+        User user = getUserById(userId);
+
+        //Если все в порядке, то достаем все необходимые данные и рисуем форму
+        model.addAttribute("user", user);
+        fillDictionaries(model);
+
+        return USER_EDIT_VIEW;
+    }
+
+    private void fillDictionaries(Model model) {
+        model.addAttribute("roles", roleDao.getAll());
+        model.addAttribute("departments", departmentDao.getAll());
+    }
+
+    protected User getCurrentUser()
+    {
+        SecurityContext context = SecurityContextHolder.getContext();
+        String userName = context.getAuthentication().getName();
+        return userDao.getByLogin(userName);
+    }
+
+    protected User getUserById(@PathVariable int userId) throws ResourceNotFoundException  {
+        // Достает пользователя по userId
+        User editUser = userDao.getById(userId);
+
+        //Если такого пользователя не нашли то возвращаем 404
+        if(editUser == null)
+            throw new ResourceNotFoundException();
+
+        //Достаем текущего пользователя и его роль в системе
+        User currentUser = getCurrentUser();
+
+        //Проверяем а может ли текущий пользователь
+        //радактировать запрашиваемого пользовател
+        //Если у пользоватея нет прав на редактироване возвращаем 404
+        if(!(currentUser.getRole().getName().contains("ROLE_ADMIN") ||
+                (currentUser.getRole().getName().contains("ROLE_MANAGER")
+                        && currentUser.getDepartment() != null
+                        && currentUser.getDepartment().getId() == editUser.getDepartment().getId() )))
+            throw new ResourceNotFoundException();
+        return editUser;
+    }
+
+    @RequestMapping(value = "/{userId}", method = RequestMethod.POST)
+    public String Save(Model model, @PathVariable int userId, User user
+            ,@RequestParam(value = "confirmPassword", required = false) String confirmPassword
+            ,@RequestParam(value = "roleId", required = false) Integer roleId
+            ,@RequestParam(value = "departmentId", required = false) Integer departmentId) {
+        //Достаем текущего пользователя и его роль в системе
+        User currentUser = getCurrentUser();
+        user.setRole(roleDao.getById(roleId));
+        user.setDepartment(departmentDao.getById(departmentId));
+        //Если userId = 0 то создаем нового польователя
+        if(userId == 0)
+        {
+            if(user.getPassword().compareTo(confirmPassword) == 0)
+            {
+                user.setCreatedBy(currentUser.getLogin());
+                user.setUpdatedBy(currentUser.getLogin());
+                userDao.save(user);
+            }
+            else
+            {
+                preparePasswordPrepareErrorForm(model, user);
+                return USER_EDIT_VIEW;
+            }
         }
-        userDao.save(user);
-        return user;
+        else
+        {
+            //Достаем пользователя, которого хотим сохранить
+            User oldUser = getUserById(userId);
+            // Если потрогали парошль, то проверяем что его подтвердили
+            if(user.getPassword().compareTo("12345") !=0 || !confirmPassword.isEmpty()){
+                if(user.getPassword().compareTo(confirmPassword) == 0) {
+                    oldUser.Merge(user, user.getPassword());
+                } else {
+                    oldUser.Merge(user);
+                    preparePasswordPrepareErrorForm(model, oldUser);
+                    return USER_EDIT_VIEW;
+                }
+            } else{ // если пароль не трогали, то сохраняем без изменения пароля
+                oldUser.Merge(user);
+            }
+            oldUser.setUpdatedBy(currentUser.getLogin());
+            oldUser.setUpdatedDate(new Date());
+            userDao.update(oldUser);
+
+        }
+
+        return REDIRECT_TO_LIST;
+    }
+
+    private void preparePasswordPrepareErrorForm(Model model, User user) {
+        model.addAttribute("user", user);
+        model.addAttribute("errorMessage", "Password was not confirmed");
+        fillDictionaries(model);
+    }
+
+    @RequestMapping(value = "/create", method = RequestMethod.GET)
+    public String create(Model model) {
+        model.addAttribute("user", new User());
+        fillDictionaries(model);
+        return USER_EDIT_VIEW;
+    }
+
+    @RequestMapping(value = "/delete/{userId}", method = RequestMethod.POST)
+    public String dreateUser(@PathVariable int userId,Model model) {
+        //Достаем пользователя, которого хотим сохранить
+        User user = getUserById(userId);
+
+        //Удаляем пользователя
+        userDao.delete(user);
+        model.addAttribute("userEdit", userDao.getAll());
+        return USER_EDIT_VIEW;
     }
 }

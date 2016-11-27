@@ -16,16 +16,14 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-
+                <sec:authorize access="isAnonymous()">
                 <li>
                     <a href="/register">Регистрация</a>
                 </li>
                 <li>
-                <sec:authorize access="isAnonymous()">
                     <a href="/login">Войти</a>
-                </sec:authorize>
                 </li>
-
+                </sec:authorize>
                    <sec:authorize access="isAuthenticated()">
                       <li>
                          <a href="/logout">Выход</a>
@@ -39,19 +37,14 @@
                     <sec:authorize access="hasAnyRole('ROLE_USER','ROLE_ADMIN')">
                         <li><a href="/requestList">Запросы</a></li>
                     </sec:authorize>
-
-<%--                    <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
-                        <li><a href="/users">Пользователи</a></li>
-                    </sec:authorize>--%>
-
                     <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Настройки<b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li class="divider"></li>
-                                <li><a href="#">Департаменты</a></li>
-                                <li><a href="#">Пользователи</a></li>
-                                <li><a href="#">Типы запросов</a></li>
+                                <li><a href="/department/list">Департаменты</a></li>
+                                <li><a href="/users/list">Пользователи</a></li>
+                                <li><a href="/requestType/list">Типы запросов</a></li>
                             </ul>
                         </li>
                     </sec:authorize>

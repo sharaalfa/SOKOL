@@ -1,9 +1,11 @@
 package io.khasang.sokol.config.db;
 
 
+import io.khasang.sokol.dao.DepartmentDao;
 import io.khasang.sokol.dao.RequestStatusDao;
 import io.khasang.sokol.dao.RoleDao;
 import io.khasang.sokol.dao.UserDao;
+import io.khasang.sokol.entity.Department;
 import io.khasang.sokol.entity.RequestStatus;
 import io.khasang.sokol.entity.Role;
 import io.khasang.sokol.entity.User;
@@ -27,6 +29,8 @@ public class AppInitialiser implements ApplicationListener<ContextRefreshedEvent
     @Autowired
     RequestStatusDao requestStatusDao;
     @Autowired
+    DepartmentDao departmentDao;
+    @Autowired
     RoleDao roleDao;
 
     @Override
@@ -38,9 +42,23 @@ public class AppInitialiser implements ApplicationListener<ContextRefreshedEvent
         Role admin_role = CheckForAdminRole();
         CheckForUserRole();
         CheckForManagerRole();
+        CheckForDepartments();
         CheckForAdminUser(admin_role);
         CheckForStatuses();
         alreadySetup = true;
+    }
+    private void CheckForDepartments()
+    {
+        Department dep =  departmentDao.getById(1);
+        if(dep == null)
+        {
+            dep = new Department();
+            dep.setId(1);
+            dep.setTitle("Test");
+            dep.setCreatedBy("SYSTEM");
+            dep.setUpdatedBy("SYSTEM");
+
+        }
     }
     private void CheckForStatuses()
     {
@@ -128,6 +146,7 @@ public class AppInitialiser implements ApplicationListener<ContextRefreshedEvent
             admin_user.setEmail("admin@test.com");
             admin_user.setCreatedBy("SYSTEM");
             admin_user.setUpdatedBy("SYSTEM");
+            admin_user.setDepartment(departmentDao.getById(1));
             admin_user.setRole(admin_role);
             userDao.save(admin_user);
         }
