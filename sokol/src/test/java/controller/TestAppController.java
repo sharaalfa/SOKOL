@@ -16,6 +16,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
@@ -35,8 +37,8 @@ public class TestAppController {
 
     @Test
     public void testFirstRequestMapping() throws Exception{
-//        mockMvc.perform(get("/login"))
-//                .andExpect(status().isOk())
-//                .andExpect(forwardedUrl("/WEB-INF/views/first.jsp"));
+        mockMvc.perform(get("/login"))
+                .andExpect(status().isOk())
+                .andExpect(forwardedUrl("/WEB-INF/views/first.jsp"));
     }
 }
