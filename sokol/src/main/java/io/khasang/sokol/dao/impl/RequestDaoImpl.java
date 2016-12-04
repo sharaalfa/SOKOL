@@ -56,7 +56,7 @@ public class RequestDaoImpl extends GenericDaoImpl<Request, Integer> implements 
     @Override
     public Request getByName(String name) {
         return (Request) getSession().createCriteria(Request.class)
-                .add(Restrictions.eq("name", name))
+                .add(Restrictions.eq("title", name))
                 .uniqueResult();
     }
 }

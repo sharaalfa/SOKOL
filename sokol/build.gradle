@@ -22,6 +22,7 @@ war {
             include 'hibernate.properties'
             include 'log4j.properties'
             include 'auth.properties'
+            include 'tiles.xml'
             into('WEB-INF/classes/')
         }
     }
@@ -36,6 +37,7 @@ sourceSets {
         resources {
             srcDir 'src/main/resources'
             include '*.properties'
+            include '*.xml'
             output.resourcesDir = 'build/classes/main'
         }
     }
@@ -81,19 +83,28 @@ dependencies {
     compile group: 'org.seleniumhq.selenium', name: 'selenium-ie-driver', version: '2.53.0'
     // postgre
     compile 'org.postgresql:postgresql:9.4.1208'
+    testCompile 'org.postgresql:postgresql:9.4.1208'
     // support orm classes
     compile 'org.springframework:spring-orm:4.2.5.RELEASE'
+    testCompile 'org.springframework:spring-orm:4.2.5.RELEASE'
     // Hibernate -->
     // to start need only this -->
     compile 'org.hibernate:hibernate-core:5.0.1.Final'
+    testCompile 'org.hibernate:hibernate-core:5.0.1.Final'
     // for JPA, use hibernate-entitymanager instead of hibernate-core
     compile 'org.hibernate:hibernate-entitymanager:5.0.1.Final'
+    testCompile 'org.hibernate:hibernate-entitymanager:5.0.1.Final'
     // optional
     compile 'org.hibernate:hibernate-osgi:5.0.1.Final'
+    testCompile 'org.hibernate:hibernate-osgi:5.0.1.Final'
     compile 'org.hibernate:hibernate-envers:5.0.1.Final'
+    testCompile 'org.hibernate:hibernate-envers:5.0.1.Final'
     compile 'org.hibernate:hibernate-c3p0:5.0.1.Final'
+    testCompile 'org.hibernate:hibernate-c3p0:5.0.1.Final'
     compile 'org.hibernate:hibernate-proxool:5.0.1.Final'
+    testCompile 'org.hibernate:hibernate-proxool:5.0.1.Final'
     compile 'org.hibernate:hibernate-infinispan:5.0.1.Final'
+    testCompile 'org.hibernate:hibernate-infinispan:5.0.1.Final'
     // cache API
     compile group: 'org.ehcache', name: 'ehcache', version: '3.1.1'
     compile group: 'org.hibernate', name: 'hibernate-ehcache', version: '5.2.2.Final'

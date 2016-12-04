@@ -4,6 +4,7 @@ import io.khasang.sokol.config.AppContext;
 import io.khasang.sokol.config.security.AppSecurityConfig;
 import io.khasang.sokol.config.db.HibernateConfig;
 import io.khasang.sokol.config.application.WebConfig;
+import org.apache.tiles.request.locale.URLApplicationResource;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,6 +15,8 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+
+import java.net.URL;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
@@ -33,12 +36,13 @@ public class TestAppController {
         mockMvc = MockMvcBuilders
                 .webAppContextSetup(webApplicationContext)
                 .build();
+
     }
 
     @Test
     public void testFirstRequestMapping() throws Exception{
         mockMvc.perform(get("/login"))
                 .andExpect(status().isOk())
-                .andExpect(forwardedUrl("/WEB-INF/views/first.jsp"));
+                .andExpect(forwardedUrl("/WEB-INF/views/layout/layout.jsp"));
     }
 }
