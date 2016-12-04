@@ -71,7 +71,7 @@
                 <td>  <c:out value="${lists.status.requestStatusName}"/></td>
                  <td>
                      <a title="Редактирование запроса"
-                        href="/requestEdit?idRequest=${lists.requestId}">
+                        href="requestList/edit?idRequest=${lists.requestId}">
                         <c:out value="${lists.title}"/>
                      </a>
                  </td>
