@@ -1,26 +1,24 @@
 package io.khasang.sokol.controller;
 
-import io.khasang.sokol.dao.*;
-import io.khasang.sokol.entity.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
+        import io.khasang.sokol.dao.*;
+        import io.khasang.sokol.entity.*;
+        import org.springframework.beans.factory.annotation.Autowired;
+        import org.springframework.context.annotation.PropertySource;
+        import org.springframework.core.env.Environment;
+        import org.springframework.security.core.context.SecurityContext;
+        import org.springframework.security.core.context.SecurityContextHolder;
+        import org.springframework.stereotype.Controller;
+        import org.springframework.ui.Model;
+        import org.springframework.web.bind.annotation.RequestMapping;
+        import org.springframework.web.bind.annotation.RequestMethod;
+        import org.springframework.web.bind.annotation.RequestParam;
+        import org.springframework.web.servlet.ModelAndView;
+        import java.text.SimpleDateFormat;
+        import java.util.ArrayList;
+        import java.util.Date;
+        import java.util.List;
 
-
-import javax.jws.soap.SOAPBinding;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import static org.bouncycastle.asn1.eac.CertificateBody.requestType;
-
+@PropertySource(value = {"classpath:hibernate.properties"})
 
 /**
  * Created by Andrey on 02.10.2016.
@@ -40,11 +38,22 @@ public class RequestController {
     TempDao tempDao;
     @Autowired
     DepartmentDao departmentDao;
+    @Autowired
+    private Environment environment;
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
-    public String requestListPage(Model requestListModel){
-        List<Request> requestAll =  requestDao.getAll();
-        requestListModel.addAttribute("requestAll", requestAll);
+    // расчет количества записей в таблице и количества страниц
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public String requestListPage(Model requestPageModel, @RequestParam("pagenumber") String pagenumber){
+        Integer countLineOfTable = requestDao.getCountLineOfTable(); // кол-во записей в таблице
+        Integer countLineOfPage = Integer.parseInt(environment.getRequiredProperty("page.size")); // кол-во записей на странице
+        Integer lastPageNumber = ((countLineOfTable  / countLineOfPage) + 1);
+        ArrayList<Integer> pageTotal = new ArrayList<>();
+        for (int i = 0; i < lastPageNumber; i++) {
+            pageTotal.add(i+1);
+        }
+        List<Request> requestAll =  requestDao.getPage((Integer.parseInt(pagenumber)-1)*countLineOfPage, countLineOfPage);
+        requestPageModel.addAttribute("requestAll", requestAll);
+        requestPageModel.addAttribute("pageTotal", pageTotal);
         return "requestList";
     }
 
@@ -53,9 +62,8 @@ public class RequestController {
         Request request =  requestDao.getByRequestId(Integer.parseInt(idRequest));
         requestDao.delete(request);
         delRequest.addAttribute("request", request);
-        return "redirect:/requestList";
+        return "redirect:/requestList/list?pagenumber=1";
     }
-
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String requestAddPage(Model requestAddModel){
@@ -68,9 +76,9 @@ public class RequestController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String requestAdd(@RequestParam("name") String name,
-                                          @RequestParam("description") String description,
-                                          @RequestParam("idrequest") String idrequest,
-                                          @RequestParam("iddepartment") String iddepartment){
+                             @RequestParam("description") String description,
+                             @RequestParam("idrequest") String idrequest,
+                             @RequestParam("iddepartment") String iddepartment){
         ModelAndView model = new ModelAndView();
         Request request = new Request();
         request.setTitle(name);
@@ -88,7 +96,7 @@ public class RequestController {
         request.setUpdatedBy(context.getAuthentication().getName());
         requestDao.save(request);
         model.setViewName("requestAdd");
-        return "redirect:/requestList";
+        return "redirect:/requestList/list?pagenumber=1";
     }
 
     // добавление запроса на редактирование
@@ -105,19 +113,19 @@ public class RequestController {
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public String  addRequestPerformer(@RequestParam("idrequest") String idrequest,
-                                            @RequestParam("name") String name,
-                                            @RequestParam("description") String description,
-                                            @RequestParam("dateCreator") String dateCreator,
-                                            @RequestParam("creator") String creator,
-                                            @RequestParam("idrequesttypes") String idrequesttypes,
-                                            @RequestParam("iddepartment") String iddepartment){
+                                       @RequestParam("name") String name,
+                                       @RequestParam("description") String description,
+                                       @RequestParam("dateCreator") String dateCreator,
+                                       @RequestParam("creator") String creator,
+                                       @RequestParam("idrequesttypes") String idrequesttypes,
+                                       @RequestParam("iddepartment") String iddepartment){
         ModelAndView model = new ModelAndView();
         Request request = requestDao.getByRequestId(Integer.parseInt(idrequest));
         request.setTitle(name);
         request.setDescription(description);
         RequestStatus status = requestStatusDao.getById(2);
         request.setStatus(status);
-       // request.setVersion(1);
+        // request.setVersion(1);
         request.setUpdatedDate(new Date());
         RequestType requestType =  requestTypeDao.getById(Integer.parseInt(idrequesttypes));
         request.setRequestType(requestType);
@@ -127,7 +135,7 @@ public class RequestController {
         try
         {
             SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy hh:mm");
-               Date date= format.parse(dateCreator);
+            Date date= format.parse(dateCreator);
             request.setCreatedDate(date);
         }
         catch (Exception e)
@@ -138,6 +146,6 @@ public class RequestController {
         request.setUpdatedBy(context.getAuthentication().getName());
         requestDao.update(request);
         model.setViewName("requestEdit");
-        return "redirect:/requestList";
+        return "redirect:/requestList/list?pagenumber=1";
     }
 }

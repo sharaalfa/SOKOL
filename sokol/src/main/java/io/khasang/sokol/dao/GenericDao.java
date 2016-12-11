@@ -15,4 +15,7 @@ public interface GenericDao<T, K extends Serializable> {
     T getById(K key);
 
     List<T> getAll();
+
+    List<T> getPage(Integer firstLine, Integer maxLine);
+
 }

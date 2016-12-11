@@ -30,12 +30,13 @@
                        </li>
                       <h4 class="navbar-text"><b>${user.getUsername()}</b> </h4>
                    </sec:authorize>
-                </li>
+               <%-- </li>--%>
             </ul>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <sec:authorize access="hasAnyRole('ROLE_USER','ROLE_ADMIN')">
-                        <li><a href="/requestList">Запросы</a></li>
+                        <%--<li><a href="/requestList">Запросы</a></li>--%>
+                        <li><a href="/requestList/list?pagenumber=1">Запросы</a></li>
                     </sec:authorize>
                     <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
                         <li class="dropdown">

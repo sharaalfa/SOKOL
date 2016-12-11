@@ -71,7 +71,7 @@
                 <td>  <c:out value="${lists.status.requestStatusName}"/></td>
                  <td>
                      <a title="Редактирование запроса"
-                        href="requestList/edit?idRequest=${lists.requestId}">
+                        href="/requestList/edit?idRequest=${lists.requestId}">
                         <c:out value="${lists.title}"/>
                      </a>
                  </td>
@@ -92,4 +92,32 @@
              </tr>
          </c:forEach>
     </table>
+
+    <div class="row">
+        <div class="col-md-10">
+            <ul class="pagination">
+                <li>
+                    <a href="" aria-label="Previous"><span aria-hidden="true">&laquo</span></a>
+                </li>
+                <c:forEach items="${pageTotal}" var="pagenumber" step="1">
+                    <li>
+                        <a href="/requestList/list?pagenumber=${pagenumber.intValue()}">
+                            <c:out value="${pagenumber.intValue()}"/>
+                        </a>
+                    </li>
+                </c:forEach>
+                <li>
+                    <a href="" aria-label="Previous"><span aria-hidden="true">&raquo</span></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+<%--        <div class="col-md-1" style="border-top-width: medium">
+            <select name="idrequest" class="selectpicker" data-width="fit">
+                <option>5</option>
+                <option>10</option>
+                <option>15</option>
+                <option>20</option>
+            </select>
+        </div>--%>
 

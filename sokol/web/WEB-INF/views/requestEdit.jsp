@@ -127,7 +127,7 @@
         </div>
 
         <div class="col-sm-1">
-            <a class="btn btn-danger" href="/requestList">Отменить</a>
+            <a class="btn btn-danger" href="/requestList/list?pagenumber=1">Отменить</a>
         </div>
 
         <div class="col-sm-5"></div>
