@@ -54,7 +54,11 @@
          <tr>
              <th style="width: 3%">№</th>
              <th style="width: 8%">Статус</th>
-             <th style="width: 16%">Название</th>
+             <th style="width: 16%">Название
+                <a href="#">
+                 <img src="/img/sort20.png" hspace="5" border="0"> </img>
+                 </a>
+             </th>
              <th style="width: 16%">Описание</th>
              <th style="width: 8%">Создатель</th>
              <th style="width: 8%">Исполнитель</th>
@@ -75,6 +79,7 @@
                         <c:out value="${lists.title}"/>
                      </a>
                  </td>
+
                  <td>  <c:out value="${lists.description}"/></td>
                  <td>  <c:out value="${lists.createdBy}"/></td>
                  <td>  <c:out value="${lists.assignedTo.fio}"/></td>
@@ -83,10 +88,12 @@
                  <td>  <c:out value="${lists.createdDate}"/></td>
                  <td>  <c:out value="${lists.updatedDate}"/></td>
                  <td>  <a class="btn btn-default" title="Удаление запроса"
+
                           href="/requestList/delete?idRequest=${lists.requestId}"
                           onclick="return confirmAction(${lists.requestId})"
                           role="button">
-                          <span class="glyphicon glyphicon-remove"></span>
+                     <img src="/img/TrashFull.png" hspace="5" border="0"> </img>
+                          <%--<span class="glyphicon glyphicon-remove"></span>--%>
                        </a>
                  </td>
              </tr>

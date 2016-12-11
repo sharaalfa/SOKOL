@@ -8,9 +8,6 @@
            <div class="row">
                 <div class="col-lg-12">
                     <ul class="list-inline">
-                        <li>
-                            <a href="/">Домой</a>
-                        </li>
                         <li class="footer-menu-divider">&sdot;</li>
                         <li>
                             <a href="#about">О нас</a>
