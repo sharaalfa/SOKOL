@@ -57,6 +57,26 @@ public class RequestController {
         return "requestList";
     }
 
+    // расчет количества записей в таблице и количества страниц
+    @RequestMapping(value = "/sorting", method = RequestMethod.GET)
+    public String requestListPage2(Model requestPageModel2){
+        Integer countLineOfTable2 = requestDao.getCountLineOfTable(); // кол-во записей в таблице
+        Integer countLineOfPage2 = Integer.parseInt(environment.getRequiredProperty("page.size")); // кол-во записей на странице
+        Integer lastPageNumber2 = ((countLineOfTable2  / countLineOfPage2) + 1);
+        ArrayList<Integer> pageTotal2 = new ArrayList<>();
+        for (int i = 0; i < lastPageNumber2; i++) {
+            pageTotal2.add(i+1);
+        }
+       // List<Request> requestAll =  requestDao.getPage(0, countLineOfPage2);
+       List<Request> requestAll =  requestDao.sortingRequestByTitle();
+
+        requestPageModel2.addAttribute("requestAll", requestAll);
+        requestPageModel2.addAttribute("pageTotal", pageTotal2);
+        return "requestList";
+    }
+
+
+
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public String delRequestPage(Model delRequest, @RequestParam("idRequest") String idRequest){
         Request request =  requestDao.getByRequestId(Integer.parseInt(idRequest));

@@ -41,7 +41,7 @@
                 <ul class="nav navbar-nav">
                     <li>
                         <h4>
-                            <img src="/img/sokol.jpg" hspace="5" border="0"> </img>
+                            <img src="/img/sokol3.png" hspace="5" border="0"> </img>
                             СОКОЛ</h4>
                     </li>
                     <li>

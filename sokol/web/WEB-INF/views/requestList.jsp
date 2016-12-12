@@ -55,7 +55,7 @@
              <th style="width: 3%">№</th>
              <th style="width: 8%">Статус</th>
              <th style="width: 16%">Название
-                <a href="#">
+                <a href="/requestList/sorting">
                  <img src="/img/sort20.png" hspace="5" border="0"> </img>
                  </a>
              </th>

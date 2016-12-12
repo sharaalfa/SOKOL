@@ -15,4 +15,6 @@ public interface RequestDao extends GenericDao<Request, Integer> {
     List<Request> getRequestsForMe(String userName);
 
     Integer getCountLineOfTable();
+
+    //List<Request> sortingRequest();
 }
