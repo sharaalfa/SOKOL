@@ -1,6 +1,7 @@
 package io.khasang.sokol.dao.impl;
 
 import io.khasang.sokol.dao.GenericDao;
+import io.khasang.sokol.entity.Request;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -63,6 +64,14 @@ public class GenericDaoImpl<T, K extends Serializable> implements GenericDao<T, 
         Query query = getSession().createQuery(String.format("from %s", type.getName()));
         query.setFirstResult(firstLine);
         query.setMaxResults(addLine);
+        return query.list();
+    }
+
+    @Override
+    public List<Request> sortingRequestByTitle(){
+        Session session = getSession();
+        String hql = "FROM Request f ORDER BY f.title ASC";
+        Query query = session.createQuery(hql);
         return query.list();
     }
 }

@@ -1,5 +1,7 @@
 package io.khasang.sokol.dao;
 
+import io.khasang.sokol.entity.Request;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -18,4 +20,5 @@ public interface GenericDao<T, K extends Serializable> {
 
     List<T> getPage(Integer firstLine, Integer maxLine);
 
+    List<Request> sortingRequestByTitle();
 }
