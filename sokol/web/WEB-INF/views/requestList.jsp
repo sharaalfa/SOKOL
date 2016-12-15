@@ -55,11 +55,15 @@
              <th style="width: 3%">№</th>
              <th style="width: 8%">Статус</th>
              <th style="width: 16%">Название
-                <a href="/requestList/sorting">
+                <a href="/requestList/sortingByTitle">
                  <img src="/img/sort20.png" hspace="5" border="0"> </img>
                  </a>
              </th>
-             <th style="width: 16%">Описание</th>
+             <th style="width: 16%">Описание
+                 <a href="/requestList/sortingByDescription">
+                     <img src="/img/sort20.png" hspace="5" border="0"> </img>
+                 </a>
+             </th>
              <th style="width: 8%">Создатель</th>
              <th style="width: 8%">Исполнитель</th>
              <th style="width: 8%">Департамент</th>
