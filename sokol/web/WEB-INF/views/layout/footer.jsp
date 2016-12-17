@@ -5,28 +5,26 @@
 <footer>
     <nav class="navbar navbar-default  navbar-fixed-bottom" role="navigation">
       <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <ul class="list-inline">
-                    <li>
-                        <a href="/">Домой</a>
-                    </li>
-                    <li class="footer-menu-divider">&sdot;</li>
-                    <li>
-                        <a href="#about">О нас</a>
-                    </li>
-                    <li class="footer-menu-divider">&sdot;</li>
-                    <li>
-                        <a href="#">Сервисы</a>
-                    </li>
-                    <li class="footer-menu-divider">&sdot;</li>
-                    <li>
-                        <a href="#">Контакты</a>
-                    </li>
-                </ul>
-                <p class="copyright text-muted small">&copy; Сокол 2016</p>
-            </div>
-        </div>
+           <div class="row">
+                <div class="col-lg-12">
+                    <ul class="list-inline">
+                        <li class="footer-menu-divider">&sdot;</li>
+                        <li>
+                            <a href="#about">О нас</a>
+                        </li>
+                        <li class="footer-menu-divider">&sdot;</li>
+                        <li>
+                            <a href="#">Сервисы</a>
+                        </li>
+                        <li class="footer-menu-divider">&sdot;</li>
+                        <li>
+                            <a href="#">Контакты</a>
+                        </li>
+
+                    </ul>
+                    <p class="copyright text-muted small">&copy; Сокол 2016</p>
+                </div>
+           </div>
       </div>
     </nav>
 </footer>

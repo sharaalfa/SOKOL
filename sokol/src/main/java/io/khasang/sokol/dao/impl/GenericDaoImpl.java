@@ -1,6 +1,7 @@
 package io.khasang.sokol.dao.impl;
 
 import io.khasang.sokol.dao.GenericDao;
+import io.khasang.sokol.entity.Request;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -55,6 +56,45 @@ public class GenericDaoImpl<T, K extends Serializable> implements GenericDao<T, 
     @SuppressWarnings("unchecked")
     public List<T> getAll() {
         Query query = getSession().createQuery(String.format("from %s", type.getName()));
+        return query.list();
+    }
+
+    // firstLine + addLine - общее кол-во записей на странице
+    public List<T> getPage(Integer firstLine, Integer addLine) {
+        Query query = getSession().createQuery(String.format("from %s", type.getName()));
+        query.setFirstResult(firstLine);
+        query.setMaxResults(addLine);
+        return query.list();
+    }
+
+
+    @Override
+    public List<Request> sortingRequestByID(Integer firstLine, Integer addLine){
+        Session session = getSession();
+        String hql = "FROM Request f ORDER BY f.id ASC";
+        Query query = session.createQuery(hql);
+        query.setFirstResult(firstLine);
+        query.setMaxResults(addLine);
+        return query.list();
+    }
+
+    @Override
+    public List<Request> sortingRequestByTitle(Integer firstLine, Integer addLine){
+        Session session = getSession();
+       String hql = "FROM Request f ORDER BY f.title ASC";
+        Query query = session.createQuery(hql);
+        query.setFirstResult(firstLine);
+        query.setMaxResults(addLine);
+        return query.list();
+    }
+
+    @Override
+    public List<Request> sortingRequestByDescription(Integer firstLine, Integer addLine){
+        Session session = getSession();
+        String hql = "FROM Request f ORDER BY f.description ASC";
+        Query query = session.createQuery(hql);
+        query.setFirstResult(firstLine);
+        query.setMaxResults(addLine);
         return query.list();
     }
 }

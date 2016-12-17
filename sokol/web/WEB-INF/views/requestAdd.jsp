@@ -1,10 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="th" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <sec:authentication var="user" property="principal" />
 
-<form action="requestAdd" method="post" >
+<form action="#" th:th:action="@{/requestList/add}" method="post" >
+
     <style>
         p {
             margin-top: 0.5em; /* Отступ сверху */
@@ -60,8 +62,8 @@
         </div>
         <div class="col-sm-4">
             <select name="idrequest" class="selectpicker">
-                <c:forEach items="${requestTypeAll}" var="requestType2">
-                    <option value="${requestType2.id}"> <c:out value="${requestType2.title}"/></option>
+                <c:forEach items="${requestTypeAll}" var="requesttype">
+                    <option value="${requesttype.id}"> <c:out value="${requesttype.title}"/></option>
                 </c:forEach>
             </select>
         </div>
@@ -91,7 +93,7 @@
         </div>
 
         <div class="col-sm-1">
-            <a class="btn btn-danger" href="/requestList">Отменить</a>
+            <a class="btn btn-danger" href="/requestList/list?pagenumber=1">Отменить</a>
         </div>
 
         <div class="col-sm-5"></div>

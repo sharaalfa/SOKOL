@@ -54,8 +54,16 @@
          <tr>
              <th style="width: 3%">№</th>
              <th style="width: 8%">Статус</th>
-             <th style="width: 16%">Название</th>
-             <th style="width: 16%">Описание</th>
+             <th style="width: 16%">Название
+                <a href="/requestList/sortingByTitle">
+                 <img src="/img/sort20.png" hspace="5" border="0"> </img>
+                 </a>
+             </th>
+             <th style="width: 16%">Описание
+                 <a href="/requestList/sortingByDescription">
+                     <img src="/img/sort20.png" hspace="5" border="0"> </img>
+                 </a>
+             </th>
              <th style="width: 8%">Создатель</th>
              <th style="width: 8%">Исполнитель</th>
              <th style="width: 8%">Департамент</th>
@@ -71,10 +79,11 @@
                 <td>  <c:out value="${lists.status.requestStatusName}"/></td>
                  <td>
                      <a title="Редактирование запроса"
-                        href="/requestEdit?idRequest=${lists.requestId}">
+                        href="/requestList/edit?idRequest=${lists.requestId}">
                         <c:out value="${lists.title}"/>
                      </a>
                  </td>
+
                  <td>  <c:out value="${lists.description}"/></td>
                  <td>  <c:out value="${lists.createdBy}"/></td>
                  <td>  <c:out value="${lists.assignedTo.fio}"/></td>
@@ -83,13 +92,43 @@
                  <td>  <c:out value="${lists.createdDate}"/></td>
                  <td>  <c:out value="${lists.updatedDate}"/></td>
                  <td>  <a class="btn btn-default" title="Удаление запроса"
+
                           href="/requestList/delete?idRequest=${lists.requestId}"
                           onclick="return confirmAction(${lists.requestId})"
                           role="button">
-                          <span class="glyphicon glyphicon-remove"></span>
+                     <img src="/img/TrashFull.png" hspace="5" border="0"> </img>
+                          <%--<span class="glyphicon glyphicon-remove"></span>--%>
                        </a>
                  </td>
              </tr>
          </c:forEach>
     </table>
+
+    <div class="row">
+        <div class="col-md-10">
+            <ul class="pagination">
+                <li>
+                    <a href="" aria-label="Previous"><span aria-hidden="true">&laquo</span></a>
+                </li>
+                <c:forEach items="${pageTotal}" var="pagenumber" step="1">
+                    <li>
+                        <a href="/requestList/list?pagenumber=${pagenumber.intValue()}">
+                            <c:out value="${pagenumber.intValue()}"/>
+                        </a>
+                    </li>
+                </c:forEach>
+                <li>
+                    <a href="" aria-label="Previous"><span aria-hidden="true">&raquo</span></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+<%--        <div class="col-md-1" style="border-top-width: medium">
+            <select name="idrequest" class="selectpicker" data-width="fit">
+                <option>5</option>
+                <option>10</option>
+                <option>15</option>
+                <option>20</option>
+            </select>
+        </div>--%>
 

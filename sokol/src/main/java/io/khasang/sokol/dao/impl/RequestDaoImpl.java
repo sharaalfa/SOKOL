@@ -7,7 +7,9 @@ import io.khasang.sokol.dao.UserDao;
 import io.khasang.sokol.entity.Request;
 import io.khasang.sokol.entity.RequestStatus;
 import io.khasang.sokol.entity.User;
+import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -56,7 +58,16 @@ public class RequestDaoImpl extends GenericDaoImpl<Request, Integer> implements 
     @Override
     public Request getByName(String name) {
         return (Request) getSession().createCriteria(Request.class)
-                .add(Restrictions.eq("name", name))
+                .add(Restrictions.eq("title", name))
                 .uniqueResult();
+    }
+
+    @Override
+        public Integer getCountLineOfTable(){
+        Session session = getSession();
+        String countQ = "Select count (f.requestId) from Request f";
+        Query countQuery = session.createQuery(countQ);
+        long countResults = (long) countQuery.uniqueResult();
+        return (int) countResults;
     }
 }
