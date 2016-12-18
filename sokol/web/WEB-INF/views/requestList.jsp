@@ -38,17 +38,81 @@
         tr:hover td {
             background: #ccddff;
         }
-    </style>
 
-    <div class="panel panel-default">
-        <div class="panel panel-default">
-        <div class="panel panel-default">
-    <div class="panel-body">
-       <a class="btn btn-default" title="Добавление запроса" href="/requestList/add"
-          role="button"><span class="glyphicon glyphicon-plus"></span>
-       </a>
-       Список запросов
-    </div>
+        h2 {
+            font-family: Verdana, Arial, Helvetica, sans-serif;
+            font-size: 1.3em;
+            margin-top: 1.5em;
+            margin-left: 6em;
+            color: #FFFFFF;
+        }
+
+    </style>
+   <div class="panel panel-default" style="background: rgb(32,64,64); height: 60px; margin-bottom: 0px">
+       <ul class="nav navbar-nav navbar-left">
+           <li>
+               <h2>ЗАПРОСЫ</h2>
+           </li>
+           <li>
+               <img src="/img/wing.jpg" border="0" style="margin-top: 12px;margin-left: 62em; "> </img>
+           </li>
+       </ul>
+   </div>
+
+            <div class="panel panel-default" style="height: 70px; margin-bottom: 0px">
+                <ul class="nav navbar-nav navbar-left">
+                    <li>
+                        <a class="btn btn-default" href="/requestList/add"
+                           style="width:110px; height:34px; margin-top: 1em; margin-left: 7.5em; padding-top: 5px; background-color: rgb(214,86,43);"
+                           role="button">
+                            <span style="color: #FFFFFF"> НОВЫЙ</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <input type="checkbox" value="check1" style="width:20px; height:20px; margin-top: 1.6em; margin-left: 3em">
+                    </li>
+
+                    <li>
+                        <label style="font-size: 12pt; font-family: Verdana, Arial, Helvetica, sans-serif; margin-top: 1.4em; margin-left: 0.5em">
+                           ИСХОДЯЩИЕ
+                        </label>
+                    </li>
+
+                    <li>
+                        <input type="checkbox" value="check1" style="width:20px; height:20px; margin-top: 1.6em; margin-left: 3em">
+                    </li>
+
+                    <li>
+                        <label style="font-size: 12pt; font-family: Verdana, Arial, Helvetica, sans-serif; margin-top: 1.4em; margin-left: 0.5em">
+                                ВХОДЯЩИЕ
+                         </label>
+                    </li>
+
+                    <li>
+                        <input type="checkbox" value="check1" style="width:20px; height:20px; margin-top: 1.6em; margin-left: 3em">
+                    </li>
+
+                    <li>
+                        <label style="font-size: 12pt; font-family: Verdana, Arial, Helvetica, sans-serif; margin-top: 1.4em; margin-left: 0.5em">
+                            ПРИНЯТЫЕ
+                        </label>
+                    </li>
+
+                    <li>
+                        <form role="search" class="form-inline">
+                            <div class="form-group" style="margin-top:14px; height:34px;">
+                                <input type="text" class="form-control" placeholder="Поиск"
+                                       style="margin-left: 3em;">
+                                <a class="btn btn-default" title="Поиск" href="/requestList/add"
+                                   style="width:34px; padding-top: 10px; padding-left: 10px; "
+                                   role="button"><span class="glyphicon glyphicon-search"></span>
+                                </a>
+                            </div>
+                        </form>
+                    </li>
+                </ul>
+        </div>
 
     <table>
          <tr>
