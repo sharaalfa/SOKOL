@@ -119,12 +119,12 @@
              <th style="width: 3%">№</th>
              <th style="width: 8%">Статус</th>
              <th style="width: 16%">Название
-              <a href="/requestList/list?pagenumber=1&sortBy=Title">
+              <a href="/requestList/list?pagenumber=1&sortBy=title">
                  <img src="/img/sortUP15.png" border="0" style="margin-top:0px; margin-left: 3px"> </img>
                  </a>
              </th>
              <th style="width: 16%">Описание
-                 <a href="/requestList/list?pagenumber=1&sortBy=Description">
+                 <a href="/requestList/list?pagenumber=1&sortBy=description">
                      <img src="/img/sortDown15.png" style="margin-bottom: 0px; margin-left: 3px" border="0"> </img>
                  </a>
              </th>
@@ -177,7 +177,7 @@
                 <c:forEach items="${pageTotal}" var="pagenumber" step="1">
                     <li>
                         <%--<a href="/requestList/list?pagenumber=${pagenumber.intValue()}">--%>
-                            <a href="/requestList/list?pagenumber=${pagenumber.intValue()}&sortBy=ID">
+                            <a href="/requestList/list?pagenumber=${pagenumber.intValue()}&sortBy=${sortBy}">
 
                             <c:out value="${pagenumber.intValue()}"/>
                         </a>
