@@ -20,10 +20,6 @@ public interface GenericDao<T, K extends Serializable> {
 
     List<T> getPage(Integer firstLine, Integer maxLine);
 
-    List<Request> sortingRequestByID(Integer firstLine, Integer maxLine);
-
-    List<Request> sortingRequestByDescription(Integer firstLine, Integer maxLine);
-
-    List<Request> sortingRequestByTitle(Integer firstLine, Integer maxLine);
+    List<T> sortingBy(Integer firstLine, Integer maxLine, String sortBy);
 
 }

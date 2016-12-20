@@ -56,6 +56,7 @@ public class RequestController {
 
 
     // расчет количества записей в таблице и количества страниц
+/*
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String requestListPage(Model requestPageModel, @RequestParam("pagenumber") String pagenumber){
         Integer countLineOfTable = requestDao.getCountLineOfTable(); // кол-во записей в таблице
@@ -75,33 +76,26 @@ public class RequestController {
         return "requestList";
 
     }
+*/
 
-    @RequestMapping(value = "/sortingByTitle", method = RequestMethod.GET)
-    public String requestListPage2(Model requestPageModel2){
-        sortingRequestByTitle = true;
-        sortingRequestByDescription = false;
-        Integer countLineOfTable2 = requestDao.getCountLineOfTable(); // кол-во записей в таблице
-        Integer countLineOfPage2 = Integer.parseInt(environment.getRequiredProperty("page.size")); // кол-во записей на странице
-        Integer lastPageNumber2 = ((countLineOfTable2  / countLineOfPage2) + 1);
-        ArrayList<Integer> pageTotal2 = totalOfPages(lastPageNumber2);
-        List<Request> requestAll =  requestDao.sortingRequestByTitle(0, countLineOfPage2);
-        requestPageModel2.addAttribute("requestAll", requestAll);
-        requestPageModel2.addAttribute("pageTotal", pageTotal2);
-        return "requestList";
-    }
 
-    @RequestMapping(value = "/sortingByDescription", method = RequestMethod.GET)
-    public String requestListPage3(Model requestPageModel3){
-        sortingRequestByTitle = false;
-        sortingRequestByDescription = true;
-        Integer countLineOfTable2 = requestDao.getCountLineOfTable(); // кол-во записей в таблице
-        Integer countLineOfPage2 = Integer.parseInt(environment.getRequiredProperty("page.size")); // кол-во записей на странице
-        Integer lastPageNumber2 = ((countLineOfTable2  / countLineOfPage2) + 1);
-        ArrayList<Integer> pageTotal2 = totalOfPages(lastPageNumber2);
-        List<Request> requestAll =  requestDao.sortingRequestByDescription(0, countLineOfPage2);
-        requestPageModel3.addAttribute("requestAll", requestAll);
-        requestPageModel3.addAttribute("pageTotal", pageTotal2);
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public String requestListPage(Model requestPageModel, @RequestParam("pagenumber") String pagenumber,
+                                                          @RequestParam("sortBy") String sortBy){
+        Integer countLineOfTable = requestDao.getCountLineOfTable(); // кол-во записей в таблице
+        Integer countLineOfPage = Integer.parseInt(environment.getRequiredProperty("page.size")); // кол-во записей на странице
+        Integer lastPageNumber = ((countLineOfTable  / countLineOfPage) + 1);
+        ArrayList<Integer> pageTotal = totalOfPages(lastPageNumber);
+        List<Request> requestAll;
+        if (sortBy.equals("Title")== true){
+            requestAll =  requestDao.sortingBy((Integer.parseInt(pagenumber)-1)*countLineOfPage, countLineOfPage, "title");
+        } else if (sortBy.equals("Description")== true){
+            requestAll =  requestDao.sortingBy((Integer.parseInt(pagenumber)-1)*countLineOfPage, countLineOfPage, "description");
+        } else {requestAll =  requestDao.sortingBy((Integer.parseInt(pagenumber)-1)*countLineOfPage, countLineOfPage, "id");}
+        requestPageModel.addAttribute("requestAll", requestAll);
+        requestPageModel.addAttribute("pageTotal", pageTotal);
         return "requestList";
+
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
