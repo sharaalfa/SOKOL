@@ -67,34 +67,12 @@ public class GenericDaoImpl<T, K extends Serializable> implements GenericDao<T, 
         return query.list();
     }
 
-
     @Override
-    public List<Request> sortingRequestByID(Integer firstLine, Integer addLine){
-        Session session = getSession();
-        String hql = "FROM Request f ORDER BY f.id ASC";
-        Query query = session.createQuery(hql);
+    public List<T> sortingBy(Integer firstLine, Integer addLine, String sortBy){
+        Query query = getSession().createQuery(String.format("FROM %s f ORDER BY f.%s ASC", type.getName(), sortBy));
         query.setFirstResult(firstLine);
         query.setMaxResults(addLine);
         return query.list();
     }
 
-    @Override
-    public List<Request> sortingRequestByTitle(Integer firstLine, Integer addLine){
-        Session session = getSession();
-       String hql = "FROM Request f ORDER BY f.title ASC";
-        Query query = session.createQuery(hql);
-        query.setFirstResult(firstLine);
-        query.setMaxResults(addLine);
-        return query.list();
-    }
-
-    @Override
-    public List<Request> sortingRequestByDescription(Integer firstLine, Integer addLine){
-        Session session = getSession();
-        String hql = "FROM Request f ORDER BY f.description ASC";
-        Query query = session.createQuery(hql);
-        query.setFirstResult(firstLine);
-        query.setMaxResults(addLine);
-        return query.list();
-    }
 }

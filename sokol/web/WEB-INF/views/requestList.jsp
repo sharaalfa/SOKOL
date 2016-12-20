@@ -15,7 +15,7 @@
             }
         </script>
 
-    <style>
+      <style>
         table {
             width: 100%;
         }
@@ -47,8 +47,8 @@
             color: #FFFFFF;
         }
 
-    </style>
-   <div class="panel panel-default" style="background: rgb(32,64,64); height: 60px; margin-bottom: 0px">
+      </style>
+     <div class="panel panel-default" style="background: rgb(32,64,64); height: 60px; margin-bottom: 0px">
        <ul class="nav navbar-nav navbar-left">
            <li>
                <h2>ЗАПРОСЫ</h2>
@@ -57,7 +57,7 @@
                <img src="/img/wing.jpg" border="0" style="margin-top: 12px;margin-left: 62em; "> </img>
            </li>
        </ul>
-   </div>
+     </div>
 
             <div class="panel panel-default" style="height: 70px; margin-bottom: 0px">
                 <ul class="nav navbar-nav navbar-left">
@@ -69,7 +69,7 @@
                         </a>
                     </li>
 
-                    <li>
+   <%--                 <li>
                         <input type="checkbox" value="check1" style="width:20px; height:20px; margin-top: 1.6em; margin-left: 3em">
                     </li>
 
@@ -98,12 +98,12 @@
                             ПРИНЯТЫЕ
                         </label>
                     </li>
-
+--%>
                     <li>
                         <form role="search" class="form-inline">
                             <div class="form-group" style="margin-top:14px; height:34px;">
                                 <input type="text" class="form-control" placeholder="Поиск"
-                                       style="margin-left: 3em;">
+                                       style="margin-left: 57em;">
                                 <a class="btn btn-default" title="Поиск" href="/requestList/add"
                                    style="width:34px; padding-top: 10px; padding-left: 10px; "
                                    role="button"><span class="glyphicon glyphicon-search"></span>
@@ -114,18 +114,18 @@
                 </ul>
         </div>
 
-    <table>
+      <table>
          <tr>
              <th style="width: 3%">№</th>
              <th style="width: 8%">Статус</th>
              <th style="width: 16%">Название
-                <a href="/requestList/sortingByTitle">
-                 <img src="/img/sort20.png" hspace="5" border="0"> </img>
+              <a href="/requestList/list?pagenumber=1&sortBy=Title">
+                 <img src="/img/sortUP15.png" border="0" style="margin-top:0px; margin-left: 3px"> </img>
                  </a>
              </th>
              <th style="width: 16%">Описание
-                 <a href="/requestList/sortingByDescription">
-                     <img src="/img/sort20.png" hspace="5" border="0"> </img>
+                 <a href="/requestList/list?pagenumber=1&sortBy=Description">
+                     <img src="/img/sortDown15.png" style="margin-bottom: 0px; margin-left: 3px" border="0"> </img>
                  </a>
              </th>
              <th style="width: 8%">Создатель</th>
@@ -166,9 +166,9 @@
                  </td>
              </tr>
          </c:forEach>
-    </table>
+      </table>
 
-    <div class="row">
+     <div class="row">
         <div class="col-md-10">
             <ul class="pagination">
                 <li>
@@ -176,7 +176,9 @@
                 </li>
                 <c:forEach items="${pageTotal}" var="pagenumber" step="1">
                     <li>
-                        <a href="/requestList/list?pagenumber=${pagenumber.intValue()}">
+                        <%--<a href="/requestList/list?pagenumber=${pagenumber.intValue()}">--%>
+                            <a href="/requestList/list?pagenumber=${pagenumber.intValue()}&sortBy=ID">
+
                             <c:out value="${pagenumber.intValue()}"/>
                         </a>
                     </li>
@@ -186,13 +188,5 @@
                 </li>
             </ul>
         </div>
-    </div>
-<%--        <div class="col-md-1" style="border-top-width: medium">
-            <select name="idrequest" class="selectpicker" data-width="fit">
-                <option>5</option>
-                <option>10</option>
-                <option>15</option>
-                <option>20</option>
-            </select>
-        </div>--%>
+     </div>
 
