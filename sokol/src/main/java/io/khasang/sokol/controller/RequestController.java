@@ -56,17 +56,35 @@ public class RequestController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String requestListPage(Model requestPageModel, @RequestParam("pagenumber") String pagenumber,
-                                  @RequestParam("sortBy") String sortBy) {
+                                  @RequestParam("sortBy") String sortBy,
+                                  @RequestParam("ASC") String ASC){
+
         Integer countLineOfTable = requestDao.getCountLineOfTable(); // кол-во записей в таблице
         Integer pageRows = Integer.parseInt(environment.getRequiredProperty("page.size")); // кол-во записей на странице
         Integer lastPageNumber = ((countLineOfTable / pageRows) + 1);
         ArrayList<Integer> pageNumbers = totalOfPages(lastPageNumber);
         List<Request> requestAll;
         sortBy = (sortBy == null || sortBy.equals("")) ? "id" : sortBy;
-        requestAll = requestDao.sortingBy((Integer.parseInt(pagenumber) - 1) * pageRows, pageRows, sortBy);
+        String imgBy = "";
+        if (ASC.equals("ASC") == true) {
+            imgBy = "/img/sortDown15.png";
+            ASC = "DESC";
+            requestAll = requestDao.sortingBy((Integer.parseInt(pagenumber) - 1) * pageRows, pageRows, sortBy, ASC);
+        } else if (ASC.equals("DESC") == true) {
+            imgBy = "/img/sortUP15.png";
+            ASC = "ASC";
+            requestAll = requestDao.sortingBy((Integer.parseInt(pagenumber) - 1) * pageRows, pageRows, sortBy, ASC);
+        } else {
+            requestAll = requestDao.sortingBy((Integer.parseInt(pagenumber) - 1) * pageRows, pageRows, sortBy, "");
+            ASC = "ASC";
+            imgBy = "";
+        }
+
         requestPageModel.addAttribute("requestAll", requestAll);
         requestPageModel.addAttribute("pageTotal", pageNumbers);
         requestPageModel.addAttribute("sortBy", sortBy);
+        requestPageModel.addAttribute("imgBy", imgBy);
+        requestPageModel.addAttribute("ASC", ASC);
         return "requestList";
 
     }

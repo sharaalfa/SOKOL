@@ -118,10 +118,21 @@
          <tr>
              <th style="width: 3%">№</th>
              <th style="width: 8%">Статус</th>
-             <th style="width: 16%">Название
-              <a href="/requestList/list?pagenumber=1&sortBy=title">
-                 <img src="/img/sortUP15.png" border="0" style="margin-top:0px; margin-left: 3px"> </img>
-                 </a>
+
+<%--             <a title="Редактирование запроса"
+                href="/requestList/edit?idRequest=${lists.requestId}">
+                 <c:out value="${lists.title}"/>
+             </a>
+             --%>
+
+
+
+             <th style="width: 16%">
+              <a href="/requestList/list?pagenumber=1&sortBy=title&ASC=${ASC}">Название
+                  <c:if test="${imgBy !=''}">
+                      <img src=${imgBy} border="0" style="margin-top:0px; margin-left: 3px"> </img>
+                      </c:if>
+              </a>
              </th>
              <th style="width: 16%">Описание
                  <a href="/requestList/list?pagenumber=1&sortBy=description">

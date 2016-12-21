@@ -68,8 +68,8 @@ public class GenericDaoImpl<T, K extends Serializable> implements GenericDao<T, 
     }
 
     @Override
-    public List<T> sortingBy(Integer firstLine, Integer addLine, String sortBy){
-        Query query = getSession().createQuery(String.format("FROM %s f ORDER BY f.%s ASC", type.getName(), sortBy));
+    public List<T> sortingBy(Integer firstLine, Integer addLine, String sortBy, String ascBy){
+        Query query = getSession().createQuery(String.format("FROM %s f ORDER BY f.%s %s ", type.getName(), sortBy, ascBy));
         query.setFirstResult(firstLine);
         query.setMaxResults(addLine);
         return query.list();
