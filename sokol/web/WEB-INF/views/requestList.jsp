@@ -128,10 +128,10 @@
 
 
              <th style="width: 16%">
-              <a href="/requestList/list?pagenumber=1&sortBy=title&ASC=${ASC}">Название
+              <a href="/requestList/list?pagenumber=1&sortBy=title&sortOrder=${sortOrder}">Название
                   <c:if test="${imgBy !=''}">
                       <img src=${imgBy} border="0" style="margin-top:0px; margin-left: 3px"> </img>
-                      </c:if>
+                  </c:if>
               </a>
              </th>
              <th style="width: 16%">Описание
@@ -188,7 +188,7 @@
                 <c:forEach items="${pageTotal}" var="pagenumber" step="1">
                     <li>
                         <%--<a href="/requestList/list?pagenumber=${pagenumber.intValue()}">--%>
-                            <a href="/requestList/list?pagenumber=${pagenumber.intValue()}&sortBy=${sortBy}">
+                            <a href="/requestList/list?pagenumber=${pagenumber.intValue()}&sortBy=${sortBy}&sortOrder=${sortOrder}">
 
                             <c:out value="${pagenumber.intValue()}"/>
                         </a>

@@ -57,7 +57,7 @@ public class RequestController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String requestListPage(Model requestPageModel, @RequestParam("pagenumber") String pagenumber,
                                   @RequestParam("sortBy") String sortBy,
-                                  @RequestParam("ASC") String ASC){
+                                  @RequestParam("sortOrder") String sortOrder){
 
         Integer countLineOfTable = requestDao.getCountLineOfTable(); // кол-во записей в таблице
         Integer pageRows = Integer.parseInt(environment.getRequiredProperty("page.size")); // кол-во записей на странице
@@ -66,25 +66,28 @@ public class RequestController {
         List<Request> requestAll;
         sortBy = (sortBy == null || sortBy.equals("")) ? "id" : sortBy;
         String imgBy = "";
-        if (ASC.equals("ASC") == true) {
-            imgBy = "/img/sortDown15.png";
-            ASC = "DESC";
-            requestAll = requestDao.sortingBy((Integer.parseInt(pagenumber) - 1) * pageRows, pageRows, sortBy, ASC);
-        } else if (ASC.equals("DESC") == true) {
-            imgBy = "/img/sortUP15.png";
-            ASC = "ASC";
-            requestAll = requestDao.sortingBy((Integer.parseInt(pagenumber) - 1) * pageRows, pageRows, sortBy, ASC);
-        } else {
-            requestAll = requestDao.sortingBy((Integer.parseInt(pagenumber) - 1) * pageRows, pageRows, sortBy, "");
-            ASC = "ASC";
-            imgBy = "";
-        }
+        requestAll = requestDao.sortingBy((Integer.parseInt(pagenumber) - 1) * pageRows, pageRows, sortBy, sortOrder);
+             if (sortOrder.equals("ASC")) {
+                imgBy = "/img/sortUP15.png";
+                sortOrder = "DESC";
+             }
+             else if (sortOrder.equals("DESC")) {
+                imgBy = "/img/sortDown15.png";
+                sortOrder = "ASC";
+             }
+             else {
+                sortOrder = "ASC";
+             }
+
+
+
+
 
         requestPageModel.addAttribute("requestAll", requestAll);
         requestPageModel.addAttribute("pageTotal", pageNumbers);
         requestPageModel.addAttribute("sortBy", sortBy);
         requestPageModel.addAttribute("imgBy", imgBy);
-        requestPageModel.addAttribute("ASC", ASC);
+        requestPageModel.addAttribute("sortOrder", sortOrder);
         return "requestList";
 
     }
