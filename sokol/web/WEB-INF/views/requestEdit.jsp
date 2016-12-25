@@ -127,9 +127,10 @@
         </div>
 
         <div class="col-sm-1">
-            <a class="btn btn-danger" href="/requestList/list?pagenumber=1">Отменить</a>
+            <a class="btn btn-danger"
+               href="/requestList/list?pagenumber=${pagenumber}&sortBy=${sortBy}&sortOrder=${sortOrder}&sortOrderHeader=${sortOrderHeader}">
+                Отменить</a>
         </div>
-
         <div class="col-sm-5"></div>
     </div>
 </form>
