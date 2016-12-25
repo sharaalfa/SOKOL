@@ -42,10 +42,6 @@ public class RequestController {
     @Autowired
     private Environment environment;
 
-    private boolean sortingRequestByTitle = false;
-    private boolean sortingRequestByDescription = false;
-
-
     private ArrayList<Integer> totalOfPages(int lastPageNumber) { //общее количество страниц для paging
         ArrayList<Integer> totalOfPages = new ArrayList<>();
         for (int i = 0; i < lastPageNumber; i++) {
@@ -56,19 +52,37 @@ public class RequestController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String requestListPage(Model requestPageModel, @RequestParam("pagenumber") String pagenumber,
-                                  @RequestParam("sortBy") String sortBy) {
+                                  @RequestParam("sortBy") String sortBy,
+                                  @RequestParam("sortOrder") String sortOrder){
+
         Integer countLineOfTable = requestDao.getCountLineOfTable(); // кол-во записей в таблице
         Integer pageRows = Integer.parseInt(environment.getRequiredProperty("page.size")); // кол-во записей на странице
         Integer lastPageNumber = ((countLineOfTable / pageRows) + 1);
         ArrayList<Integer> pageNumbers = totalOfPages(lastPageNumber);
         List<Request> requestAll;
         sortBy = (sortBy == null || sortBy.equals("")) ? "id" : sortBy;
-        requestAll = requestDao.sortingBy((Integer.parseInt(pagenumber) - 1) * pageRows, pageRows, sortBy);
+        String imgBy = "";
+        String sortOrderHeader = "";
+        requestAll = requestDao.sortingBy((Integer.parseInt(pagenumber) - 1) * pageRows, pageRows, sortBy, sortOrder);
+            if (sortOrder.equals("ASC")) {
+                imgBy = "/img/sortUP15.png";
+                sortOrderHeader = "DESC";
+            } else if (sortOrder.equals("DESC")) {
+                imgBy = "/img/sortDown15.png";
+                sortOrderHeader = "ASC";
+            } else {
+                sortOrderHeader = "ASC";
+                sortOrder = "ASC";
+            }
+
         requestPageModel.addAttribute("requestAll", requestAll);
         requestPageModel.addAttribute("pageTotal", pageNumbers);
         requestPageModel.addAttribute("sortBy", sortBy);
+        requestPageModel.addAttribute("imgBy", imgBy);
+        requestPageModel.addAttribute("sortOrder", sortOrder);
+        requestPageModel.addAttribute("sortOrderHeader", sortOrderHeader);
+        requestPageModel.addAttribute("pagenumber", pagenumber);
         return "requestList";
-
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
@@ -76,15 +90,25 @@ public class RequestController {
         Request request = requestDao.getByRequestId(Integer.parseInt(idRequest));
         requestDao.delete(request);
         delRequest.addAttribute("request", request);
-        return "redirect:/requestList/list?pagenumber=1";
+        return "redirect:/requestList/list?pagenumber=1&sortBy=id&sortOrder=";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public String requestAddPage(Model requestAddModel) {
+    public String requestAddPage(Model requestAddModel,
+                                 @RequestParam("pagenumber") String pagenumber,
+                                 @RequestParam("sortBy") String sortBy,
+                                 @RequestParam("sortOrder") String sortOrder,
+                                 @RequestParam("sortOrderHeader") String sortOrderHeader)
+    {
         List<RequestType> requestTypeAll = requestTypeDao.getAll();
         requestAddModel.addAttribute("requestTypeAll", requestTypeAll);
         List<Department> departmentAll = departmentDao.getAll();
         requestAddModel.addAttribute("departmentAll", departmentAll);
+        requestAddModel.addAttribute("pagenumber", pagenumber);
+        requestAddModel.addAttribute("sortBy", sortBy);
+        requestAddModel.addAttribute("sortOrder", sortOrder);
+        requestAddModel.addAttribute("sortOrderHeader", sortOrderHeader);
+
         return "requestAdd";
     }
 
@@ -92,7 +116,12 @@ public class RequestController {
     public String requestAdd(@RequestParam("name") String name,
                              @RequestParam("description") String description,
                              @RequestParam("idrequest") String idrequest,
-                             @RequestParam("iddepartment") String iddepartment) {
+                             @RequestParam("iddepartment") String iddepartment,
+                             @RequestParam("pagenumber") String pagenumber,
+                             @RequestParam("sortBy") String sortBy,
+                             @RequestParam("sortOrder") String sortOrder,
+                             @RequestParam("sortOrderHeader") String sortOrderHeader)
+    {
         ModelAndView model = new ModelAndView();
         Request request = new Request();
         request.setTitle(name);
@@ -110,20 +139,31 @@ public class RequestController {
         request.setUpdatedBy(context.getAuthentication().getName());
         requestDao.save(request);
         model.setViewName("requestAdd");
-        return "redirect:/requestList/list?pagenumber=1";
+        return "redirect:/requestList/list?pagenumber="+pagenumber+"&sortBy="+sortBy+"&sortOrder="+sortOrder+"&sortOrderHeader="+sortOrderHeader;
+
+
     }
 
     // добавление запроса на редактирование
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
-    public String requestEditPage(Model requestEditModel, @RequestParam("idRequest") String idRequest) {
+    public String requestEditPage(Model requestEditModel, @RequestParam("idRequest") String idRequest,
+                                  @RequestParam("pagenumber") String pagenumber,
+                                  @RequestParam("sortBy") String sortBy,
+                                  @RequestParam("sortOrder") String sortOrder,
+                                  @RequestParam("sortOrderHeader") String sortOrderHeader){
         Request request = requestDao.getByRequestId(Integer.parseInt(idRequest));
         requestEditModel.addAttribute("request", request);
         List<RequestType> requestTypeAll = requestTypeDao.getAll();
         requestEditModel.addAttribute("requestTypeAll", requestTypeAll);
         List<Department> departmentAll = departmentDao.getAll();
         requestEditModel.addAttribute("departmentAll", departmentAll);
+        requestEditModel.addAttribute("pagenumber", pagenumber);
+        requestEditModel.addAttribute("sortBy", sortBy);
+        requestEditModel.addAttribute("sortOrder", sortOrder);
+        requestEditModel.addAttribute("sortOrderHeader", sortOrderHeader);
         return "requestEdit";
     }
+
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public String addRequestPerformer(@RequestParam("idrequest") String idrequest,
@@ -132,7 +172,11 @@ public class RequestController {
                                       @RequestParam("dateCreator") String dateCreator,
                                       @RequestParam("creator") String creator,
                                       @RequestParam("idrequesttypes") String idrequesttypes,
-                                      @RequestParam("iddepartment") String iddepartment) {
+                                      @RequestParam("iddepartment") String iddepartment,
+                                      @RequestParam("pagenumber") String pagenumber,
+                                      @RequestParam("sortBy") String sortBy,
+                                      @RequestParam("sortOrder") String sortOrder,
+                                      @RequestParam("sortOrderHeader") String sortOrderHeader){
         ModelAndView model = new ModelAndView();
         Request request = requestDao.getByRequestId(Integer.parseInt(idrequest));
         request.setTitle(name);
@@ -157,6 +201,5 @@ public class RequestController {
         request.setUpdatedBy(context.getAuthentication().getName());
         requestDao.update(request);
         model.setViewName("requestEdit");
-        return "redirect:/requestList/list?pagenumber=1";
-    }
+        return "redirect:/requestList/list?pagenumber="+pagenumber+"&sortBy="+sortBy+"&sortOrder="+sortOrder+"&sortOrderHeader="+sortOrderHeader;    }
 }
