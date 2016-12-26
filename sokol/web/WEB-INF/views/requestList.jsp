@@ -1,10 +1,7 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
-
-        <title>Request</title>
-        <!-- Bootstrap -->
-
+        <title>RequestList</title>
         <script type="text/javascript">
             function confirmAction(id) {
                 if (confirm("Вы действительно хотите удалить запрос № " + id + " ?")) {
@@ -69,17 +66,6 @@
                             <span style="color: #FFFFFF"> НОВЫЙ</span>
                         </a>
                     </li>
-
-   <%--                 <li><input type="checkbox" value="check1" style="width:20px; height:20px; margin-top: 1.6em; margin-left: 3em"></li>
-                        <li><label style="font-size: 12pt; font-family: Verdana, Arial, Helvetica, sans-serif; margin-top: 1.4em; margin-left: 0.5em">
-                           ИСХОДЯЩИЕ</label></li>
-                    <li><input type="checkbox" value="check1" style="width:20px; height:20px; margin-top: 1.6em; margin-left: 3em"></li>
-                    <li><label style="font-size: 12pt; font-family: Verdana, Arial, Helvetica, sans-serif; margin-top: 1.4em; margin-left: 0.5em">
-                           ВХОДЯЩИЕ</label></li>
-                    <li><input type="checkbox" value="check1" style="width:20px; height:20px; margin-top: 1.6em; margin-left: 3em"></li>
-                    <li><label style="font-size: 12pt; font-family: Verdana, Arial, Helvetica, sans-serif; margin-top: 1.4em; margin-left: 0.5em">
-                           ПРИНЯТЫЕ</label></li>
---%>
                     <li>
                         <form role="search" class="form-inline">
                             <div class="form-group" style="margin-top:14px; height:34px;">
@@ -114,7 +100,6 @@
              </th>
              <th style="width: 14%">
                  <a href="/requestList/list?pagenumber=${pagenumber}&sortBy=description&sortOrder=${sortOrderHeader}">Описание
-                     <%--<c:if test="${imgBy !=''} & ${sortBy.equals('description')}">--%>
                      <c:if test="${sortBy.equals('description')}">
                          <img src=${imgBy} border="0" style="margin-top:0px; margin-left: 3px"> </img>
                      </c:if>
