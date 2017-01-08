@@ -25,7 +25,7 @@ body{
 }
 .navbar-nav.navbar-right .enter{
 	background: transparent url("../img/enter.png") no-repeat left center;
-	padding-left: 10px; 
+	padding-left: 10px;
 }
 .navbar-default.sokol .navbar-nav > li > a,
 .navbar-default.sokol .navbar-nav > li > a:hover
@@ -49,7 +49,7 @@ body{
 	padding-right: 15px;
 	margin-top:  -5px;
 	padding-left: 15px;
-	font-size: 20px;	
+	font-size: 20px;
 }
 
 .our-services{
@@ -57,7 +57,7 @@ body{
 	display: block;
 	margin-top: 50px;
 	height: 600px;
-	padding-top: 55px; 
+	padding-top: 55px;
 }
 .our-services .header{
 	color: white;
@@ -98,7 +98,7 @@ body{
 	display: block;
 	min-height: 600px;
 	overflow-y: auto;
-	margin-top: 70px; 
+	margin-top: 70px;
 	padding-top: 120px;
 }
 
@@ -111,20 +111,20 @@ body{
 	color: white;
 	display: block;
 	font-size: 60px;
-	font-weight: bold;	
+	font-weight: bold;
 	margin-top: 30px;
 }
 .try-it .enter span{
 	display: block;
 	font-weight: normal;
 	font-size: 18px;
-	margin-top: -7px; 
+	margin-top: -7px;
 }
 
 .footer{
 	background-color: #251d16;
 	display: block;
-	margin-top: 75px; 
+	margin-top: 75px;
 	height: 300px;
 	padding-top: 30px;
 }
@@ -142,7 +142,7 @@ body{
 }
 .footer .copyright{
 	color: white;
-	font-size: 14px;	
+	font-size: 14px;
 }
 .footer .social{
 	display: block;
@@ -158,7 +158,7 @@ body{
 	height: 60px;
 	width: 60px;
 	display: inline-block;
-	margin-left:5px; 
+	margin-left:5px;
 }
 
 .footer .social .net1{
@@ -173,3 +173,193 @@ body{
 .footer .social .net4{
 	background: transparent url("../img/img4.png") center center;
 }
+
+.sokol-list-view {
+	display: block;
+	height: 100%;
+	min-height: 1500px;
+	background: #5f9ead url("../img/sky.jpg")  no-repeat center top;
+}
+.sokol-list-view .header{
+	height: 32px;
+	background-color: white;
+	margin-bottom: 0px;
+}
+.sokol-list-view .header .navbar-right{
+	margin-left: -30px;
+}
+.sokol-list-view .navbar-brand{
+	margin-top: -7px;
+}
+.sokol-list-view  .profile-photo{
+	margin-top:  15px;
+}
+.sokol-list-view .info-line{
+	display: block;
+	height: 47px;
+	background-color: #3c3c3c;
+	padding-right: 70px;
+	padding-left: 50px;
+	color: white;
+}
+.sokol-list-view .caption{
+	font-size: 22px;
+	padding-top: 7px;
+}
+
+.sokol-list-view .navbar-inverse{
+	background-color: #3c3c3c;
+	padding-right: 70px;
+	padding-left: 50px;
+	padding-top: 10px;
+	color: white;
+}
+.sokol-list-view .table-header{
+	display: block;
+	height: 60px;
+	background-color: white;
+	padding: 20px 15px 20px 15px;
+}
+.sokol-list-view .create-btn{
+
+	padding: 7px 25px 7px 25px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+.sokol-list-view .create-btn{
+	text-decoration: none;
+}
+.sokol-list-view  .table-wrapper,
+.sokol-list-view  .form-wrapper{
+	display: block;
+	background-color: white;
+	padding-bottom: 10px;
+	-webkit-border-radius: 0px 0px 10px 10px;
+	border-radius: 0px 0px 10px 10px;
+}
+.sokol-list-view  .form-wrapper{
+	padding-bottom: 30px;
+}
+.sokol-list-view  .table-wrapper .list-table{
+	width: 100%;
+}
+
+.list-table .del-cell{
+	width: 50px;
+	text-align: center;
+}
+.list-table .del-cell .del-btn{
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	background: transparent url("../img/del.png")  no-repeat center center;
+}
+.list-table .id-cell{
+	width: 50px;
+	font-weight: bold;
+}
+.list-table tr.alt{
+	background-color: #d6f7ff;
+}
+
+.sokol-list-view  .form-wrapper .audit-info,
+.sokol-list-view  .table-wrapper thead{
+	background-color: #027e96;
+	color:  white;
+}
+.sokol-list-view  .form-wrapper .audit-info{
+	padding: 10px;
+}
+.sokol-list-view  .form-wrapper .audit-info table{
+	float: none;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 12px;
+}
+.sokol-list-view  .form-wrapper .audit-info table td,
+.sokol-list-view  .form-wrapper .audit-info table th
+{
+	padding: 5px 10px 5px 10px;
+	color: #ffffff;
+}
+.sokol-list-view  .table-wrapper thead a{
+	color:  white;
+}
+.sokol-list-view  .table-wrapper thead a.sort-down,
+.sokol-list-view  .table-wrapper thead a.sort-up{
+	padding-right: 20px;
+	background: transparent url("../img/sort_up.png")  no-repeat right center;
+}
+.sokol-list-view  .table-wrapper thead a.sort-down{
+	background: transparent url("../img/sort_down.png")  no-repeat right center;
+}
+
+.sokol-list-view  .table-wrapper td,
+.sokol-list-view  .table-wrapper thead th{
+	padding: 10px 5px 10px 5px;
+}
+.sokol-list-view  .table-wrapper th{
+	font-weight: normal;
+}
+
+.table-footer{
+	display: block;
+	height: 50px;
+	padding-left: 10px;
+}
+.table-footer .pagination{
+	display:  inline-block;
+	margin: 0px 0;
+	margin-top:5px;
+}
+
+.sokol-list-view .page-footer .navbar-nav li a{
+	color: white;
+	margin: 0 0 0 0;
+	padding: 0 30px 0 0;
+}
+.sokol-list-view .page-footer .navbar-nav li a:hover{
+	text-decoration: underline;
+}
+
+.sokol-cr{
+	color: white;
+}
+
+.form-body{
+	padding:  20px;
+	width: 70%;
+	float: none;
+	margin-left: auto;
+	margin-right: auto;
+
+}
+
+.form-body input,
+.form-body select,
+.form-body textarea
+{
+	border-color: #83b0bd;
+}
+.form-body .btn-close,
+.form-body .btn-save{
+	background-color: #a3c822;
+	color: white;
+	padding: 10px 15px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+.form-body .btn-save:hover{
+	background-color: #8fb50b;
+	text-decoration: none;
+}
+.form-body .btn-close{
+	background-color: #6ebbcd;
+}
+
+.form-body .btn-close:hover{
+	background-color: #4094a9;
+	text-decoration: none;
+}
+
+
