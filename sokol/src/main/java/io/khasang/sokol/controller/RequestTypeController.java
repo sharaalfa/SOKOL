@@ -70,7 +70,7 @@ public class RequestTypeController {
         return REDIRECT_TO_LIST;
     }
 
-    @RequestMapping(value = "/{id}/delete", method = RequestMethod.GET)
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String deleteRequestType(@PathVariable int id) {
         requestTypeDao.delete(requestTypeDao.getById(id));
         return REDIRECT_TO_LIST;
