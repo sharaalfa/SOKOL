@@ -20,18 +20,14 @@ public class RequestDaoImpl extends GenericDaoImpl<Request, Integer> implements 
     public RequestDaoImpl() {
         super(Request.class);
     }
-
     @Autowired
     UserDao userDao;
-
     @Autowired
     RequestStatusDao requestStatusDao;
-
     @Override
     public Request getByRequestId(Integer requestId) {
         return getSession().get(Request.class, requestId);
     }
-
     @Override
     public List<Request>  getMyRequests(String userName) {
         User user = userDao.getByLogin(userName);
@@ -43,7 +39,6 @@ public class RequestDaoImpl extends GenericDaoImpl<Request, Integer> implements 
                 .add(Restrictions.ne("status",statusCanceled))
                 .list();
     }
-
     @Override
     public List<Request> getRequestsForMe(String userName) {
         RequestStatus statusClosed  = requestStatusDao.getById(3);
@@ -54,14 +49,12 @@ public class RequestDaoImpl extends GenericDaoImpl<Request, Integer> implements 
                 .add(Restrictions.ne("status",statusCanceled))
                 .list();
     }
-
     @Override
     public Request getByName(String name) {
         return (Request) getSession().createCriteria(Request.class)
                 .add(Restrictions.eq("title", name))
                 .uniqueResult();
     }
-
     @Override
         public Integer getCountLineOfTable(){
         Session session = getSession();

@@ -59,42 +59,12 @@ public class GenericDaoImpl<T, K extends Serializable> implements GenericDao<T, 
         return query.list();
     }
 
-    // firstLine + addLine - общее кол-во записей на странице
-    public List<T> getPage(Integer firstLine, Integer addLine) {
-        Query query = getSession().createQuery(String.format("from %s", type.getName()));
-        query.setFirstResult(firstLine);
-        query.setMaxResults(addLine);
-        return query.list();
-    }
-
-
     @Override
-    public List<Request> sortingRequestByID(Integer firstLine, Integer addLine){
-        Session session = getSession();
-        String hql = "FROM Request f ORDER BY f.id ASC";
-        Query query = session.createQuery(hql);
+    public List<T> sortingBy(Integer firstLine, Integer addLine, String sortBy, String sortOrder){
+        Query query = getSession().createQuery(String.format("FROM %s f ORDER BY f.%s %s ", type.getName(), sortBy, sortOrder));
         query.setFirstResult(firstLine);
         query.setMaxResults(addLine);
         return query.list();
     }
 
-    @Override
-    public List<Request> sortingRequestByTitle(Integer firstLine, Integer addLine){
-        Session session = getSession();
-       String hql = "FROM Request f ORDER BY f.title ASC";
-        Query query = session.createQuery(hql);
-        query.setFirstResult(firstLine);
-        query.setMaxResults(addLine);
-        return query.list();
-    }
-
-    @Override
-    public List<Request> sortingRequestByDescription(Integer firstLine, Integer addLine){
-        Session session = getSession();
-        String hql = "FROM Request f ORDER BY f.description ASC";
-        Query query = session.createQuery(hql);
-        query.setFirstResult(firstLine);
-        query.setMaxResults(addLine);
-        return query.list();
-    }
 }

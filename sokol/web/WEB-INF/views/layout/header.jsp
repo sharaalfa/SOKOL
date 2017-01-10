@@ -45,10 +45,11 @@
                             СОКОЛ</h4>
                     </li>
                     <li>
-                        <a href="/">&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Главная</a>
+                        <a href="/" style="margin-left: 8pt">Главная</a>
                     </li>
                     <sec:authorize access="hasAnyRole('ROLE_USER','ROLE_ADMIN')">
-                        <li><a href="/requestList/list?pagenumber=1">Запросы</a></li>
+                        <%--<li><a href="/requestList/list?pagenumber=1">Запросы</a></li>--%>
+                        <li><a href="/requestList/list?pagenumber=1&sortBy=id&sortOrder=">Запросы</a></li>
                     </sec:authorize>
                     <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
                         <li class="dropdown">
