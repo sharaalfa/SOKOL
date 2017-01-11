@@ -56,9 +56,24 @@
         <put-attribute name="body" value="/WEB-INF/views/second.jsp"/>
     </definition>
 
-    <definition name="requestTypes" extends="base.definition">
+    <definition name="requestTypeList" extends="base.definition">
         <put-attribute name="title" value="Request Types"/>
-        <put-attribute name="body" value="/WEB-INF/views/requestTypes.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/views/requestTypeList.jsp"/>
+    </definition>
+
+    <definition name="requestTypeForm" extends="base.definition">
+        <put-attribute name="title" value="Request Types"/>
+        <put-attribute name="body" value="/WEB-INF/views/requestTypeForm.jsp"/>
+    </definition>
+
+    <definition name="departmentList" extends="base.definition">
+        <put-attribute name="title" value="Request Types"/>
+        <put-attribute name="body" value="/WEB-INF/views/departmentList.jsp"/>
+    </definition>
+
+    <definition name="departmentForm" extends="base.definition">
+        <put-attribute name="title" value="Request Types"/>
+        <put-attribute name="body" value="/WEB-INF/views/departmentForm.jsp"/>
     </definition>
 
     <definition name="mypanel" extends="base.definition">
