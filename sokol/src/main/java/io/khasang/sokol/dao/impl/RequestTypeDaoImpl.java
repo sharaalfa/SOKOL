@@ -2,7 +2,6 @@ package io.khasang.sokol.dao.impl;
 
 import io.khasang.sokol.dao.RequestTypeDao;
 import io.khasang.sokol.entity.RequestType;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 @Repository
