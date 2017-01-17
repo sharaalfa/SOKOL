@@ -41,11 +41,14 @@ public class RequestController {
         }
         return totalOfPages;
     }
+
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String requestListPage(Model requestPageModel,
-                                  @RequestParam("pagenumber") String pagenumber,
-                                  @RequestParam("sortBy") String sortBy,
-                                  @RequestParam("sortOrder") String sortOrder){
+    public String requestListPage(Model requestPageModel, @RequestParam(value= "pagenumber", required=false)  String pagenumber,
+                                  @RequestParam(value="sortBy", required=false) String sortBy,
+                                  @RequestParam(value="sortOrder", required=false) String sortOrder){
+
+        pagenumber = (pagenumber == null || sortBy.equals("")) ? "1" : pagenumber;
+        sortOrder = (sortOrder == null || sortOrder.equals("")) ? "" : sortOrder;
         Integer countLineOfTable = requestDao.getCountLineOfTable(); // кол-во записей в таблице
         Integer pageRows = Integer.parseInt(environment.getRequiredProperty("page.size")); // кол-во записей на странице
         Integer lastPageNumber = ((countLineOfTable / pageRows) + 1);
@@ -55,16 +58,17 @@ public class RequestController {
         String imgBy = "";
         String sortOrderHeader = "";
         requestAll = requestDao.sortingBy((Integer.parseInt(pagenumber) - 1) * pageRows, pageRows, sortBy, sortOrder);
-            if (sortOrder.equals("ASC")) {
-                imgBy = "/img/sortUP.png";
-                sortOrderHeader = "DESC";
-            } else if (sortOrder.equals("DESC")) {
-                imgBy = "/img/sortDown.png";
-                sortOrderHeader = "ASC";
-            } else {
-                sortOrderHeader = "ASC";
-                sortOrder = "ASC";
-            }
+        if (sortOrder.equals("ASC")) {
+            imgBy = "/img/sortUP15.png";
+            sortOrderHeader = "DESC";
+        } else if (sortOrder.equals("DESC")) {
+            imgBy = "/img/sortDown15.png";
+            sortOrderHeader = "ASC";
+        } else {
+            sortOrderHeader = "ASC";
+            sortOrder = "ASC";
+        }
+
         requestPageModel.addAttribute("requestAll", requestAll);
         requestPageModel.addAttribute("pageTotal", pageNumbers);
         requestPageModel.addAttribute("sortBy", sortBy);
@@ -98,9 +102,9 @@ public class RequestController {
         return "requestAdd";
     }
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String requestAdd(@RequestParam("name") String name,
+    public String requestAdd(@RequestParam("title") String name,
                              @RequestParam("description") String description,
-                             @RequestParam("idrequest") String idrequest,
+                             @RequestParam("idrequesttype") String idrequesttype,
                              @RequestParam("iddepartment") String iddepartment,
                              @RequestParam("pagenumber") String pagenumber,
                              @RequestParam("sortBy") String sortBy,
@@ -114,7 +118,7 @@ public class RequestController {
         request.setStatus(status);
         request.setVersion(1);
         request.setCreatedDate(new Date());
-        RequestType requestType = requestTypeDao.getById(Integer.parseInt(idrequest));
+        RequestType requestType = requestTypeDao.getById(Integer.parseInt(idrequesttype));
         request.setRequestType(requestType);
         Department department = departmentDao.getById(Integer.parseInt(iddepartment));
         request.setDepartment(department);
@@ -146,10 +150,8 @@ public class RequestController {
     }
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public String addRequestPerformer(@RequestParam("idrequest") String idrequest,
-                                      @RequestParam("name") String name,
+                                      @RequestParam("title") String name,
                                       @RequestParam("description") String description,
-                                      @RequestParam("dateCreator") String dateCreator,
-                                      @RequestParam("creator") String creator,
                                       @RequestParam("idrequesttypes") String idrequesttypes,
                                       @RequestParam("iddepartment") String iddepartment,
                                       @RequestParam("pagenumber") String pagenumber,
@@ -165,16 +167,8 @@ public class RequestController {
         request.setUpdatedDate(new Date());
         RequestType requestType = requestTypeDao.getById(Integer.parseInt(idrequesttypes));
         request.setRequestType(requestType);
-        request.setCreatedBy(creator);
         Department department = departmentDao.getById(Integer.parseInt(iddepartment));
         request.setDepartment(department);
-        try {
-            SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy hh:mm");
-            Date date = format.parse(dateCreator);
-            request.setCreatedDate(date);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         SecurityContext context = SecurityContextHolder.getContext();
         request.setUpdatedBy(context.getAuthentication().getName());
         requestDao.update(request);

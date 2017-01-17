@@ -40,6 +40,7 @@ public class UserController {
         //просматривать текущйи пользователь в соответствии со своей ролью
         List<User> users = userDao.getUserListByUser(user);
         model.addAttribute("userList", users);
+        model.addAttribute("headerTitle", "Список пользователей");
 
         return USER_LIST_VIEW;
     }
@@ -52,7 +53,7 @@ public class UserController {
         //Если все в порядке, то достаем все необходимые данные и рисуем форму
         model.addAttribute("user", user);
         fillDictionaries(model);
-
+        model.addAttribute("headerTitle", "Редактирование пользователя");
         return USER_EDIT_VIEW;
     }
 
@@ -149,6 +150,7 @@ public class UserController {
     public String create(Model model) {
         model.addAttribute("user", new User());
         fillDictionaries(model);
+        model.addAttribute("headerTitle", "Новый пользователь");
         return USER_EDIT_VIEW;
     }
 

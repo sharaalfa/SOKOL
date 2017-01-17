@@ -11,13 +11,13 @@
 
 <c:if test="${errorMessage != null}">
     <div class="alert alert-danger">
-        ${errorMessage}
+        c
     </div>
 </c:if>
 <div class="container">
 <!-- FORM  -->
     <div class="form-wrapper">
-        <sf:form method="post" action="/users/${user.id}" cssClass="form-horizontal">
+        <sf:form method="post" id="userForm" action="/users/${user.id}" cssClass="form-horizontal">
             <div class="form-body">
                 <div class="form-group">
                     <label for="inputLogin"  class="control-label col-sm-3">ID сотрудника</label>
@@ -94,7 +94,7 @@
                     <div class="control-label col-sm-3"></div>
                     <div class="col-sm-8">
 
-                        <a href="#" onclick="document.form.submit();" class="btn-save pull-left">СОХРАНИТЬ</a>
+                        <a href="#" onclick="document.forms['userForm'].submit();" class="btn-save pull-left">СОХРАНИТЬ</a>
                         <a href="/users/list" class="btn-close pull-right">ЗАКРЫТЬ</a>
                     </div>
                 </div>

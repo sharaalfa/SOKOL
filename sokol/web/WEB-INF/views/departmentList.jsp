@@ -19,16 +19,16 @@
     <div class="table-header">
         <a href="${root_url}department/add" class="create-btn btn-danger">НОВЫЙ</a>
 
-        <div style="display: inline-block; width: 300px; float: right; margin-top: -5px;">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Поиск">
-                <div class="input-group-btn">
-                    <button class="btn btn-default" type="submit">
-                        <i class="glyphicon glyphicon-search"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
+        <%--<div style="display: inline-block; width: 300px; float: right; margin-top: -5px;">--%>
+            <%--<div class="input-group">--%>
+                <%--<input type="text" class="form-control" placeholder="Поиск">--%>
+                <%--<div class="input-group-btn">--%>
+                    <%--<button class="btn btn-default" type="submit">--%>
+                        <%--<i class="glyphicon glyphicon-search"></i>--%>
+                    <%--</button>--%>
+                <%--</div>--%>
+            <%--</div>--%>
+        <%--</div>--%>
     </div>
 
     <div class="table-wrapper">
@@ -52,30 +52,30 @@
             </tbody>
         </table>
         <div class="table-footer">
-            <table>
-                <tr>
-                    <td>Страницы:</td>
-                    <td>
-                        <ul class="pagination">
-                            <li>
-                                <a href="" aria-label="Previous"><span aria-hidden="true">«</span></a>
-                            </li>
+            <%--<table>--%>
+                <%--<tr>--%>
+                    <%--<td>Страницы:</td>--%>
+                    <%--<td>--%>
+                        <%--<ul class="pagination">--%>
+                            <%--<li>--%>
+                                <%--<a href="" aria-label="Previous"><span aria-hidden="true">«</span></a>--%>
+                            <%--</li>--%>
 
-                            <li>
-                                <a href="#">1</a>
-                            </li>
+                            <%--<li>--%>
+                                <%--<a href="#">1</a>--%>
+                            <%--</li>--%>
 
-                            <li>
-                                <a href="#">2</a>
-                            </li>
+                            <%--<li>--%>
+                                <%--<a href="#">2</a>--%>
+                            <%--</li>--%>
 
-                            <li>
-                                <a href="" aria-label="Previous"><span aria-hidden="true">»</span></a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-            </table>
+                            <%--<li>--%>
+                                <%--<a href="" aria-label="Previous"><span aria-hidden="true">»</span></a>--%>
+                            <%--</li>--%>
+                        <%--</ul>--%>
+                    <%--</td>--%>
+                <%--</tr>--%>
+            <%--</table>--%>
         </div>
     </div>
 

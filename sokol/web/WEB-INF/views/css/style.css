@@ -5,6 +5,7 @@ body{
 	margin: 0;
 }
 
+
 .main{
 	background: transparent url("../img/Index1.png") center center;
 	height: 900px;
@@ -294,6 +295,10 @@ body{
 	background: transparent url("../img/sort_down.png")  no-repeat right center;
 }
 
+.sokol-list-view .btn{
+	padding-top: 9px;
+	padding-bottom: 9px;
+}
 .sokol-list-view  .table-wrapper td,
 .sokol-list-view  .table-wrapper thead th{
 	padding: 10px 5px 10px 5px;
