@@ -76,6 +76,45 @@
                     </div>
                 </div>
 
+                <div class="form-group">
+                    <label for="inputStatus"  class="control-label col-sm-3">Статус запроса</label>
+                    <div class="col-sm-8">
+                        <select name="idrequeststatus"  id="inputStatus" class="form-control">
+                            <%--<c:forEach items="${requestStatusAll}" var="requeststatus">--%>
+                                <c:set value="${requestStatusAll}" var="requeststatus" />
+
+                                <c:if test="${request.status.requestStatusId == '2'}">
+                                    <option value="1" disabled>
+                                        <c:out value="${requeststatus.get(1).requestStatusName}"/>
+                                    </option>
+                                    <option value="2">
+                                        <c:out value="${requeststatus.get(2).requestStatusName}"/>
+                                    </option>
+                                    <option value="3">
+                                        <c:out value="${requeststatus.get(3).requestStatusName}"/>
+                                   </option>
+                                    <option value="4">
+                                        <c:out value="${requeststatus.get(4).requestStatusName}"/>
+                                    </option>
+                                </c:if>
+<%--                                <c:if test="${requeststatus.requestStatusId == request.status.requestStatusId}">
+                                    <option value="${requeststatus.requestStatusId}" selected disabled>
+                                        <c:out value="${requeststatus.requestStatusName}"/>
+                                    </option>
+                                </c:if>
+                                <c:if test="${requeststatus.requestStatusId != request.status.requestStatusId}">
+                                    <option value="${requeststatus.requestStatusId}">
+                                        <c:out value="${requeststatus.requestStatusName}"/>
+                                    </option>
+                                </c:if>--%>
+<%--
+                                    <option>
+                                        <c:out value="${requeststatus.requestStatusName}"/>
+                                    </option>--%>
+                            <%--</c:forEach>--%>
+                        </select>
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <label for="inputDescrition"  class="control-label col-sm-3">Описание</label>
