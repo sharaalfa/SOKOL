@@ -139,14 +139,11 @@ public class RequestController {
         Request request = requestDao.getByRequestId(Integer.parseInt(idRequest));
         requestEditModel.addAttribute("request", request);
         List<RequestStatus> requestStatusAll = requestStatusDao.getAll();
-     //   List<String> requestStatusEditAll = new ArrayList<>();
-     //  Integer numberStatus = request.getStatus().getRequestStatusId();
 
         List<RequestType> requestTypeAll = requestTypeDao.getAll();
         requestEditModel.addAttribute("requestTypeAll", requestTypeAll);
         List<Department> departmentAll = departmentDao.getAll();
         requestEditModel.addAttribute("departmentAll", departmentAll);
-
         requestEditModel.addAttribute("requestStatusAll", requestStatusAll);
         requestEditModel.addAttribute("pagenumber", pagenumber);
         requestEditModel.addAttribute("sortBy", sortBy);
@@ -169,8 +166,7 @@ public class RequestController {
         Request request = requestDao.getByRequestId(Integer.parseInt(idrequest));
         request.setTitle(name);
         request.setDescription(description);
-        RequestStatus status = requestStatusDao.getById(Integer.parseInt(idrequeststatus));
-//        RequestStatus status = requestStatusDao.getById(2);
+        RequestStatus status = requestStatusDao.getByRequestStatusId(Integer.parseInt(idrequeststatus));
         request.setStatus(status);
         request.setUpdatedDate(new Date());
         RequestType requestType = requestTypeDao.getById(Integer.parseInt(idrequesttypes));

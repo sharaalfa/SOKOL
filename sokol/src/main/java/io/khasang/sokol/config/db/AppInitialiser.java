@@ -91,6 +91,14 @@ public class AppInitialiser implements ApplicationListener<ContextRefreshedEvent
             requestStatusDao.save(status);
         }
 
+        status  = requestStatusDao.getById(5);
+        if(status == null){
+            status = new RequestStatus();
+            status.setRequestStatusId(5);
+            status.setRequestStatusName("На доработку");
+            requestStatusDao.save(status);
+        }
+
     }
     private Role CheckForManagerRole() {
         Role roleManager  = roleDao.getByName("ROLE_MANAGER");

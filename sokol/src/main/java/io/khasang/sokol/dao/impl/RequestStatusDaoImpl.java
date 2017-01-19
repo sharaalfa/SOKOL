@@ -9,4 +9,9 @@ public class RequestStatusDaoImpl extends GenericDaoImpl<RequestStatus, Integer>
     public RequestStatusDaoImpl() {
         super(RequestStatus.class);
     }
+    @Override
+    public RequestStatus getByRequestStatusId(Integer requestStatusId) {
+        return getSession().get(RequestStatus.class, requestStatusId);
+    }
 }
+
