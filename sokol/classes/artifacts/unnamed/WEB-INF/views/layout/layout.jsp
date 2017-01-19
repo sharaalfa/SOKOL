@@ -23,7 +23,7 @@
 
     <title><tiles:getAsString name="title"/></title>
  </head>
- <body>
+ <body  class="sokol-list-view">
     <tiles:insertAttribute name="header"/>
     <tiles:insertAttribute name="body"/>
     <tiles:insertAttribute name="footer"/>

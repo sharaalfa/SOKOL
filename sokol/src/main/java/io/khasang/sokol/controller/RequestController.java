@@ -138,10 +138,13 @@ public class RequestController {
                                   @RequestParam("sortOrderHeader") String sortOrderHeader){
         Request request = requestDao.getByRequestId(Integer.parseInt(idRequest));
         requestEditModel.addAttribute("request", request);
+        List<RequestStatus> requestStatusAll = requestStatusDao.getAll();
+
         List<RequestType> requestTypeAll = requestTypeDao.getAll();
         requestEditModel.addAttribute("requestTypeAll", requestTypeAll);
         List<Department> departmentAll = departmentDao.getAll();
         requestEditModel.addAttribute("departmentAll", departmentAll);
+        requestEditModel.addAttribute("requestStatusAll", requestStatusAll);
         requestEditModel.addAttribute("pagenumber", pagenumber);
         requestEditModel.addAttribute("sortBy", sortBy);
         requestEditModel.addAttribute("sortOrder", sortOrder);
@@ -157,12 +160,13 @@ public class RequestController {
                                       @RequestParam("pagenumber") String pagenumber,
                                       @RequestParam("sortBy") String sortBy,
                                       @RequestParam("sortOrder") String sortOrder,
-                                      @RequestParam("sortOrderHeader") String sortOrderHeader){
+                                      @RequestParam("sortOrderHeader") String sortOrderHeader,
+                                      @RequestParam("idrequeststatus") String idrequeststatus){
         ModelAndView model = new ModelAndView();
         Request request = requestDao.getByRequestId(Integer.parseInt(idrequest));
         request.setTitle(name);
         request.setDescription(description);
-        RequestStatus status = requestStatusDao.getById(2);
+        RequestStatus status = requestStatusDao.getByRequestStatusId(Integer.parseInt(idrequeststatus));
         request.setStatus(status);
         request.setUpdatedDate(new Date());
         RequestType requestType = requestTypeDao.getById(Integer.parseInt(idrequesttypes));
