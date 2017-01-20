@@ -80,97 +80,55 @@
                     <label for="inputStatus"  class="control-label col-sm-3">Статус запроса</label>
                     <div class="col-sm-8">
                         <select name="idrequeststatus"  id="inputStatus" class="form-control">
-                                <c:set value="${requestStatusAll}" var="requeststatus" />
-                                <c:choose>
-                                    <c:when test="${request.status.requestStatusId == '1'}"> <%--статус "новый"--%>
-                                        <option value="${requeststatus.get(0).requestStatusId}" disabled>
-                                            <c:out value="${requeststatus.get(0).requestStatusName}"/> <%--"новая"--%>
-                                        </option>
-                                        <option value="2" selected>
-                                            <c:out value="${requeststatus.get(1).requestStatusName}"/> <%--"в работе"--%>
-                                        </option>
-                                        <option value="3" disabled>
-                                            <c:out value="${requeststatus.get(2).requestStatusName}"/> <%--"закрыта--%>
-                                        </option>
-                                        <option value="4" disabled>
-                                            <c:out value="${requeststatus.get(3).requestStatusName}"/> <%--"отклонена"--%>
-                                        </option>
-                                        <option value="5" disabled>
-                                            <c:out value="${requeststatus.get(4).requestStatusName}"/> <%--"на доработку"--%>
-                                        </option>
-                                    </c:when>
-                                    <c:when test="${request.status.requestStatusId == '2'}"> <%--статус "в работе"--%>
-                                        <option value="${requeststatus.get(0).requestStatusId}" disabled>
-                                            <c:out value="${requeststatus.get(0).requestStatusName}"/> <%--"новая"--%>
-                                        </option>
-                                        <option value="${requeststatus.get(1).requestStatusId}" selected>
-                                            <c:out value="${requeststatus.get(1).requestStatusName}"/>
-                                        </option>
-                                        <option value="${requeststatus.get(2).requestStatusId}">
-                                            <c:out value="${requeststatus.get(2).requestStatusName}"/>
-                                        </option>
-                                        <option value="${requeststatus.get(3).requestStatusId}">
-                                            <c:out value="${requeststatus.get(3).requestStatusName}"/>
-                                        </option>
-                                        <option value="${requeststatus.get(4).requestStatusId}" disabled>
-                                           <c:out value="${requeststatus.get(4).requestStatusName}"/>
-                                        </option>
-                                    </c:when>
-
-                                    <c:when test="${request.status.requestStatusId == '3'}"> <%--статус "закрыта"--%>
-                                        <option value="${requeststatus.get(0).requestStatusId}" disabled>
-                                            <c:out value="${requeststatus.get(0).requestStatusName}"/> <%--"новая"--%>
-                                        </option>
-                                        <option value="${requeststatus.get(1).requestStatusId}">
-                                            <c:out value="${requeststatus.get(1).requestStatusName}"/>
-                                        </option>
-                                        <option value="${requeststatus.get(2).requestStatusId}" disabled>
-                                            <c:out value="${requeststatus.get(2).requestStatusName}"/>
-                                        </option>
-                                        <option value="${requeststatus.get(3).requestStatusId}" disabled>
-                                            <c:out value="${requeststatus.get(3).requestStatusName}"/>
-                                        </option>
-                                        <option value="${requeststatus.get(4).requestStatusId}" selected>
-                                            <c:out value="${requeststatus.get(4).requestStatusName}"/>
-                                        </option>
-                                    </c:when>
-
-                                    <c:when test="${request.status.requestStatusId == '4'}"> <%--статус "отклонена"--%>
-                                        <option value="${requeststatus.get(0).requestStatusId}" disabled>
-                                            <c:out value="${requeststatus.get(0).requestStatusName}"/> <%--"новая"--%>
-                                        </option>
-                                        <option value="${requeststatus.get(1).requestStatusId}" disabled>
-                                            <c:out value="${requeststatus.get(1).requestStatusName}"/>
-                                        </option>
-                                        <option value="${requeststatus.get(2).requestStatusId}" disabled>
-                                            <c:out value="${requeststatus.get(2).requestStatusName}"/>
-                                        </option>
-                                        <option value="${requeststatus.get(3).requestStatusId}" disabled>
-                                            <c:out value="${requeststatus.get(3).requestStatusName}"/>
-                                        </option>
-                                        <option value="${requeststatus.get(4).requestStatusId}" selected>
-                                            <c:out value="${requeststatus.get(4).requestStatusName}"/>
-                                        </option>
-                                    </c:when>
-
-                                    <c:when test="${request.status.requestStatusId == '5'}"> <%--статус "на доработку"--%>
-                                        <option value="${requeststatus.get(0).requestStatusId}" disabled>
-                                            <c:out value="${requeststatus.get(0).requestStatusName}"/> <%--"новая"--%>
-                                        </option>
-                                        <option value="${requeststatus.get(1).requestStatusId}" selected>
-                                            <c:out value="${requeststatus.get(1).requestStatusName}"/>
-                                        </option>
-                                        <option value="${requeststatus.get(2).requestStatusId}" disabled>
-                                            <c:out value="${requeststatus.get(2).requestStatusName}"/>
-                                        </option>
-                                        <option value="${requeststatus.get(3).requestStatusId}" disabled>
-                                            <c:out value="${requeststatus.get(3).requestStatusName}"/>
-                                        </option>
-                                        <option value="${requeststatus.get(4).requestStatusId}" disabled>
-                                            <c:out value="${requeststatus.get(4).requestStatusName}"/>
-                                        </option>
-                                    </c:when>
-                                </c:choose>
+                            <c:set value="${requestStatusAll}" var="requeststatus" />
+                            <c:choose>
+                                <c:when test="${request.status.requestStatusId == '1'}"> <%--статус "новый"--%>
+                                   <option value="${requeststatus.get(0).requestStatusId}" selected>
+                                      <c:out value="${requeststatus.get(0).requestStatusName}"/> <%--"новая"--%>
+                                   </option>
+                                   <option value="${requeststatus.get(1).requestStatusId}">
+                                      <c:out value="${requeststatus.get(1).requestStatusName}"/> <%--"в работе"--%>
+                                   </option>
+                                </c:when>
+                                <c:when test="${request.status.requestStatusId == '2'}"> <%--статус "в работе"--%>
+                                   <option value="${requeststatus.get(1).requestStatusId}" selected>
+                                      <c:out value="${requeststatus.get(1).requestStatusName}"/>
+                                   </option>
+                                   <option value="${requeststatus.get(2).requestStatusId}">
+                                      <c:out value="${requeststatus.get(2).requestStatusName}"/>
+                                   </option>
+                                   <option value="${requeststatus.get(3).requestStatusId}">
+                                      <c:out value="${requeststatus.get(3).requestStatusName}"/>
+                                   </option>
+                                </c:when>
+                                <c:when test="${request.status.requestStatusId == '3'}"> <%--статус "закрыта"--%>
+                                   <option value="${requeststatus.get(1).requestStatusId}">
+                                       <c:out value="${requeststatus.get(1).requestStatusName}"/>
+                                   </option>
+                                   <option value="${requeststatus.get(2).requestStatusId}" selected>
+                                       <c:out value="${requeststatus.get(2).requestStatusName}"/>
+                                   </option>
+                                   <option value="${requeststatus.get(4).requestStatusId}">
+                                       <c:out value="${requeststatus.get(4).requestStatusName}"/>
+                                   </option>
+                                </c:when>
+                                <c:when test="${request.status.requestStatusId == '4'}"> <%--статус "отклонена"--%>
+                                   <option value="${requeststatus.get(3).requestStatusId}" selected>
+                                       <c:out value="${requeststatus.get(3).requestStatusName}"/>
+                                   </option>
+                                   <option value="${requeststatus.get(4).requestStatusId}">
+                                       <c:out value="${requeststatus.get(4).requestStatusName}"/>
+                                   </option>
+                                </c:when>
+                                <c:when test="${request.status.requestStatusId == '5'}"> <%--статус "на доработку"--%>
+                                   <option value="${requeststatus.get(1).requestStatusId}">
+                                       <c:out value="${requeststatus.get(1).requestStatusName}"/>
+                                   </option>
+                                   <option value="${requeststatus.get(4).requestStatusId}" selected>
+                                       <c:out value="${requeststatus.get(4).requestStatusName}"/>
+                                   </option>
+                                </c:when>
+                            </c:choose>
                         </select>
                     </div>
                 </div>
