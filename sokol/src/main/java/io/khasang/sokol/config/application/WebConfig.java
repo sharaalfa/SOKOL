@@ -3,6 +3,8 @@ package io.khasang.sokol.config.application;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -25,6 +27,14 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         viewResolver.setOrder(0);
         return viewResolver;
     }
+
+    @Bean
+    public StandardServletMultipartResolver multipartResolver(){
+        return new StandardServletMultipartResolver();
+    }
+
+
+
 
     @Bean
     public InternalResourceViewResolver viewResolver() {

@@ -30,6 +30,11 @@ import java.util.Set;
     @ManyToOne
     @JoinColumn(name = "REQUEST_TYPE_ID")
     private RequestType requestType;
+
+    @JoinColumn(name = "SCREEN_SHOT")
+    private byte[] screenShot;
+
+
     @Version
     private int version;
     public Request() {
@@ -85,6 +90,14 @@ import java.util.Set;
     }
     public void setDepartment(Department department) {
         this.department = department;
+    }
+
+    public byte[] getScreenShot() {
+        return screenShot;
+    }
+
+    public void setScreenShot(byte[] screenShot) {
+        this.screenShot = screenShot;
     }
 }
 

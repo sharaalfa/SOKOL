@@ -21,7 +21,7 @@
 <div class="container">
     <!-- FORM  -->
     <div class="form-wrapper">
-        <sf:form method="post" id="requestForm" action="/requestList/add" commandName="department" cssClass="form-horizontal">
+        <sf:form method="post" id="requestForm" action="/requestList/add" commandName="department" cssClass="form-horizontal" enctype="multipart/form-data">
             <div class="form-body">
                 <input type="hidden" name="creator"         value="${user.getUsername()}" />
                 <input type="hidden" name="pagenumber"      value="${pagenumber}">
@@ -51,7 +51,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="inputDepartment"  class="control-label col-sm-3">Департамент:</label>
+                    <label for="inputDepartment"  class="control-label col-sm-3">Департамент</label>
                     <div class="col-sm-8">
                         <select name="iddepartment" id="inputDepartment" class="form-control">
                             <c:forEach items="${departmentAll}" var="department" >
@@ -70,6 +70,15 @@
                         <textarea  name="description" id="inputDescrition" placeholder="Описание типа запроса" class="form-control" rows="3" ></textarea>
                     </div>
                 </div>
+
+                <div class="form-group">
+                    <label for="inputScreenShot"  class="control-label col-sm-3">Приложение</label>
+                    <div class="col-sm-8">
+                        <%--<p><input type="file" name="fileScreenShot" id="inputScreenShot">--%>
+                        <p><input type="file" name="file" id="inputScreenShot">
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <div class="control-label col-sm-3"></div>
                     <div class="col-sm-8">
