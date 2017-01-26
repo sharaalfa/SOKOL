@@ -1,5 +1,5 @@
 #SOKOL 
-![logo](https://github.com/khasang/SOKOL/blob/develop/sokol/web/WEB-INF/views/img/Logo1.png)
+![logo](https://github.com/khasang/SOKOL/blob/develop/sokol.png)
 
 
 #is a powerfull help-desk service in the Universe!
