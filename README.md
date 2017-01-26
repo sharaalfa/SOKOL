@@ -1,9 +1,9 @@
 #SOKOL 
-![logo](http://github.com/.png)
-![Build Status] (build_status.png)(http://github.com/sokol/release/1.0)
+![logo](https://github.com/khasang/SOKOL/blob/develop/sokol/web/WEB-INF/views/img/Logo1.png)
+
 
 #is a powerfull help-desk service in the Universe!
-## более подробное описание
+## Система взаимодействия между подразделениями внутри организации. Основная цель проекта - структурировать взаимодействие подразделений с целью повышения эффективности рабочих процессов и мониторинга проблемных зон для предприятий малого и среднего бизнеса.
 
 # команда проекта
 
@@ -11,14 +11,4 @@
 
 #руководство пользователя (опытного и неопытного)
 
-
-* first
-* second
-
-требования к платформе для запуска
-<table>
-    <tr>
-    <th></th>
-    </tr>
-</hable>
-
+в разработке
