@@ -21,15 +21,18 @@ import javax.persistence.Embeddable;
 import java.io.Serializable;
 
 @Embeddable
-public class FileldValueKey implements Serializable {
+public class FieldValueKey implements Serializable {
     @Column(name = "FIELD_ID")
     private Integer fieldId;
     @Column(name = "REQUEST_ID")
     private Integer requestId;
 
-    public FileldValueKey(Integer fieldId, Integer requestId) {
+    public FieldValueKey(Integer fieldId, Integer requestId) {
         this.fieldId = fieldId;
         this.requestId = requestId;
+    }
+
+    public FieldValueKey() {
     }
 
     public Integer getFieldId() {

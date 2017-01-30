@@ -1,18 +1,19 @@
 /*
-Copyright 2016,2017 Sokol Development Team
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+ * Copyright 2016-2017 Sokol Development Team
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
+
 package io.khasang.sokol.controller;
 
 import io.khasang.sokol.Exception.ResourceNotFoundException;
@@ -25,10 +26,11 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.Date;
 import java.util.List;
 
@@ -77,19 +79,18 @@ public class UserController {
         model.addAttribute("departments", departmentDao.getAll());
     }
 
-    protected User getCurrentUser()
-    {
+    protected User getCurrentUser() {
         SecurityContext context = SecurityContextHolder.getContext();
         String userName = context.getAuthentication().getName();
         return userDao.getByLogin(userName);
     }
 
-    protected User getUserById(@PathVariable int userId) throws ResourceNotFoundException  {
+    protected User getUserById(@PathVariable int userId) throws ResourceNotFoundException {
         // Достает пользователя по userId
         User editUser = userDao.getById(userId);
 
         //Если такого пользователя не нашли то возвращаем 404
-        if(editUser == null)
+        if (editUser == null)
             throw new ResourceNotFoundException();
 
         //Достаем текущего пользователя и его роль в системе
@@ -98,52 +99,46 @@ public class UserController {
         //Проверяем а может ли текущий пользователь
         //радактировать запрашиваемого пользовател
         //Если у пользоватея нет прав на редактироване возвращаем 404
-        if(!(currentUser.getRole().getName().contains("ROLE_ADMIN") ||
+        if (!(currentUser.getRole().getName().contains("ROLE_ADMIN") ||
                 (currentUser.getRole().getName().contains("ROLE_MANAGER")
                         && currentUser.getDepartment() != null
-                        && currentUser.getDepartment().getId() == editUser.getDepartment().getId() )))
+                        && currentUser.getDepartment().getId() == editUser.getDepartment().getId())))
             throw new ResourceNotFoundException();
         return editUser;
     }
 
     @RequestMapping(value = "/{userId}", method = RequestMethod.POST)
     public String Save(Model model, @PathVariable int userId, User user
-            ,@RequestParam(value = "confirmPassword", required = false) String confirmPassword
-            ,@RequestParam(value = "roleId", required = false) Integer roleId
-            ,@RequestParam(value = "departmentId", required = false) Integer departmentId) {
+            , @RequestParam(value = "confirmPassword", required = false) String confirmPassword
+            , @RequestParam(value = "roleId", required = false) Integer roleId
+            , @RequestParam(value = "departmentId", required = false) Integer departmentId) {
         //Достаем текущего пользователя и его роль в системе
         User currentUser = getCurrentUser();
         user.setRole(roleDao.getById(roleId));
         user.setDepartment(departmentDao.getById(departmentId));
         //Если userId = 0 то создаем нового польователя
-        if(userId == 0)
-        {
-            if(user.getPassword().compareTo(confirmPassword) == 0)
-            {
+        if (userId == 0) {
+            if (user.getPassword().compareTo(confirmPassword) == 0) {
                 user.setCreatedBy(currentUser.getLogin());
                 user.setUpdatedBy(currentUser.getLogin());
                 userDao.save(user);
-            }
-            else
-            {
+            } else {
                 preparePasswordPrepareErrorForm(model, user);
                 return USER_EDIT_VIEW;
             }
-        }
-        else
-        {
+        } else {
             //Достаем пользователя, которого хотим сохранить
             User oldUser = getUserById(userId);
             // Если потрогали парошль, то проверяем что его подтвердили
-            if(user.getPassword().compareTo("12345") !=0 || !confirmPassword.isEmpty()){
-                if(user.getPassword().compareTo(confirmPassword) == 0) {
+            if (user.getPassword().compareTo("12345") != 0 || !confirmPassword.isEmpty()) {
+                if (user.getPassword().compareTo(confirmPassword) == 0) {
                     oldUser.Merge(user, user.getPassword());
                 } else {
                     oldUser.Merge(user);
                     preparePasswordPrepareErrorForm(model, oldUser);
                     return USER_EDIT_VIEW;
                 }
-            } else{ // если пароль не трогали, то сохраняем без изменения пароля
+            } else { // если пароль не трогали, то сохраняем без изменения пароля
                 oldUser.Merge(user);
             }
             oldUser.setUpdatedBy(currentUser.getLogin());
@@ -170,7 +165,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/delete/{userId}", method = RequestMethod.POST)
-    public String dreateUser(@PathVariable int userId,Model model) {
+    public String dreateUser(@PathVariable int userId, Model model) {
         //Достаем пользователя, которого хотим сохранить
         User user = getUserById(userId);
 

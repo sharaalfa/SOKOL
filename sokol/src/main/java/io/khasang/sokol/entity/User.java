@@ -1,8 +1,22 @@
+/*
+ * Copyright 2016-2017 Sokol Development Team
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package io.khasang.sokol.entity;
 
-
 import io.khasang.sokol.validators.PasswordMatcher;
-import org.hibernate.annotations.Type;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
@@ -13,7 +27,7 @@ import java.util.Date;
 @Entity
 @Table(name = "USERS")
 @PasswordMatcher
-public class User extends  AuditableEntity {
+public class User extends AuditableEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
@@ -41,24 +55,22 @@ public class User extends  AuditableEntity {
     @Version
     private int version;
 
-
     public User() {
         super();
     }
 
-    public void Merge(User usr){
+    public void Merge(User usr) {
         this.login = usr.login;
         this.email = usr.email;
         this.fio = usr.fio;
         this.role = usr.role;
-        this.department= usr.department;
+        this.department = usr.department;
     }
-    public void Merge(User usr, String password)
-    {
+
+    public void Merge(User usr, String password) {
         this.Merge(usr);
         this.setPassword(new BCryptPasswordEncoder().encode(password));
     }
-
 
     public int getId() {
         return id;
@@ -88,6 +100,10 @@ public class User extends  AuditableEntity {
         return department;
     }
 
+    public void setDepartment(io.khasang.sokol.entity.Department department) {
+        this.department = department;
+    }
+
     public Date getUpdatedDate() {
         return updatedDate;
     }
@@ -111,11 +127,6 @@ public class User extends  AuditableEntity {
     public void setRole(Role role) {
         this.role = role;
     }
-
-    public void setDepartment(io.khasang.sokol.entity.Department department) {
-        this.department = department;
-    }
-
 
     public String getPassword() {
         return password;
