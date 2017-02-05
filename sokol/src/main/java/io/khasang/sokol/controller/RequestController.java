@@ -28,7 +28,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -177,13 +180,15 @@ public class RequestController {
                                       @RequestParam("sortBy") String sortBy,
                                       @RequestParam("sortOrder") String sortOrder,
                                       @RequestParam("sortOrderHeader") String sortOrderHeader,
-                                      @RequestParam("idrequeststatus") String idrequeststatus){
+                                      @RequestParam("idrequeststatus") String idrequeststatus,
+                                      @RequestParam("file") final MultipartFile file) throws IOException {
         ModelAndView model = new ModelAndView();
         Request request = requestDao.getByRequestId(Integer.parseInt(idrequest));
         request.setTitle(name);
         request.setDescription(description);
         RequestStatus status = requestStatusDao.getByRequestStatusId(Integer.parseInt(idrequeststatus));
         request.setStatus(status);
+        request.setFile(file.getBytes());
         request.setUpdatedDate(new Date());
         RequestType requestType = requestTypeDao.getById(Integer.parseInt(idrequesttypes));
         request.setRequestType(requestType);

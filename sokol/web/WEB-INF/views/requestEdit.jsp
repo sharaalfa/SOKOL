@@ -15,7 +15,7 @@
 <div class="container">
     <!-- FORM  -->
     <div class="form-wrapper">
-        <sf:form method="post" action="/requestList/edit" id="requestForm" cssClass="form-horizontal">
+        <sf:form method="post" action="/requestList/edit" id="requestForm" cssClass="form-horizontal" enctype="multipart/form-data">
             <div class="form-body">
                 <input type="hidden" name="idrequest" value="${request.requestId}">
                 <input type="hidden" name="pagenumber" value="${pagenumber}">
@@ -132,7 +132,12 @@
                         </select>
                     </div>
                 </div>
-
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Приложение</label>
+                    <div class="col-sm-8">
+                        <input type="file" name="file">
+                    </div>
+                </div>
                 <div class="form-group">
                     <label for="inputDescription"  class="control-label col-sm-3">Описание</label>
                     <div class="col-sm-8">

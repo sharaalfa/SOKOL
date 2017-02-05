@@ -28,6 +28,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 @Configuration
 @EnableWebMvc
@@ -75,6 +76,13 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 //        TilesDefinitionsConfig.addDefinitions();
         tiles.setCheckRefresh(true);
         return tiles;
+    }
+    @Bean(name = "multipartResolver")
+    public CommonsMultipartResolver multipartResolver() {
+
+        final CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+        multipartResolver.setMaxUploadSize(100000);
+        return multipartResolver;
     }
 
     @Override
