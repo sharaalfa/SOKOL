@@ -11,10 +11,10 @@
 //@Service("userValidationService")
 //public class UserValidationService  {
 //    @Autowired
-//    private Validator validator;
+//    private Validator validators;
 //
 //
 //    public Set<ConstraintViolation<User>> validateUser(User user){
-//        return validator.validate(user);
+//        return validators.validate(user);
 //    }
 //}
