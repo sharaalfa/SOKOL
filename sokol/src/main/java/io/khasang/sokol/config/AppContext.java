@@ -86,7 +86,7 @@ public class AppContext {
     }
 
 //    @Bean
-//    public LocalValidatorFactoryBean validator(){
+//    public LocalValidatorFactoryBean validators(){
 //        return new LocalValidatorFactoryBean();
 //    }
 }
