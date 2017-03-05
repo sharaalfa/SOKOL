@@ -19,6 +19,7 @@ package io.khasang.sokol.controller;
 import io.khasang.sokol.dao.RequestDao;
 import io.khasang.sokol.dao.RoleDao;
 import io.khasang.sokol.dao.UserDao;
+import io.khasang.sokol.entity.MyPanelScore;
 import io.khasang.sokol.entity.Request;
 import io.khasang.sokol.model.CreateTable;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,12 @@ public class MyPanelController {
         String userName = context.getAuthentication().getName();
         List<Request> myRequests = requestDao.getMyRequests(userName);
         List<Request> forMeRequests = requestDao.getRequestsForMe(userName);
+
+        MyPanelScore scoreIn  = requestDao.getScoreIn(userName);
+        MyPanelScore scoreOut  = requestDao.getScoreOut(userName);
+
+        model.addAttribute("scoreIn", scoreIn);
+        model.addAttribute("scoreOut", scoreOut);
         model.addAttribute("myRequests", myRequests);
         model.addAttribute("forMeRequests", forMeRequests);
         return "mypanel";

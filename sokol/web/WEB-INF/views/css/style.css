@@ -231,6 +231,7 @@ body{
 	text-decoration: none;
 }
 .sokol-list-view  .table-wrapper,
+.sokol-list-view  .mypanel-wrapper,
 .sokol-list-view  .form-wrapper{
 	display: block;
 	background-color: white;
@@ -241,7 +242,9 @@ body{
 .sokol-list-view  .form-wrapper{
 	padding-bottom: 30px;
 }
-.sokol-list-view  .table-wrapper .list-table{
+.sokol-list-view  .table-wrapper .list-table,
+.panel-sokol .list-table
+{
 	width: 100%;
 }
 
@@ -367,4 +370,73 @@ body{
 	text-decoration: none;
 }
 
+
+.mypanel-wrapper{
+
+}
+.mypanel-wrapper .col.mypanel-col{
+	padding: 30px 10px 10px 40px;
+}
+.mypanel-wrapper .col.mypanel-col.right{
+	padding: 30px 40px 10px 10px;
+}
+.mypanel-wrapper .col.mypanel-col .col-header{
+	font-size: 14pt;
+	color: #558da7;
+	margin-bottom: 20px;
+	display: block;
+}
+.panel.panel-sokol{
+	box-shadow:  none;
+}
+.panel-sokol .panel-heading{
+	background-color: #477d95;
+	color: white;
+}
+.panel-sokol .score{
+	width: 100%;
+}
+.panel-sokol .panel-body{
+	padding-left: 0;
+	padding-right: 0;
+}
+.panel-sokol .score th,
+.panel-sokol .score td
+{
+	color: #477d95;
+	border: 1px solid #477d95;
+	text-align: center;
+	width: 33%;
+	font-size: 11px;
+	padding: 5px;
+}
+.panel-sokol .score td{
+	height: 65px;
+	color:  black;
+	font-weight: bold;
+	font-size: 20px;
+}
+a.graph-btn{
+	display: inline-block;
+	text-align: center;
+	font-size: 11px;
+	border: 1px solid #477d95;
+	padding: 5px 10px 5px 10px;
+	margin-bottom: 10px;
+	cursor: pointer;
+
+}
+a.graph-btn.active,
+a.graph-btn:hover{
+	text-decoration: none;
+	cursor: pointer;
+	background-color: #6daac3;
+	color: white;
+}
+.panel-sokol .list-table{
+	/*border: 2px solid #477d95;*/
+}
+.panel-sokol .list-table thead{
+	border-bottom: 2px solid #477d95;
+}
 

@@ -19,6 +19,7 @@ package io.khasang.sokol.dao.impl;
 import io.khasang.sokol.dao.RequestDao;
 import io.khasang.sokol.dao.RequestStatusDao;
 import io.khasang.sokol.dao.UserDao;
+import io.khasang.sokol.entity.MyPanelScore;
 import io.khasang.sokol.entity.Request;
 import io.khasang.sokol.entity.RequestStatus;
 import io.khasang.sokol.entity.User;
@@ -28,6 +29,7 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigInteger;
 import java.util.List;
 
 @Repository
@@ -46,6 +48,40 @@ public class RequestDaoImpl extends GenericDaoImpl<Request, Integer> implements 
         return getSession().get(Request.class, requestId);
     }
 
+    @Override
+    public MyPanelScore getScoreIn(String userName)
+    {
+        MyPanelScore score  = new MyPanelScore();
+        List<Object[]> scoreQuery = getSession().createSQLQuery("select sum(CASE WHEN request_status_id = 1 THEN 1 ELSE 0 END) SCORE_NEW,\n" +
+                "  sum(CASE WHEN request_status_id = 2 THEN 1 ELSE 0 END) SCORE_INPROGRESS,\n" +
+                "  sum(CASE WHEN request_status_id = 3 THEN 1 ELSE 0 END) SCORE_DONE\n" +
+                "from requests where created_by = :p_created_by").setParameter("p_created_by", userName ).list();
+        if(scoreQuery != null  && scoreQuery.size() > 0){
+
+            score.setCountNew(((BigInteger)scoreQuery.get(0)[0]).intValue());
+            score.setCountInProgress(((BigInteger)scoreQuery.get(0)[1]).intValue());
+            score.setCountClosed(((BigInteger)scoreQuery.get(0)[2]).intValue());
+        }
+        return  score;
+
+    }
+    @Override
+    public MyPanelScore getScoreOut(String userName)
+    {
+        User user = userDao.getByLogin(userName);
+        MyPanelScore score  = new MyPanelScore();
+        List<Object[]> scoreQuery = getSession().createSQLQuery("select sum(CASE WHEN request_status_id = 1 THEN 1 ELSE 0 END) SCORE_NEW,\n" +
+                "  sum(CASE WHEN request_status_id = 2 THEN 1 ELSE 0 END) SCORE_INPROGRESS,\n" +
+                "  sum(CASE WHEN request_status_id = 3 THEN 1 ELSE 0 END) SCORE_DONE\n" +
+                "from requests where assigned_to = :p_assigned_to").setParameter("p_assigned_to", user.getId() ).list();
+        if(scoreQuery != null  && scoreQuery.size() > 0){
+            score.setCountNew(((BigInteger)scoreQuery.get(0)[0]).intValue());
+            score.setCountInProgress(((BigInteger)scoreQuery.get(0)[1]).intValue());
+            score.setCountClosed(((BigInteger)scoreQuery.get(0)[2]).intValue());
+        }
+        return  score;
+
+    }
     @Override
     public List<Request> getMyRequests(String userName) {
         User user = userDao.getByLogin(userName);
