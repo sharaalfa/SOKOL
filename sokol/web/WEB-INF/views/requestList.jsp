@@ -121,7 +121,8 @@
                         <%--</a>--%>
                         <%----%>
                         <%--</td>--%>
-                        <td class="del-cell"><a class="del-btn" href="#" onclick="return confirmAction(${lists.requestId})"></a></td>
+                        <td class="del-cell"><a class="del-btn" href="/requestList/delete?idRequest=${lists.requestId}"
+                                                onclick="return confirmAction(${lists.requestId})"></a></td>
                     </tr>
                 </c:forEach>
                 </tbody>

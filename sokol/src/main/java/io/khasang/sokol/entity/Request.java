@@ -45,6 +45,10 @@ public class Request extends AuditableEntity {
     private RequestType requestType;
     @Version
     private int version;
+
+    @Column(name = "FILE_NAME")
+    private String file_name;
+
     @Column(name = "FILE")
     private byte[] file;
 
@@ -131,6 +135,14 @@ public class Request extends AuditableEntity {
 
     public void setFile(byte[] file) {
         this.file = file;
+    }
+
+    public String getFile_name() {
+        return file_name;
+    }
+
+    public void setFile_name(String file_name) {
+        this.file_name = file_name;
     }
 }
 
