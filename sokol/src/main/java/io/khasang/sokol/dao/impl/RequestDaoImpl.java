@@ -65,7 +65,7 @@ public class RequestDaoImpl extends GenericDaoImpl<Request, Integer> implements 
         return  score;
 
     }
-    @Override
+/*    @Override
     public MyPanelScore getScoreOut(String userName)
     {
         User user = userDao.getByLogin(userName);
@@ -81,7 +81,22 @@ public class RequestDaoImpl extends GenericDaoImpl<Request, Integer> implements 
         }
         return  score;
 
+    }*/
+
+    @Override
+    public MyPanelScore getScoreOut(String userName)
+    {
+        MyPanelScore score  = new MyPanelScore();
+        Session session = getSession();
+         Query query = session.createQuery(String.format("Select count (f.status.requestStatusId) from Request f WHERE f.status.requestStatusId = 1 AND f.createdBy = '%s'" , userName));
+          long countResults = (long) query.uniqueResult();
+            score.setCountNew((int) countResults);
+            score.setCountInProgress(4);
+            score.setCountClosed(5);
+        return  score;
     }
+
+
     @Override
     public List<Request> getMyRequests(String userName) {
         User user = userDao.getByLogin(userName);
