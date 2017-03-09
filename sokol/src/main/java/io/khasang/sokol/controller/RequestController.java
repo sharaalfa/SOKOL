@@ -88,10 +88,12 @@ public class RequestController {
         String sortOrderHeader = "";
         requestAll = requestDao.sortingBy((Integer.parseInt(pagenumber) - 1) * pageRows, pageRows, sortBy, sortOrder);
         if (sortOrder.equals("ASC")) {
-            imgBy = "/img/sortUP15.png";
+          //  imgBy = "/img/sort_up.png";
+            imgBy = "sort-up";
             sortOrderHeader = "DESC";
         } else if (sortOrder.equals("DESC")) {
-            imgBy = "/img/sortDown15.png";
+          //  imgBy = "/img/sort-down";
+            imgBy = "sort-down";
             sortOrderHeader = "ASC";
         } else {
             sortOrderHeader = "ASC";

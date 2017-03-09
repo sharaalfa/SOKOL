@@ -51,12 +51,11 @@ public class MyPanelController {
         String userName = context.getAuthentication().getName();
         List<Request> myRequests = requestDao.getMyRequests(userName);
         List<Request> forMeRequests = requestDao.getRequestsForMe(userName);
+      //  MyPanelScore scoreIn  = requestDao.getScoreIn(userName);
+   //     MyPanelScore scoreOut  = requestDao.getScoreOut(userName);
 
-        MyPanelScore scoreIn  = requestDao.getScoreIn(userName);
-        MyPanelScore scoreOut  = requestDao.getScoreOut(userName);
-
-        model.addAttribute("scoreIn", scoreIn);
-        model.addAttribute("scoreOut", scoreOut);
+      //  model.addAttribute("scoreIn", scoreIn);
+    //    model.addAttribute("scoreOut", scoreOut);
         model.addAttribute("myRequests", myRequests);
         model.addAttribute("forMeRequests", forMeRequests);
         return "mypanel";
