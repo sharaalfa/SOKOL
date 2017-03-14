@@ -1,35 +1,41 @@
 package io.khasang.sokol.entity;
 
-public class MyPanelScore
-{
-    int countNew;
-    int countInProgress;
-    int countClosed;
+public class MyPanelScore {
 
-    public int getCountNew() {
+    long countNew;
+    long countInProgress;
+    long countClosed;
+
+    public MyPanelScore() {
+    }
+
+    public MyPanelScore(long countNew, long countInProgress, long countClosed) {
+        this.countNew = 0L;
+        this.countInProgress = 0L;
+        this.countClosed = 0L;
+    }
+
+    public long getCountNew() {
         return countNew;
     }
 
-    public void setCountNew(int countNew) {
+    public void setCountNew(long countNew) {
         this.countNew = countNew;
     }
 
-    public int getCountInProgress() {
+    public long getCountInProgress() {
         return countInProgress;
     }
 
-    public void setCountInProgress(int countInProgress) {
+    public void setCountInProgress(long countInProgress) {
         this.countInProgress = countInProgress;
     }
 
-    public int getCountClosed() {
+    public long getCountClosed() {
         return countClosed;
     }
 
-    public void setCountClosed(int countClosed) {
+    public void setCountClosed(long countClosed) {
         this.countClosed = countClosed;
     }
-
-
-
 }

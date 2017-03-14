@@ -30,7 +30,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Repository
 public class RequestDaoImpl extends GenericDaoImpl<Request, Integer> implements RequestDao {
@@ -49,9 +51,8 @@ public class RequestDaoImpl extends GenericDaoImpl<Request, Integer> implements 
     }
 
     @Override
-    public MyPanelScore getScoreIn(String userName)
-    {
-        MyPanelScore score  = new MyPanelScore();
+    public MyPanelScore getScoreIn(String userName) {
+/*        MyPanelScore score  = new MyPanelScore();
         List<Object[]> scoreQuery = getSession().createSQLQuery("select sum(CASE WHEN request_status_id = 1 THEN 1 ELSE 0 END) SCORE_NEW,\n" +
                 "  sum(CASE WHEN request_status_id = 2 THEN 1 ELSE 0 END) SCORE_INPROGRESS,\n" +
                 "  sum(CASE WHEN request_status_id = 3 THEN 1 ELSE 0 END) SCORE_DONE\n" +
@@ -62,40 +63,26 @@ public class RequestDaoImpl extends GenericDaoImpl<Request, Integer> implements 
             score.setCountInProgress(((BigInteger)scoreQuery.get(0)[1]).intValue());
             score.setCountClosed(((BigInteger)scoreQuery.get(0)[2]).intValue());
         }
-        return  score;
+        return  score;*/
+        return null;
 
     }
-/*    @Override
-    public MyPanelScore getScoreOut(String userName)
-    {
-        User user = userDao.getByLogin(userName);
-        MyPanelScore score  = new MyPanelScore();
-        List<Object[]> scoreQuery = getSession().createSQLQuery("select sum(CASE WHEN request_status_id = 1 THEN 1 ELSE 0 END) SCORE_NEW,\n" +
-                "  sum(CASE WHEN request_status_id = 2 THEN 1 ELSE 0 END) SCORE_INPROGRESS,\n" +
-                "  sum(CASE WHEN request_status_id = 3 THEN 1 ELSE 0 END) SCORE_DONE\n" +
-                "from requests where assigned_to = :p_assigned_to").setParameter("p_assigned_to", user.getId() ).list();
-        if(scoreQuery != null  && scoreQuery.size() > 0){
-            score.setCountNew(((BigInteger)scoreQuery.get(0)[0]).intValue());
-            score.setCountInProgress(((BigInteger)scoreQuery.get(0)[1]).intValue());
-            score.setCountClosed(((BigInteger)scoreQuery.get(0)[2]).intValue());
-        }
-        return  score;
-
-    }*/
 
     @Override
-    public MyPanelScore getScoreOut(String userName)
-    {
-        MyPanelScore score  = new MyPanelScore();
+    public MyPanelScore getScoreOut(String userName) {
+        MyPanelScore score = new MyPanelScore();
         Session session = getSession();
-         Query query = session.createQuery(String.format("Select count (f.status.requestStatusId) from Request f WHERE f.status.requestStatusId = 1 AND f.createdBy = '%s'" , userName));
-          long countResults = (long) query.uniqueResult();
-            score.setCountNew((int) countResults);
-            score.setCountInProgress(4);
-            score.setCountClosed(5);
-        return  score;
+        Query query = session.createQuery("Select sum (case when f.status.requestStatusId = 1 THEN 1 ELSE 0 END)," +
+                "sum(case when f.status.requestStatusId = 2 THEN 1 ELSE 0 END)," +
+                "sum(case when f.status.requestStatusId = 3 THEN 1 ELSE 0 END)" +
+                "from Request f WHERE f.createdBy = ?");
+        query.setParameter(0, userName);
+        List<Object[]> scoreQuery = query.list();
+        score.setCountNew((long) scoreQuery.get(0)[0]);
+        score.setCountInProgress((long) scoreQuery.get(0)[1]);
+        score.setCountClosed((long) scoreQuery.get(0)[2]);
+        return score;
     }
-
 
     @Override
     public List<Request> getMyRequests(String userName) {
