@@ -52,20 +52,18 @@ public class RequestDaoImpl extends GenericDaoImpl<Request, Integer> implements 
 
     @Override
     public MyPanelScore getScoreIn(String userName) {
-/*        MyPanelScore score  = new MyPanelScore();
-        List<Object[]> scoreQuery = getSession().createSQLQuery("select sum(CASE WHEN request_status_id = 1 THEN 1 ELSE 0 END) SCORE_NEW,\n" +
-                "  sum(CASE WHEN request_status_id = 2 THEN 1 ELSE 0 END) SCORE_INPROGRESS,\n" +
-                "  sum(CASE WHEN request_status_id = 3 THEN 1 ELSE 0 END) SCORE_DONE\n" +
-                "from requests where created_by = :p_created_by").setParameter("p_created_by", userName ).list();
-        if(scoreQuery != null  && scoreQuery.size() > 0){
-
-            score.setCountNew(((BigInteger)scoreQuery.get(0)[0]).intValue());
-            score.setCountInProgress(((BigInteger)scoreQuery.get(0)[1]).intValue());
-            score.setCountClosed(((BigInteger)scoreQuery.get(0)[2]).intValue());
-        }
-        return  score;*/
-        return null;
-
+        MyPanelScore score = new MyPanelScore();
+        Session session = getSession();
+        Query query = session.createQuery("Select sum (case when f.status.requestStatusId = 1 THEN 1 ELSE 0 END)," +
+                "sum(case when f.status.requestStatusId = 2 THEN 1 ELSE 0 END)," +
+                "sum(case when f.status.requestStatusId = 3 THEN 1 ELSE 0 END)" +
+                "from Request f WHERE f.assignedTo.login = ?");
+        query.setParameter(0, userName);
+        List<Object[]> scoreQuery = query.list();
+        score.setCountNew((long) scoreQuery.get(0)[0]);
+        score.setCountInProgress((long) scoreQuery.get(0)[1]);
+        score.setCountClosed((long) scoreQuery.get(0)[2]);
+        return score;
     }
 
     @Override
@@ -86,22 +84,23 @@ public class RequestDaoImpl extends GenericDaoImpl<Request, Integer> implements 
 
     @Override
     public List<Request> getMyRequests(String userName) {
+        RequestStatus statusClosed = requestStatusDao.getById(3);
+        RequestStatus statusCanceled = requestStatusDao.getById(4);
+        return (List<Request>) getSession().createCriteria(Request.class)
+                .add(Restrictions.eq("createdBy", userName))
+                .add(Restrictions.ne("status", statusClosed))
+                .add(Restrictions.ne("status", statusCanceled))
+                .list();
+
+    }
+
+    @Override
+    public List<Request> getRequestsForMe(String userName) {
         User user = userDao.getByLogin(userName);
         RequestStatus statusClosed = requestStatusDao.getById(3);
         RequestStatus statusCanceled = requestStatusDao.getById(4);
         return (List<Request>) getSession().createCriteria(Request.class)
                 .add(Restrictions.eq("assignedTo", user))
-                .add(Restrictions.ne("status", statusClosed))
-                .add(Restrictions.ne("status", statusCanceled))
-                .list();
-    }
-
-    @Override
-    public List<Request> getRequestsForMe(String userName) {
-        RequestStatus statusClosed = requestStatusDao.getById(3);
-        RequestStatus statusCanceled = requestStatusDao.getById(4);
-        return (List<Request>) getSession().createCriteria(Request.class)
-                .add(Restrictions.eq("createdBy", userName))
                 .add(Restrictions.ne("status", statusClosed))
                 .add(Restrictions.ne("status", statusCanceled))
                 .list();

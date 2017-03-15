@@ -58,6 +58,7 @@ public class MyPanelController {
         model.addAttribute("scoreOut", scoreOut);
         model.addAttribute("myRequests", myRequests);
         model.addAttribute("forMeRequests", forMeRequests);
+        model.addAttribute("headerTitle", "МОЯ ПАНЕЛЬ");
         return "mypanel";
     }
 }
