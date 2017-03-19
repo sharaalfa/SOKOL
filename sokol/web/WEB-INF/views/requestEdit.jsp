@@ -22,8 +22,12 @@
                 <input type="hidden" name="sortOrderHeader" value="${sortOrderHeader}">
                 <div class="form-group">
                     <label class="control-label col-sm-3">Номер запроса</label>
-                    <div class="col-sm-8">
+                    <div class="col-sm-4">
                         <p class="form-control-static">${request.requestId}</p>
+                    </div>
+                    <div class="col-sm-4">
+                        <a href="/requestList/assignedTo?idRequest=${request.requestId}"
+                           class="btn-close pull-right">ВЗЯТЬ В РАБОТУ</a>
                     </div>
                 </div>
 
