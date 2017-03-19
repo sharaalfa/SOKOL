@@ -88,11 +88,11 @@ public class RequestController {
         String sortOrderHeader = "";
         requestAll = requestDao.sortingBy((Integer.parseInt(pagenumber) - 1) * pageRows, pageRows, sortBy, sortOrder);
         if (sortOrder.equals("ASC")) {
-          //  imgBy = "/img/sort_up.png";
+            //  imgBy = "/img/sort_up.png";
             imgBy = "sort-up";
             sortOrderHeader = "DESC";
         } else if (sortOrder.equals("DESC")) {
-          //  imgBy = "/img/sort-down";
+            //  imgBy = "/img/sort-down";
             imgBy = "sort-down";
             sortOrderHeader = "ASC";
         } else {
@@ -107,6 +107,7 @@ public class RequestController {
         requestPageModel.addAttribute("sortOrder", sortOrder);
         requestPageModel.addAttribute("sortOrderHeader", sortOrderHeader);
         requestPageModel.addAttribute("pagenumber", pagenumber);
+        requestPageModel.addAttribute("headerTitle", "ЗАПРОСЫ");
         return "requestList";
     }
 
@@ -118,9 +119,19 @@ public class RequestController {
         return "redirect:/requestList/list?pagenumber=1&sortBy=id&sortOrder=";
     }
 
+    @RequestMapping(value = "/assignedTo", method = RequestMethod.GET) // назначение ответственного за выполнение заявки
+    public String assignedToRequest(@RequestParam("idRequest") String idRequest) {
+        Request request = requestDao.getByRequestId(Integer.parseInt(idRequest));
+        SecurityContext context = SecurityContextHolder.getContext();
+        User user = userDao.getByLogin(context.getAuthentication().getName());
+        request.setAssignedTo(user);
+        requestDao.saveOrUpdate(request);
+        return "redirect:/requestList/list?pagenumber=1&sortBy=id&sortOrder=";
+    }
+
     @RequestMapping(value = "/download", method = RequestMethod.GET)
     public
-  //  @ResponseBody
+        //  @ResponseBody
     HttpServletResponse downloadFile(HttpServletResponse response, @RequestParam("idRequest") String idRequest)
             throws Exception {
         Request request = requestDao.getByRequestId(Integer.parseInt(idRequest));
@@ -157,6 +168,7 @@ public class RequestController {
         requestAddModel.addAttribute("sortBy", sortBy);
         requestAddModel.addAttribute("sortOrder", sortOrder);
         requestAddModel.addAttribute("sortOrderHeader", sortOrderHeader);
+        requestAddModel.addAttribute("headerTitle", "ЗАПРОСЫ. НОВЫЙ ЗАПРОС");
         return "requestAdd";
     }
 
@@ -202,7 +214,7 @@ public class RequestController {
         Request request = requestDao.getByRequestId(Integer.parseInt(idRequest));
         requestEditModel.addAttribute("request", request);
         List<RequestStatus> requestStatusAll = requestStatusDao.getAll();
-      //  String requestFileName = request.getFile_name();
+        //  String requestFileName = request.getFile_name();
         List<RequestType> requestTypeAll = requestTypeDao.getAll();
         requestEditModel.addAttribute("requestTypeAll", requestTypeAll);
         List<Department> departmentAll = departmentDao.getAll();
@@ -212,7 +224,8 @@ public class RequestController {
         requestEditModel.addAttribute("sortBy", sortBy);
         requestEditModel.addAttribute("sortOrder", sortOrder);
         requestEditModel.addAttribute("sortOrderHeader", sortOrderHeader);
-       // requestEditModel.addAttribute("requestFileName", requestFileName);
+        requestEditModel.addAttribute("headerTitle", "ЗАПРОСЫ. РЕДАКТИРОВАНИЕ ЗАПРОСА");
+        // requestEditModel.addAttribute("requestFileName", requestFileName);
 
         return "requestEdit";
     }
@@ -245,7 +258,7 @@ public class RequestController {
         SecurityContext context = SecurityContextHolder.getContext();
         request.setUpdatedBy(context.getAuthentication().getName());
         requestDao.saveOrUpdate(request);
-       // requestDao.update(request);
+        // requestDao.update(request);
         model.setViewName("requestEdit");
         return "redirect:/requestList/list?pagenumber=" + pagenumber + "&sortBy=" + sortBy + "&sortOrder=" + sortOrder + "&sortOrderHeader=" + sortOrderHeader;
     }

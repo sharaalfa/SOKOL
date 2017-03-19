@@ -52,7 +52,7 @@ public class RequestDaoImpl extends GenericDaoImpl<Request, Integer> implements 
 
     @Override
     public MyPanelScore getScoreIn(String userName) {
-        MyPanelScore score = new MyPanelScore();
+        MyPanelScore score = new MyPanelScore(0L, 0L, 0L);
         Session session = getSession();
         Query query = session.createQuery("Select sum (case when f.status.requestStatusId = 1 THEN 1 ELSE 0 END)," +
                 "sum(case when f.status.requestStatusId = 2 THEN 1 ELSE 0 END)," +
@@ -68,7 +68,7 @@ public class RequestDaoImpl extends GenericDaoImpl<Request, Integer> implements 
 
     @Override
     public MyPanelScore getScoreOut(String userName) {
-        MyPanelScore score = new MyPanelScore();
+        MyPanelScore score = new MyPanelScore(0L, 0L, 0L);
         Session session = getSession();
         Query query = session.createQuery("Select sum (case when f.status.requestStatusId = 1 THEN 1 ELSE 0 END)," +
                 "sum(case when f.status.requestStatusId = 2 THEN 1 ELSE 0 END)," +
@@ -76,10 +76,16 @@ public class RequestDaoImpl extends GenericDaoImpl<Request, Integer> implements 
                 "from Request f WHERE f.createdBy = ?");
         query.setParameter(0, userName);
         List<Object[]> scoreQuery = query.list();
-        score.setCountNew((long) scoreQuery.get(0)[0]);
-        score.setCountInProgress((long) scoreQuery.get(0)[1]);
-        score.setCountClosed((long) scoreQuery.get(0)[2]);
-        return score;
+        if (scoreQuery.get(0)[0] != null) {
+            score.setCountNew((long) scoreQuery.get(0)[0]);
+        }
+        if (scoreQuery.get(0)[1] != null) {
+            score.setCountInProgress((long) scoreQuery.get(0)[1]);
+        }
+        if (scoreQuery.get(0)[2] != null) {
+            score.setCountClosed((long) scoreQuery.get(0)[2]);
+        }
+         return score;
     }
 
     @Override
